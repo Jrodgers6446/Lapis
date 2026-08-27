@@ -4,51 +4,48 @@ A parametric latex garment pattern generator — enter body measurements and lat
 
 ## Try it
 
-Open `index.html` directly in a browser, or (once GitHub Pages is enabled for this repo) at the live site.
+Open `index.html` directly in a browser, or at the live GitHub Pages site if enabled for this repo.
 
 ## What it does
 
-Ten garment types, switchable via tabs at the top, sharing the same core latex-specific math and now including **curved seams, sleeves, a real multi-finger glove, and true 1:1 print export**.
+Ten garment types, switchable via tabs at the top, sharing the same core latex-specific math.
 
-**Curved seams (new):** side seams on Skirt/Top/Catsuit/Leotard curve outward instead of running dead straight, and Leggings/Catsuit have a genuine asymmetric crotch curve (concave inner seam, convex outer seam) instead of a mirrored straight block. The curve amount is adjustable via "Side-seam curve" in Latex-specific factors.
+**Real upgrades in this version:**
+- **Curved side seams** — every torso/leg shape now curves smoothly through its real measurement points (waist→hip→hem, bust→waist→hip→ankle, etc.) using an actual Catmull-Rom-to-Bezier spline, not a cosmetic effect. Straight top/bottom edges (where a waistband or hem attaches) stay straight on purpose.
+- **True 1:1 scale print export** — "Print pattern (1:1, tiled)" renders every piece at genuine physical size and tiles it across US Letter or A4 pages with overlap margins for taping and a 1cm reference square on every sheet to verify your printer didn't rescale anything. Preview and print now share one geometry model, so what you see is what prints.
+- **A real (if simplified) sleeve block** for Top/Catsuit/Leotard — a curved cap using a commonly-cited beginner drafting ratio (cap height ≈ armhole-depth × 0.6), with wrist/elbow/shoulder length presets.
+- **A curved-base bralette cup** — a genuine soft-cup improvement over a hard triangle point.
 
-**Sleeves (new):** Top, Catsuit, and Leotard all have an "Include sleeves" toggle — when on, the bodice gets a real armhole cutout curve and a matching sleeve panel with a curved cap, sized by sleeve length and upper-arm circumference.
+**Confidence tiers**, shown live in the app via a colored banner on each tab:
 
-**Full-finger gloves (new):** the Gloves tab now defaults to a genuine multi-piece pattern — a palm plus four individually-sized fingers (proportional to your hand length) plus a separately-pieced thumb, rather than just a tapered sleeve. The old fingerless/arm-sleeve option is still there as a style choice.
+**Solid:**
+- **Skirt**, **Top**, **Panties**, **Garters**
 
-**Hood improvements (new):** the crown now domes via a curve instead of meeting at a sharp point, and a face-opening curve is carved into the center-front edge. Still the least-solid garment here — see confidence note below.
+**Simplified, with a clear caveat:**
+- **Leggings**, **Catsuit**, **Leotard** — curved side seams now, but still no true crotch curve (front/back rise are treated as identical)
 
-**True 1:1 print export (new):** every garment has a "Print full-size (tiled)" button. It lays out the actual pattern pieces at real scale, slices them across A4 or US Letter pages with a 10mm margin, and adds corner registration marks so adjacent pages align when taped together. **This uses the exact same geometry functions as the on-screen preview** — there's no separate "print version" of the shapes that could quietly drift out of sync with what you see on screen; an automated test suite checks this equivalence directly.
+**Rough starting blocks — flagged with ▲ on their tabs:**
+- **Gloves** — fingerless/arm-sleeve style only. A true 5-finger glove needs individual finger-length measurements and separate curved finger cones, which this tool doesn't collect yet — tell me your hand length and finger lengths and this becomes buildable properly.
+- **Bralette** — triangle/no-underwire only. Molded or underwire cups need curved, darted pieces genuinely out of scope here.
+- **Hood** — side panels curve now, but the face opening still isn't drafted at all — that needs face width/height measurements not yet collected. Strongly recommend a fabric mockup before cutting latex regardless, since a hood is inherently a 3D shape no flat pattern captures perfectly.
 
-Confidence tiers (shown live in the app via the colored banner above each pattern):
+Shared across all ten:
+- **Stretch reduction (%)** — latex is cut *smaller* than the body since it stretches to fit
+- **Glue overlap (mm)** — seams need overlap allowance rather than a folded hem
 
-- **Solid:** Skirt, Top, Panties, Garters — straight-line construction (now with curves layered on top for the applicable ones) is a legitimate real-world choice
-- **Simplified, with a clear caveat:** Leggings, Catsuit, Leotard — genuinely usable, curve-improved, but still approximations rather than measured/fitted curves
-- **Rough starting blocks:** Bralette (triangle/no-underwire only), Hood (still fundamentally a 3D shape a flat pattern can only approximate) — marked with ▲ on the Hood tab
+A **cm / inch unit toggle** sits in the header — all internal math always runs in centimeters. The formula panel shows the exact arithmetic live for whichever garment is selected.
 
-Shared across all ten: **Stretch reduction (%)** (latex is cut smaller than the body since it stretches to fit) and **glue overlap (mm)** (seams need overlap allowance, not a folded hem, since latex is bonded not sewn). A **cm/inch unit toggle** keeps all internal math in centimeters regardless of display unit. The formula panel shows the exact arithmetic live for whichever garment is selected.
+## Known limitations (current, honest state)
 
-## Known limitations (current state)
-
-- **Curves are parametric approximations, not measured or draped curves.** They're a real improvement over straight lines, but a professional pattern-drafting system would derive curves from actual body scan data or draping — these are reasonable heuristic shapes, not that.
-- **The full-finger glove has no fourchette side-strips** (the narrow strips real bespoke gloves use between fingers for a closer fit) — fingers are simple tapered tubes, pieced onto the palm rather than cut as one continuous silhouette.
-- **Hood remains the least solid garment here** — a hood is inherently a 3D dome, and the face-opening/crown curves are single-edge approximations, not a properly drafted 3D-to-2D unwrap. Mock this up in cheap fabric before cutting latex.
-- **Bralette is triangle/no-underwire only** — molded or underwire cups need darted, multi-panel construction this system doesn't attempt.
-- **Sleeve cap and armhole curves are matched approximately**, not eased/notched to a precise seam-length match the way a professional pattern would be — expect to true up the cap by hand.
-- **"Multiple types" for Garters/Panties/Gloves-length is still presets adjusting sliders**, not separate drafting algorithms.
+- **No true crotch curve** on Leggings/Catsuit — front and back rise are still treated as identical, which a real fitted pattern wouldn't do
+- **Print page counts are large for a full garment** (often 15–30+ tiled pages) — this is inherent to printing real garment-sized panels on home-printer paper, not specific to this tool; real PDF sewing patterns commonly run this long for the same reason. A copy shop with large-format/plotter printing can output the same pattern on far fewer sheets.
+- **Sleeves are a basic block** — no armhole-ease distribution or shoulder-slope adjustment; a muslin test is worthwhile before cutting latex
+- **Gloves, Bralette, and Hood remain rough blocks on purpose** — each needs additional measurement inputs (finger lengths, cup volume data, face dimensions) that aren't collected yet; building those properly is the next real step rather than faking curves without the data to back them
 
 ## Roadmap ideas
 
-- Fourchette side-strips for the glove, for a properly fitted 5-finger pattern
-- A real 3D-to-2D hood unwrap (or at minimum, curves derived from actual head-scan proportions rather than heuristics)
-- Darted/molded bra cup support
-- Eased, notch-matched sleeve caps
-
-## Testing
-
-This isn't just "does it run" — there's an automated test suite (run via Node + jsdom, not committed to this repo but re-run before every push) that checks:
-- Curve bulge directions are geometrically correct (outward curves actually curve outward, inward/concave curves actually curve inward) by sampling the resulting bezier control points, not just eyeballing the render
-- Every garment generates valid SVG content with no `NaN` values, across all 10 tabs
-- Toggling sleeves/glove-style actually changes the piece count as expected
-- Print export runs without throwing and produces sane tile counts
-- **Preview and print produce byte-for-byte identical geometry** for the same inputs — this is the check that matters most, since a mismatch here would mean what you see on screen doesn't match what you'd actually cut
+- Per-finger measurement inputs + individual curved finger cones for a real 5-finger glove pattern
+- Face width/height inputs + a real curved face-opening for the Hood
+- True asymmetric front/back crotch curve for Leggings/Catsuit
+- Armhole-ease distribution and shoulder-slope adjustment for a more refined sleeve
+- Smarter page packing to reduce print page counts further where genuinely possible
