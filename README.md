@@ -8,14 +8,16 @@ Open `index.html` directly in a browser, or (once GitHub Pages is enabled for th
 
 ## What it does
 
-Currently generates a two-panel latex skirt pattern (front + back + waistband), driven by:
+Three garment types, switchable via tabs at the top, sharing the same core latex-specific math:
 
-- **Body measurements** — waist, hip, skirt length
+- **Skirt** — front + back trapezoid panels + waistband, optional back zip allowance
+- **Top** — sleeveless bodice block, bust-to-waist trapezoid panels, optional back zip allowance
+- **Leggings** — simplified single-leg block per panel (waist → hip → ankle taper), straight-line only, no crotch curve yet
+
+Shared across all three:
+
 - **Stretch reduction (%)** — latex is cut *smaller* than the body since it stretches to fit; this is the core latex-specific calculation, applied before any panel geometry is computed
 - **Glue overlap (mm)** — latex garments are bonded with rubber cement, not sewn, so seams need overlap allowance rather than a folded hem
-- **Hem flare (cm)** — additive width for an A-line silhouette
-- **Waistband height**
-- **Back zip toggle** — switches the center-back edge between a plain fold and an overlap allowance for a zip flap
 
 A **cm / inch unit toggle** sits in the header — all internal math always runs in centimeters regardless of which unit is displayed, so switching units never drifts or rounds the underlying values.
 
@@ -23,13 +25,15 @@ The formula panel below the pattern preview shows the exact arithmetic live, wit
 
 ## Known limitations (current state)
 
-- **Straight-line panels only** — no curved side seams yet, so it's closer to a flared cut than a truly fitted silhouette
+- **Straight-line panels only, for every garment** — no curved seams anywhere yet, including the Leggings crotch curve, which real fitted leggings/catsuit bottoms need. The Leggings tab explicitly calls this out in its formula panel.
+- **Top is a sleeveless block** — no sleeves, armhole shaping, or bust darts modeled yet
 - **On-screen scale only** — no 1:1 physical-size print/PDF export with page tiling yet
-- **One garment type** — just the skirt. The `generate()` function structure is meant to make adding a top or catsuit straightforward, sharing the same ease/overlap logic, but that's not built yet
+- **Leggings' hip placement is an approximation** (18% of inseam length down from the waist), not a measured rise — adjust by hand if that doesn't match your actual proportions
 
 ## Roadmap ideas
 
-- Curved side-seam shaping for a true A-line/fitted cut
+- Curved side-seam and crotch-curve shaping for genuinely fitted silhouettes
 - Multi-page 1:1 scale PDF export (tiled across printable sheets)
-- Additional garment types (top, catsuit) reusing the existing stretch/overlap math
+- Sleeves and armhole shaping for the Top block
+- A full catsuit combining the Top and Leggings blocks into one connected garment
 - Per-body-region ease presets (chest vs. ankle stretch differently)
