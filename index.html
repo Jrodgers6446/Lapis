@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latex Skirt Pattern &mdash; Parametric Draft</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+  :root {
+    --paper: #f6f3ea;
+    --ink: #1e2a24;
+    --ink-soft: #5c6b62;
+    --line: #c9cfc2;
+    --pin: #b5482f;
+    --thread: #2f6b5e;
+    --grid: #dfe4d6;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    min-height: 100vh;
+  }
+
+  header {
+    padding: 2.2rem 2rem 1.4rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.3rem;
+    text-transform: uppercase;
+  }
+
+  header h1 span { color: var(--pin); }
+
+  header p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 60ch;
+  }
+
+  .unit-toggle {
+    display: flex;
+    border: 2px solid var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    flex: none;
+  }
+  .unit-toggle button {
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  .unit-toggle button + button { border-left: 2px solid var(--ink); }
+  .unit-toggle button.active { background: var(--ink); color: var(--paper); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 110px);
+  }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .controls {
+    border-right: 2px solid var(--ink);
+    padding: 1.6rem;
+    background: rgba(255,255,255,0.35);
+  }
+
+  .controls h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 1.6rem 0 0.7rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  .controls h2:first-child { margin-top: 0; }
+
+  .field { margin-bottom: 0.9rem; }
+
+  .field label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .field label .unit { color: var(--ink-soft); }
+  .field label .val { color: var(--pin); font-weight: 700; }
+
+  .field input[type="range"] { width: 100%; accent-color: var(--pin); }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .canvas-wrap { padding: 1.6rem; overflow: auto; }
+
+  .canvas-frame {
+    background: #fff;
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--line);
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .meta-row .stamp {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+  }
+
+  button.action {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+  }
+  button.action:hover { background: var(--thread); }
+
+  .formula-panel {
+    margin-top: 1.6rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    padding: 1rem 1.2rem;
+    white-space: pre-wrap;
+    color: var(--ink-soft);
+  }
+  .formula-panel .num { color: var(--pin); }
+  .formula-panel .lbl { color: var(--thread); }
+  .formula-panel .note { color: var(--ink-soft); font-style: italic; }
+
+  svg text.dim { font-family: 'Space Mono', monospace; font-size: 10px; fill: var(--ink-soft); }
+  svg .panel-fill { fill: rgba(47,107,94,0.06); stroke: var(--ink); stroke-width: 1.5; }
+  svg .overlap { stroke: var(--pin); stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; }
+  svg .fold { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 1 3; }
+  svg .waistband { fill: rgba(181,72,47,0.06); stroke: var(--ink); stroke-width: 1.5; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Pattern<span>/</span>Draft &mdash; Latex Skirt</h1>
+    <p>A parametric cutting pattern, generated from body measurements rather than a fixed size. All math runs internally in centimeters; switch units any time without losing your numbers.</p>
+  </div>
+  <div class="unit-toggle" role="group" aria-label="Units">
+    <button id="unitCm" class="active">cm</button>
+    <button id="unitIn">in</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="controls">
+    <h2>Body measurements</h2>
+    <div class="field">
+      <label for="waist">Waist <span class="unit" id="waistUnit">cm</span> <span class="val" id="waistVal">70</span></label>
+      <input type="range" id="waist" data-field="waist">
+    </div>
+    <div class="field">
+      <label for="hip">Hip <span class="unit" id="hipUnit">cm</span> <span class="val" id="hipVal">96</span></label>
+      <input type="range" id="hip" data-field="hip">
+    </div>
+    <div class="field">
+      <label for="length">Skirt length <span class="unit" id="lengthUnit">cm</span> <span class="val" id="lengthVal">36</span></label>
+      <input type="range" id="length" data-field="length">
+    </div>
+
+    <h2>Latex-specific factors</h2>
+    <div class="field">
+      <label for="ease">Stretch reduction <span class="unit">%</span> <span class="val" id="easeVal">8</span></label>
+      <input type="range" id="ease" min="0" max="20" step="0.5" value="8">
+    </div>
+    <div class="field">
+      <label for="overlap">Glue overlap <span class="unit" id="overlapUnit">mm</span> <span class="val" id="overlapVal">8</span></label>
+      <input type="range" id="overlap" data-field="overlap">
+    </div>
+    <div class="field">
+      <label for="flare">Hem flare <span class="unit" id="flareUnit">cm</span> <span class="val" id="flareVal">6</span></label>
+      <input type="range" id="flare" data-field="flare">
+    </div>
+
+    <h2>Construction</h2>
+    <div class="field">
+      <label for="waistband">Waistband height <span class="unit" id="waistbandUnit">cm</span> <span class="val" id="waistbandVal">4</span></label>
+      <input type="range" id="waistband" data-field="waistband">
+    </div>
+    <div class="field toggle-row">
+      <input type="checkbox" id="zip" checked>
+      <label for="zip" style="margin:0;">Include back zip allowance</label>
+    </div>
+
+    <h2>Export</h2>
+    <button class="action" id="downloadBtn">Download SVG</button>
+  </aside>
+
+  <main class="canvas-wrap">
+    <div class="meta-row">
+      <div class="stamp">SCALE 1 : 1 (ON-SCREEN APPROX) &nbsp;&middot;&nbsp; PIECES: 2 PANELS + WAISTBAND</div>
+      <div class="stamp" id="cutStamp">CUT 2 (FRONT/BACK), MIRROR &middot; CUT 1 WAISTBAND</div>
+    </div>
+    <div class="canvas-frame">
+      <svg id="patternSvg" width="100%" height="640" viewBox="0 0 900 640"></svg>
+    </div>
+
+    <div class="formula-panel" id="formulaPanel"></div>
+  </main>
+</div>
+
+<script>
+const CM_PER_IN = 2.54;
+
+// Every field's true source of value lives here, always in centimeters
+// (or, for overlap, centimeters representing what's normally spoken of in mm).
+// Sliders are just a view onto these numbers in whichever unit is selected.
+const fieldState = {
+  waist:     { cm: 70, minCm: 55,  maxCm: 130, stepCm: 1,   isOverlap: false },
+  hip:       { cm: 96, minCm: 70,  maxCm: 150, stepCm: 1,   isOverlap: false },
+  length:    { cm: 36, minCm: 20,  maxCm: 90,  stepCm: 1,   isOverlap: false },
+  flare:     { cm: 6,  minCm: 0,   maxCm: 30,  stepCm: 1,   isOverlap: false },
+  waistband: { cm: 4,  minCm: 0,   maxCm: 10,  stepCm: 0.5, isOverlap: false },
+  overlap:   { cm: 0.8, minCm: 0.4, maxCm: 1.5, stepCm: 0.1, isOverlap: true },
+};
+
+let unit = 'cm'; // 'cm' or 'in'
+
+const els = {};
+Object.keys(fieldState).forEach(f => { els[f] = document.getElementById(f); });
+const zipEl = document.getElementById('zip');
+const easeEl = document.getElementById('ease');
+const svg = document.getElementById('patternSvg');
+const formulaPanel = document.getElementById('formulaPanel');
+const cutStamp = document.getElementById('cutStamp');
+
+function toDisplay(valueCm, field) {
+  if (unit === 'cm') {
+    return field.isOverlap ? valueCm * 10 : valueCm; // overlap shown as mm in cm-mode
+  }
+  return valueCm / CM_PER_IN; // inches, for both regular fields and overlap
+}
+function fromDisplay(displayVal, field) {
+  if (unit === 'cm') {
+    return field.isOverlap ? displayVal / 10 : displayVal;
+  }
+  return displayVal * CM_PER_IN;
+}
+function unitLabel(field) {
+  if (unit === 'cm') return field.isOverlap ? 'mm' : 'cm';
+  return 'in';
+}
+function roundForDisplay(v, field) {
+  if (unit === 'in') return Math.round(v * 20) / 20; // nearest 0.05"
+  return field.isOverlap ? Math.round(v * 2) / 2 : Math.round(v * 2) / 2; // nearest 0.5 in cm/mm
+}
+
+function refreshSliderChrome() {
+  Object.keys(fieldState).forEach(f => {
+    const state = fieldState[f];
+    const slider = els[f];
+    const dispMin = toDisplay(state.minCm, state);
+    const dispMax = toDisplay(state.maxCm, state);
+    const dispStep = unit === 'in' ? 0.05 : (state.isOverlap ? 0.5 : (state.stepCm >= 1 ? 1 : 0.5));
+    const dispVal = toDisplay(state.cm, state);
+
+    slider.min = dispMin;
+    slider.max = dispMax;
+    slider.step = dispStep;
+    slider.value = dispVal;
+
+    document.getElementById(f + 'Unit').textContent = unitLabel(state);
+    document.getElementById(f + 'Val').textContent = roundForDisplay(dispVal, state).toFixed(unit === 'in' ? 2 : (state.isOverlap && unit === 'cm' ? 1 : 1));
+  });
+}
+
+function onSliderInput(f) {
+  const state = fieldState[f];
+  const slider = els[f];
+  const displayed = Number(slider.value);
+  state.cm = fromDisplay(displayed, state);
+  document.getElementById(f + 'Val').textContent = roundForDisplay(displayed, state).toFixed(unit === 'in' ? 2 : 1);
+  generate();
+}
+
+Object.keys(fieldState).forEach(f => {
+  els[f].addEventListener('input', () => onSliderInput(f));
+});
+easeEl.addEventListener('input', generate);
+zipEl.addEventListener('input', generate);
+
+document.getElementById('unitCm').addEventListener('click', () => setUnit('cm'));
+document.getElementById('unitIn').addEventListener('click', () => setUnit('in'));
+function setUnit(u) {
+  unit = u;
+  document.getElementById('unitCm').classList.toggle('active', u === 'cm');
+  document.getElementById('unitIn').classList.toggle('active', u === 'in');
+  refreshSliderChrome();
+  generate();
+}
+
+function svgEl(tag, attrs) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+
+function fmt(valueCm) {
+  // format a cm quantity for the drawing labels, in whatever unit is active
+  if (unit === 'cm') return `${valueCm.toFixed(1)}cm`;
+  return `${(valueCm / CM_PER_IN).toFixed(2)}in`;
+}
+
+function generate() {
+  const waist = fieldState.waist.cm;
+  const hip = fieldState.hip.cm;
+  const length = fieldState.length.cm;
+  const easePct = Number(easeEl.value);
+  const overlapCm = fieldState.overlap.cm;
+  const flare = fieldState.flare.cm;
+  const waistbandH = fieldState.waistband.cm;
+  const includeZip = zipEl.checked;
+  document.getElementById('easeVal').textContent = easePct;
+
+  // ---- the actual pattern math (always in cm) ----
+  const effectiveWaist = waist * (1 - easePct / 100);
+  const effectiveHip = hip * (1 - easePct / 100);
+
+  const panelTopHalf = effectiveWaist / 2;
+  const panelBottomHalf = effectiveHip / 2 + flare;
+
+  const panelTopWidth = panelTopHalf + overlapCm * 2;
+  const panelBottomWidth = panelBottomHalf + overlapCm * 2;
+
+  const waistbandWidth = effectiveWaist + overlapCm * 2;
+
+  // ---- drawing (screen scale, not physical size) ----
+  const scale = 4.4;
+  svg.innerHTML = '';
+
+  function panel(cx, label, isBack) {
+    const topW = panelTopWidth * scale;
+    const botW = panelBottomWidth * scale;
+    const h = length * scale;
+    const top = 60;
+    const x0 = cx - topW / 2, x1 = cx + topW / 2;
+    const x2 = cx + botW / 2, x3 = cx - botW / 2;
+    const points = `${x0},${top} ${x1},${top} ${x2},${top + h} ${x3},${top + h}`;
+    svg.appendChild(svgEl('polygon', { points, class: 'panel-fill' }));
+
+    svg.appendChild(svgEl('line', { x1: x0, y1: top, x2: x3, y2: top + h, class: 'overlap' }));
+    svg.appendChild(svgEl('line', { x1: x1, y1: top, x2: x2, y2: top + h, class: 'overlap' }));
+
+    const centerDash = (isBack && includeZip) ? 'overlap' : 'fold';
+    svg.appendChild(svgEl('line', { x1: cx, y1: top, x2: cx, y2: top + h, class: centerDash }));
+
+    const lbl = svgEl('text', { x: cx, y: top - 12, 'text-anchor': 'middle', class: 'dim' });
+    lbl.textContent = label;
+    svg.appendChild(lbl);
+
+    const dim1 = svgEl('text', { x: cx, y: top + 14, 'text-anchor': 'middle', class: 'dim' });
+    dim1.textContent = fmt(panelTopWidth);
+    svg.appendChild(dim1);
+
+    const dim2 = svgEl('text', { x: cx, y: top + h - 6, 'text-anchor': 'middle', class: 'dim' });
+    dim2.textContent = fmt(panelBottomWidth);
+    svg.appendChild(dim2);
+
+    return top + h;
+  }
+
+  const frontBottom = panel(230, 'FRONT PANEL \u00d7 1', false);
+  const backBottom = panel(560, 'BACK PANEL \u00d7 1' + (includeZip ? ' (zip overlap on CB)' : ''), true);
+
+  const wbY = Math.max(frontBottom, backBottom) + 50;
+  const wbW = waistbandWidth * scale;
+  const wbH = Math.max(waistbandH, 0.1) * scale;
+  const wbX = 450 - wbW / 2;
+  svg.appendChild(svgEl('rect', { x: wbX, y: wbY, width: wbW, height: wbH, class: 'waistband' }));
+  const wbLbl = svgEl('text', { x: 450, y: wbY - 10, 'text-anchor': 'middle', class: 'dim' });
+  wbLbl.textContent = `WAISTBAND \u00d7 1  \u2014  ${fmt(waistbandWidth)} \u00d7 ${fmt(waistbandH)}`;
+  svg.appendChild(wbLbl);
+
+  cutStamp.textContent = `CUT 2 (FRONT + BACK) \u00b7 CUT 1 WAISTBAND \u00b7 ${includeZip ? 'BACK ZIP' : 'NO ZIP \u2014 CB FOLD OR SEAM'}`;
+
+  // ---- formula readout (always shown in cm, since that's the internal math) ----
+  formulaPanel.innerHTML =
+`<span class="note">Internal math always runs in centimeters, regardless of the unit toggle \u2014 the slider just converts your entry for display.</span>
+
+<span class="lbl">effective_waist</span> = waist \u00d7 (1 \u2212 ease/100)
+  = ${waist.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveWaist.toFixed(2)} cm</span>
+
+<span class="lbl">effective_hip</span>   = hip \u00d7 (1 \u2212 ease/100)
+  = ${hip.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveHip.toFixed(2)} cm</span>
+
+<span class="lbl">panel_top_width</span>    = effective_waist / 2 + overlap \u00d7 2
+  = ${effectiveWaist.toFixed(2)} / 2 + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${panelTopWidth.toFixed(2)} cm</span>  (${fmt(panelTopWidth)})
+
+<span class="lbl">panel_bottom_width</span> = effective_hip / 2 + hem_flare + overlap \u00d7 2
+  = ${effectiveHip.toFixed(2)} / 2 + ${flare.toFixed(2)} + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${panelBottomWidth.toFixed(2)} cm</span>  (${fmt(panelBottomWidth)})
+
+<span class="lbl">waistband_width</span>    = effective_waist + overlap \u00d7 2
+  = ${effectiveWaist.toFixed(2)} + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${waistbandWidth.toFixed(2)} cm</span>  (${fmt(waistbandWidth)})
+
+Dashed red = glue overlap edge (side seams${includeZip ? ' + back zip flap' : ''}).
+Dashed grey = fold or plain center edge (no seam needed).`;
+}
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'latex-skirt-pattern.svg';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+refreshSliderChrome();
+generate();
+</script>
+</body>
+</html>
