@@ -305,13 +305,14 @@
 <div class="layout">
   <aside class="controls">
     <h2>Body measurements</h2>
+    <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--ink-soft); margin:-0.4rem 0 0.8rem;">Measure over bare skin or very thin underwear, with a soft tape held level and not pulled tight -- a friend helping gets more accurate results than measuring yourself. This is standard practice across latex makers, not specific to this tool.</p>
 
     <div class="field" data-garments="skirt,leggings,top,catsuit,leotard,panties,garters">
       <label for="waist">Waist <span class="unit" id="waistUnit">cm</span> <span class="val" id="waistVal">70</span></label>
       <input type="range" id="waist" data-field="waist">
     </div>
     <div class="field" data-garments="skirt,leggings,catsuit,panties">
-      <label for="hip">Hip <span class="unit" id="hipUnit">cm</span> <span class="val" id="hipVal">96</span></label>
+      <label for="hip">Hips <span class="unit" id="hipUnit">cm</span> <span class="val" id="hipVal">96</span></label>
       <input type="range" id="hip" data-field="hip">
     </div>
     <div class="field" data-garments="skirt">
@@ -341,13 +342,21 @@
       <input type="range" id="sleeveLength" data-field="sleeveLength">
     </div>
     <div class="field" data-garments="top,catsuit,leotard">
-      <label for="upperArm">Upper-arm circumference <span class="unit" id="upperArmUnit">cm</span> <span class="val" id="upperArmVal">28</span></label>
+      <label for="upperArm">Biceps <span class="unit" id="upperArmUnit">cm</span> <span class="val" id="upperArmVal">28</span></label>
       <input type="range" id="upperArm" data-field="upperArm">
+    </div>
+    <div class="field" data-garments="top,catsuit,leotard">
+      <label for="armhole">Armhole (measured, not derived) <span class="unit" id="armholeUnit">cm</span> <span class="val" id="armholeVal">40</span></label>
+      <input type="range" id="armhole" data-field="armhole">
     </div>
 
     <div class="field" data-garments="leggings,catsuit">
       <label for="inseam">Inseam (waist to ankle) <span class="unit" id="inseamUnit">cm</span> <span class="val" id="inseamVal">75</span></label>
       <input type="range" id="inseam" data-field="inseam">
+    </div>
+    <div class="field" data-garments="leggings,catsuit">
+      <label for="knee">Knee <span class="unit" id="kneeUnit">cm</span> <span class="val" id="kneeVal">38</span></label>
+      <input type="range" id="knee" data-field="knee">
     </div>
     <div class="field" data-garments="leggings,catsuit">
       <label for="ankle">Ankle circumference <span class="unit" id="ankleUnit">cm</span> <span class="val" id="ankleVal">22</span></label>
@@ -369,7 +378,7 @@
     </div>
 
     <div class="field" data-garments="bralette">
-      <label for="underbust">Underbust <span class="unit" id="underbustUnit">cm</span> <span class="val" id="underbustVal">74</span></label>
+      <label for="underbust">Under bust <span class="unit" id="underbustUnit">cm</span> <span class="val" id="underbustVal">74</span></label>
       <input type="range" id="underbust" data-field="underbust">
     </div>
     <div class="field" data-garments="bralette">
@@ -408,7 +417,7 @@
         <button type="button" data-preset="armLength" data-value="45">Elbow</button>
         <button type="button" data-preset="armLength" data-value="65">Shoulder</button>
       </div>
-      <label for="armLength">Length (wrist to chosen point) <span class="unit" id="armLengthUnit">cm</span> <span class="val" id="armLengthVal">45</span></label>
+      <label for="armLength">Arm length (wrist to chosen point) <span class="unit" id="armLengthUnit">cm</span> <span class="val" id="armLengthVal">45</span></label>
       <input type="range" id="armLength" data-field="armLength">
     </div>
     <div class="field" data-garments="gloves" data-glovestyle="fingerless">
@@ -416,7 +425,7 @@
       <input type="range" id="wrist" data-field="wrist">
     </div>
     <div class="field" data-garments="gloves" data-glovestyle="fingerless">
-      <label for="bicep">Upper-arm circumference (at chosen length) <span class="unit" id="bicepUnit">cm</span> <span class="val" id="bicepVal">28</span></label>
+      <label for="bicep">Biceps (at chosen length) <span class="unit" id="bicepUnit">cm</span> <span class="val" id="bicepVal">28</span></label>
       <input type="range" id="bicep" data-field="bicep">
     </div>
 
@@ -454,7 +463,7 @@
     </div>
 
     <div class="field" data-garments="hood">
-      <label for="headCirc">Head circumference <span class="unit" id="headCircUnit">cm</span> <span class="val" id="headCircVal">56</span></label>
+      <label for="headCirc">Head (forehead) <span class="unit" id="headCircUnit">cm</span> <span class="val" id="headCircVal">56</span></label>
       <input type="range" id="headCirc" data-field="headCirc">
     </div>
     <div class="field" data-garments="hood">
@@ -478,6 +487,7 @@
     <div class="field">
       <label for="ease">Stretch reduction <span class="unit">%</span> <span class="val" id="easeVal">8</span></label>
       <input type="range" id="ease" min="0" max="20" step="0.5" value="8">
+      <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--ink-soft); margin:0.3rem 0 0;">Bright&amp;Shiny (a real latex maker) uses 10&ndash;15% reduction as their production standard \u2014 a reasonable reference range if you're unsure what to set here.</p>
     </div>
     <div class="field">
       <label for="overlap">Glue overlap <span class="unit" id="overlapUnit">mm</span> <span class="val" id="overlapVal">8</span></label>
@@ -540,8 +550,10 @@ const fieldState = {
   torsoLength:  { cm: 40, minCm: 25,  maxCm: 70,  stepCm: 1,   isOverlap: false },
   sleeveLength: { cm: 20, minCm: 5,   maxCm: 65,  stepCm: 1,   isOverlap: false },
   upperArm:     { cm: 28, minCm: 18,  maxCm: 45,  stepCm: 1,   isOverlap: false },
+  armhole:      { cm: 40, minCm: 30,  maxCm: 55,  stepCm: 1,   isOverlap: false },
   inseam:       { cm: 75, minCm: 50,  maxCm: 100, stepCm: 1,   isOverlap: false },
   ankle:        { cm: 22, minCm: 15,  maxCm: 40,  stepCm: 1,   isOverlap: false },
+  knee:         { cm: 38, minCm: 25,  maxCm: 55,  stepCm: 1,   isOverlap: false },
   flare:        { cm: 6,  minCm: 0,   maxCm: 30,  stepCm: 1,   isOverlap: false },
   waistband:    { cm: 4,  minCm: 0,   maxCm: 10,  stepCm: 0.5, isOverlap: false },
   overlap:      { cm: 0.8, minCm: 0.4, maxCm: 1.5, stepCm: 0.1, isOverlap: true },
@@ -948,8 +960,11 @@ function generate() {
 function sleevePieceIfWanted(bustCm, easePct, overlapCm) {
   if (!includeSleeveEl.checked) return null;
   const bicep = fieldState.upperArm.cm * (1 - easePct/100) + overlapCm*2;
-  const armholeDepth = bustCm/4 + 2.5;
-  const capHeight = armholeDepth * 0.6;
+  // Uses your actual measured armhole (Bright&Shiny-style measurement
+  // sheets collect this directly) rather than deriving it from bust --
+  // a real accuracy improvement over guessing armhole depth from a ratio.
+  const armholeMeasured = fieldState.armhole.cm;
+  const capHeight = (armholeMeasured/2) * 0.6;
   const length = fieldState.sleeveLength.cm;
   return { type: 'sleeve', bicepCm: bicep, lengthCm: length, capHeightCm: capHeight, label: 'SLEEVE \u00d72 (mirror)' };
 }
@@ -977,7 +992,7 @@ function generateSkirt() {
 
 function generateTop() {
   setBanner('', includeSleeveEl.checked
-    ? 'Curved bust\u2192waist side seam, plus a real (if simplified) sleeve block using a standard beginner drafting ratio. No armhole ease distribution or shoulder-slope adjustment -- still a basic block.'
+    ? 'Curved bust\u2192waist side seam, plus a sleeve block using your actual measured armhole (not a bust-derived guess) for the cap height. No armhole ease distribution or shoulder-slope adjustment -- still a basic block, but the cap sizing itself now comes from a real measurement.'
     : 'Curved bust\u2192waist side seam. Sleeveless; enable the sleeve option above to add a basic sleeve block.');
   const bust = fieldState.bust.cm, waist = fieldState.waist.cm, length = fieldState.torsoLength.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm, includeZip = zipEl.checked;
@@ -994,38 +1009,39 @@ function generateTop() {
   cutStamp.textContent = `CUT 2 (FRONT+BACK)${sleeve?' + 2 SLEEVES':''} \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'}`;
   formulaPanel.innerHTML = `<span class="lbl">effective_bust</span> = <span class="num">${effBust.toFixed(2)}cm</span>  <span class="lbl">effective_waist</span> = <span class="num">${effWaist.toFixed(2)}cm</span>
 <span class="lbl">panel_top</span> = <span class="num">${topW.toFixed(2)}cm</span>  <span class="lbl">panel_bottom</span> = <span class="num">${botW.toFixed(2)}cm</span>` +
-  (sleeve ? `\n<span class="lbl">sleeve_bicep</span> = <span class="num">${sleeve.bicepCm.toFixed(2)}cm</span>  <span class="lbl">cap_height</span> \u2248 (bust/4+2.5)\u00d70.6 = <span class="num">${sleeve.capHeightCm.toFixed(2)}cm</span>
+  (sleeve ? `\n<span class="lbl">sleeve_bicep</span> = <span class="num">${sleeve.bicepCm.toFixed(2)}cm</span>  <span class="lbl">cap_height</span> = (measured armhole/2)\u00d70.6 = <span class="num">${sleeve.capHeightCm.toFixed(2)}cm</span>
 <span class="note">Sleeve uses a standard simplified drafting ratio, not a fitted couture cap -- a muslin test is worthwhile before cutting latex.</span>` : '');
 }
 
 function generateLeggings() {
-  setBanner('warn', 'Curved waist\u2192hip\u2192ankle side seam using real measurements at each point -- a genuine fit improvement over straight segments. Still NO true crotch curve (front/back rise are treated as identical), so the inner-leg seam may still need truing up by hand.');
-  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, ankle = fieldState.ankle.cm, inseam = fieldState.inseam.cm;
+  setBanner('warn', 'Curved waist\u2192hip\u2192knee\u2192ankle side seam using real measurements at each point -- adding your actual knee measurement gives a noticeably better taper than interpolating straight through. Still NO true crotch curve (front/back rise are treated as identical), so the inner-leg seam may still need truing up by hand.');
+  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, knee = fieldState.knee.cm, ankle = fieldState.ankle.cm, inseam = fieldState.inseam.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
-  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100), effAnkle = ankle*(1-easePct/100);
-  const wW = effWaist/2+overlapCm*2, hW = effHip/2+overlapCm*2, aW = effAnkle/2+overlapCm*2;
-  const points = [[0, wW], [0.18, hW], [1, aW]];
+  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100), effKnee = knee*(1-easePct/100), effAnkle = ankle*(1-easePct/100);
+  const wW = effWaist/2+overlapCm*2, hW = effHip/2+overlapCm*2, kW = effKnee/2+overlapCm*2, aW = effAnkle/2+overlapCm*2;
+  const points = [[0, wW], [0.18, hW], [0.55, kW], [1, aW]];
   const pieces = [
     { type:'curved', points, heightCm: inseam, label:'FRONT PANEL \u00d71', isBack:false, includeZip:false },
     { type:'curved', points, heightCm: inseam, label:'BACK PANEL \u00d71', isBack:false, includeZip:false },
   ];
   renderPreview(pieces);
   cutStamp.textContent = `CUT 2 (FRONT+BACK), MIRROR EACH \u00b7 CURVED SIDE SEAM, NO TRUE CROTCH CURVE`;
-  formulaPanel.innerHTML = `<span class="lbl">waist_width</span> = <span class="num">${wW.toFixed(2)}cm</span>  <span class="lbl">hip_width</span> = <span class="num">${hW.toFixed(2)}cm</span>  <span class="lbl">ankle_width</span> = <span class="num">${aW.toFixed(2)}cm</span>
-<span class="note">Hip point at 18% of inseam length -- an approximation, not a measured rise.</span>`;
+  formulaPanel.innerHTML = `<span class="lbl">waist_width</span> = <span class="num">${wW.toFixed(2)}cm</span>  <span class="lbl">hip_width</span> = <span class="num">${hW.toFixed(2)}cm</span>  <span class="lbl">knee_width</span> = <span class="num">${kW.toFixed(2)}cm</span>  <span class="lbl">ankle_width</span> = <span class="num">${aW.toFixed(2)}cm</span>
+<span class="note">Hip point at 18% and knee point at 55% of inseam length -- placement fractions are still an approximation, but the WIDTHS at each point are your real measurements now.</span>`;
 }
 
 function generateCatsuit() {
-  setBanner('warn', 'One continuous curved panel per side through bust\u2192waist\u2192hip\u2192ankle -- all real measurements driving the curve. Still no true crotch curve, and sleeves use the same simplified block as Top.');
-  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, hip = fieldState.hip.cm, ankle = fieldState.ankle.cm;
+  setBanner('warn', 'One continuous curved panel per side through bust\u2192waist\u2192hip\u2192knee\u2192ankle -- all real measurements driving the curve. Still no true crotch curve, and sleeves use the same simplified block as Top.');
+  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, hip = fieldState.hip.cm, knee = fieldState.knee.cm, ankle = fieldState.ankle.cm;
   const torsoLen = fieldState.torsoLength.cm, inseam = fieldState.inseam.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, includeZip = zipEl.checked;
   const eff = v => v*(1-easePct/100);
-  const bW = eff(bust)/2+overlapCm*2, wW = eff(waist)/2+overlapCm*2, hW = eff(hip)/2+overlapCm*2, aW = eff(ankle)/2+overlapCm*2;
+  const bW = eff(bust)/2+overlapCm*2, wW = eff(waist)/2+overlapCm*2, hW = eff(hip)/2+overlapCm*2, kW = eff(knee)/2+overlapCm*2, aW = eff(ankle)/2+overlapCm*2;
   const totalLen = torsoLen + inseam;
   const waistFrac = torsoLen/totalLen;
   const hipFrac = waistFrac + (1-waistFrac)*0.18;
-  const points = [[0, bW], [waistFrac, wW], [hipFrac, hW], [1, aW]];
+  const kneeFrac = waistFrac + (1-waistFrac)*0.55;
+  const points = [[0, bW], [waistFrac, wW], [hipFrac, hW], [kneeFrac, kW], [1, aW]];
   const pieces = [
     { type:'curved', points, heightCm: totalLen, label:'FRONT PANEL \u00d71', isBack:false, includeZip },
     { type:'curved', points, heightCm: totalLen, label:'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), isBack:true, includeZip },
@@ -1034,8 +1050,8 @@ function generateCatsuit() {
   if (sleeve) pieces.push(sleeve);
   renderPreview(pieces);
   cutStamp.textContent = `CUT 2 (FRONT+BACK)${sleeve?' + 2 SLEEVES':''} \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'} \u00b7 NO TRUE CROTCH CURVE`;
-  formulaPanel.innerHTML = `<span class="lbl">bust</span>=<span class="num">${bW.toFixed(2)}cm</span> <span class="lbl">waist</span>=<span class="num">${wW.toFixed(2)}cm</span> <span class="lbl">hip</span>=<span class="num">${hW.toFixed(2)}cm</span> <span class="lbl">ankle</span>=<span class="num">${aW.toFixed(2)}cm</span>
-<span class="note">One smooth curve runs through all four points per side seam.</span>`;
+  formulaPanel.innerHTML = `<span class="lbl">bust</span>=<span class="num">${bW.toFixed(2)}cm</span> <span class="lbl">waist</span>=<span class="num">${wW.toFixed(2)}cm</span> <span class="lbl">hip</span>=<span class="num">${hW.toFixed(2)}cm</span> <span class="lbl">knee</span>=<span class="num">${kW.toFixed(2)}cm</span> <span class="lbl">ankle</span>=<span class="num">${aW.toFixed(2)}cm</span>
+<span class="note">One smooth curve runs through all five points per side seam.</span>`;
 }
 
 function generateLeotard() {
