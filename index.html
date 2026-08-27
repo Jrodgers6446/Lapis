@@ -8,63 +8,268 @@
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
 
   :root {
-    --paper: #f6f3ea; --ink: #1e2a24; --ink-soft: #5c6b62; --line: #c9cfc2;
-    --pin: #b5482f; --thread: #2f6b5e; --grid: #dfe4d6; --warn: #a06a1a;
+    --paper: #f6f3ea;
+    --ink: #1e2a24;
+    --ink-soft: #5c6b62;
+    --line: #c9cfc2;
+    --pin: #b5482f;
+    --thread: #2f6b5e;
+    --grid: #dfe4d6;
+    --warn: #a06a1a;
   }
+
   * { box-sizing: border-box; }
+
   body {
-    margin: 0; background: var(--paper);
-    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 24px 24px; color: var(--ink); font-family: 'Source Serif 4', serif; min-height: 100vh;
+    margin: 0;
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    min-height: 100vh;
   }
-  header { padding: 2.2rem 2rem 1.4rem; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
-  header h1 { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 0.3rem; text-transform: uppercase; }
+
+  header {
+    padding: 2.2rem 2rem 1.4rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.3rem;
+    text-transform: uppercase;
+  }
+
   header h1 span { color: var(--pin); }
-  header p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; max-width: 60ch; }
-  .unit-toggle { display: flex; border: 2px solid var(--ink); font-family: 'Space Mono', monospace; font-size: 0.78rem; text-transform: uppercase; flex: none; }
-  .unit-toggle button { background: var(--paper); color: var(--ink); border: none; padding: 0.5rem 1rem; cursor: pointer; }
+
+  header p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 60ch;
+  }
+
+  .unit-toggle {
+    display: flex;
+    border: 2px solid var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    flex: none;
+  }
+  .unit-toggle button {
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
   .unit-toggle button + button { border-left: 2px solid var(--ink); }
   .unit-toggle button.active { background: var(--ink); color: var(--paper); }
-  .garment-tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid var(--ink); }
-  .garment-tabs button { flex: 1 1 auto; min-width: 90px; background: rgba(255,255,255,0.35); border: none; border-right: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 0.65rem 0.4rem; font-family: 'Space Mono', monospace; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-soft); cursor: pointer; }
+
+  .garment-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--ink);
+  }
+  .garment-tabs button {
+    flex: 1 1 auto;
+    min-width: 90px;
+    background: rgba(255,255,255,0.35);
+    border: none;
+    border-right: 1.5px solid var(--line);
+    border-bottom: 1.5px solid var(--line);
+    padding: 0.65rem 0.4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
   .garment-tabs button.active { background: var(--ink); color: var(--paper); }
   .garment-tabs button .confidence { font-size: 0.9em; margin-left: 2px; }
-  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 0; min-height: calc(100vh - 175px); }
-  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
-  .controls { border-right: 2px solid var(--ink); padding: 1.6rem; background: rgba(255,255,255,0.35); }
-  .controls h2 { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin: 1.6rem 0 0.7rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 175px);
+  }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .controls {
+    border-right: 2px solid var(--ink);
+    padding: 1.6rem;
+    background: rgba(255,255,255,0.35);
+  }
+
+  .controls h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 1.6rem 0 0.7rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
   .controls h2:first-child { margin-top: 0; }
+
   .field { margin-bottom: 0.9rem; }
-  .field label { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--ink); margin-bottom: 0.3rem; }
+
+  .field label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
   .field label .unit { color: var(--ink-soft); }
   .field label .val { color: var(--pin); font-weight: 700; }
+
   .field input[type="range"] { width: 100%; accent-color: var(--pin); }
-  .field select { width: 100%; font-family: 'Space Mono', monospace; font-size: 0.85rem; padding: 0.4rem; background: var(--paper); border: 1.5px solid var(--ink); color: var(--ink); }
+  .field select {
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.4rem;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+  }
+
   .preset-row { display: flex; gap: 0.4rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
-  .preset-row button { flex: 1; font-family: 'Space Mono', monospace; font-size: 0.68rem; text-transform: uppercase; background: var(--paper); border: 1.3px solid var(--line); padding: 0.35rem 0.3rem; cursor: pointer; color: var(--ink-soft); }
+  .preset-row button {
+    flex: 1;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    background: var(--paper);
+    border: 1.3px solid var(--line);
+    padding: 0.35rem 0.3rem;
+    cursor: pointer;
+    color: var(--ink-soft);
+  }
   .preset-row button:hover { border-color: var(--thread); color: var(--thread); }
-  .toggle-row { display: flex; align-items: center; gap: 0.5rem; font-family: 'Space Mono', monospace; font-size: 0.8rem; }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+  }
+
   .canvas-wrap { padding: 1.6rem; overflow: auto; }
-  .canvas-frame { background: #fff; border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--line); }
-  .meta-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
-  .meta-row .stamp { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--ink-soft); letter-spacing: 0.06em; }
-  button.action { font-family: 'Space Mono', monospace; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; background: var(--ink); color: var(--paper); border: none; padding: 0.55rem 1rem; cursor: pointer; }
+
+  .canvas-frame {
+    background: #fff;
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--line);
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .meta-row .stamp {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+  }
+
+  button.action {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+  }
   button.action:hover { background: var(--thread); }
-  button.action.secondary { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); }
-  .confidence-banner { font-family: 'Space Mono', monospace; font-size: 0.78rem; padding: 0.7rem 1rem; margin-bottom: 1rem; border-left: 4px solid var(--thread); background: rgba(47,107,94,0.06); color: var(--ink); }
+  button.action.secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+
+  .confidence-banner {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--thread);
+    background: rgba(47,107,94,0.06);
+    color: var(--ink);
+  }
   .confidence-banner.warn { border-left-color: var(--warn); background: rgba(160,106,26,0.08); }
   .confidence-banner.rough { border-left-color: var(--pin); background: rgba(181,72,47,0.08); }
-  .formula-panel { margin-top: 1.6rem; font-family: 'Space Mono', monospace; font-size: 0.78rem; line-height: 1.7; background: #fff; border: 1.5px solid var(--line); padding: 1rem 1.2rem; white-space: pre-wrap; color: var(--ink-soft); }
+
+  .formula-panel {
+    margin-top: 1.6rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    padding: 1rem 1.2rem;
+    white-space: pre-wrap;
+    color: var(--ink-soft);
+  }
   .formula-panel .num { color: var(--pin); }
   .formula-panel .lbl { color: var(--thread); }
   .formula-panel .note { color: var(--ink-soft); font-style: italic; }
+
   svg text.dim { font-family: 'Space Mono', monospace; font-size: 10px; fill: var(--ink-soft); }
   svg .panel-fill { fill: rgba(47,107,94,0.06); stroke: var(--ink); stroke-width: 1.5; }
   svg .overlap { stroke: var(--pin); stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; }
   svg .fold { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 1 3; }
   svg .waistband { fill: rgba(181,72,47,0.06); stroke: var(--ink); stroke-width: 1.5; }
-  .export-row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-top: 0.6rem; }
-  .export-row select { font-family: 'Space Mono', monospace; font-size: 0.78rem; padding: 0.4rem; border: 1.5px solid var(--ink); background: var(--paper); }
+
+  /* ---- print pages (hidden on screen, shown only when printing) ---- */
+  #printPages { display: none; }
+  .print-page {
+    position: relative;
+    page-break-after: always;
+    box-sizing: border-box;
+  }
+  .print-page svg { display: block; width: 100%; height: 100%; }
+  .print-page .page-tag {
+    position: absolute;
+    top: 3mm; left: 3mm;
+    font-family: monospace;
+    font-size: 8pt;
+    color: #999;
+  }
+
+  @media print {
+    header, .garment-tabs, .layout > .controls, .meta-row, .canvas-frame, .formula-panel, .confidence-banner { display: none !important; }
+    .layout { display: block !important; }
+    .canvas-wrap { padding: 0 !important; }
+    #printPages { display: block !important; }
+  }
 </style>
 </head>
 <body>
@@ -88,8 +293,8 @@
   <button data-garment="leotard">Leotard</button>
   <button data-garment="panties">Panties</button>
   <button data-garment="garters">Garters</button>
-  <button data-garment="gloves">Gloves</button>
-  <button data-garment="bralette">Bralette</button>
+  <button data-garment="gloves">Gloves <span class="confidence">&#9650;</span></button>
+  <button data-garment="bralette">Bralette <span class="confidence">&#9650;</span></button>
   <button data-garment="hood">Hood <span class="confidence">&#9650;</span></button>
 </nav>
 
@@ -115,22 +320,23 @@
       <input type="range" id="bust" data-field="bust">
     </div>
     <div class="field" data-garments="top,catsuit,leotard">
-      <label for="shoulderWidth">Shoulder width <span class="unit" id="shoulderWidthUnit">cm</span> <span class="val" id="shoulderWidthVal">38</span></label>
-      <input type="range" id="shoulderWidth" data-field="shoulderWidth">
-    </div>
-    <div class="field" data-garments="top,catsuit,leotard">
       <label for="torsoLength">Torso length (shoulder to waist) <span class="unit" id="torsoLengthUnit">cm</span> <span class="val" id="torsoLengthVal">40</span></label>
       <input type="range" id="torsoLength" data-field="torsoLength">
     </div>
     <div class="field toggle-row" data-garments="top,catsuit,leotard">
-      <input type="checkbox" id="sleeves">
-      <label for="sleeves" style="margin:0;">Include sleeves</label>
+      <input type="checkbox" id="includeSleeve">
+      <label for="includeSleeve" style="margin:0;">Include sleeve</label>
     </div>
-    <div class="field" data-garments="top,catsuit,leotard" id="sleeveLengthField">
-      <label for="sleeveLength">Sleeve length <span class="unit" id="sleeveLengthUnit">cm</span> <span class="val" id="sleeveLengthVal">15</span></label>
+    <div class="field" data-garments="top,catsuit,leotard">
+      <div class="preset-row">
+        <button type="button" data-preset="sleeveLength" data-value="8">Cap</button>
+        <button type="button" data-preset="sleeveLength" data-value="20">Short</button>
+        <button type="button" data-preset="sleeveLength" data-value="55">Long</button>
+      </div>
+      <label for="sleeveLength">Sleeve length <span class="unit" id="sleeveLengthUnit">cm</span> <span class="val" id="sleeveLengthVal">20</span></label>
       <input type="range" id="sleeveLength" data-field="sleeveLength">
     </div>
-    <div class="field" data-garments="top,catsuit,leotard,gloves" id="upperArmField">
+    <div class="field" data-garments="top,catsuit,leotard">
       <label for="upperArm">Upper-arm circumference <span class="unit" id="upperArmUnit">cm</span> <span class="val" id="upperArmVal">28</span></label>
       <input type="range" id="upperArm" data-field="upperArm">
     </div>
@@ -185,31 +391,21 @@
     </div>
 
     <div class="field" data-garments="gloves">
-      <label for="gloveStyle">Style</label>
-      <select id="gloveStyle">
-        <option value="fingerless">Fingerless / arm sleeve</option>
-        <option value="fullfinger" selected>Full-finger glove</option>
-      </select>
-    </div>
-    <div class="field" data-garments="gloves" id="gloveFingerlessFields">
       <div class="preset-row">
-        <button type="button" data-preset="sleeveLength" data-value="18">Wrist</button>
-        <button type="button" data-preset="sleeveLength" data-value="45">Elbow</button>
-        <button type="button" data-preset="sleeveLength" data-value="65">Shoulder</button>
+        <button type="button" data-preset="armLength" data-value="18">Wrist</button>
+        <button type="button" data-preset="armLength" data-value="45">Elbow</button>
+        <button type="button" data-preset="armLength" data-value="65">Shoulder</button>
       </div>
-      <label for="sleeveLength2">Length (wrist to chosen point) <span class="unit">cm</span></label>
+      <label for="armLength">Length (wrist to chosen point) <span class="unit" id="armLengthUnit">cm</span> <span class="val" id="armLengthVal">45</span></label>
+      <input type="range" id="armLength" data-field="armLength">
     </div>
     <div class="field" data-garments="gloves">
       <label for="wrist">Wrist circumference <span class="unit" id="wristUnit">cm</span> <span class="val" id="wristVal">16</span></label>
       <input type="range" id="wrist" data-field="wrist">
     </div>
-    <div class="field" data-garments="gloves" id="handLengthField">
-      <label for="handLength">Hand length (wrist to middle fingertip) <span class="unit" id="handLengthUnit">cm</span> <span class="val" id="handLengthVal">18</span></label>
-      <input type="range" id="handLength" data-field="handLength">
-    </div>
-    <div class="field" data-garments="gloves" id="palmWidthField">
-      <label for="palmWidth">Palm width (across knuckles) <span class="unit" id="palmWidthUnit">cm</span> <span class="val" id="palmWidthVal">9</span></label>
-      <input type="range" id="palmWidth" data-field="palmWidth">
+    <div class="field" data-garments="gloves">
+      <label for="bicep">Upper-arm circumference (at chosen length) <span class="unit" id="bicepUnit">cm</span> <span class="val" id="bicepVal">28</span></label>
+      <input type="range" id="bicep" data-field="bicep">
     </div>
 
     <div class="field" data-garments="hood">
@@ -223,14 +419,6 @@
     <div class="field" data-garments="hood">
       <label for="hoodLength">Length (neck to crown) <span class="unit" id="hoodLengthUnit">cm</span> <span class="val" id="hoodLengthVal">30</span></label>
       <input type="range" id="hoodLength" data-field="hoodLength">
-    </div>
-    <div class="field" data-garments="hood">
-      <label for="faceWidth">Face opening width <span class="unit" id="faceWidthUnit">cm</span> <span class="val" id="faceWidthVal">16</span></label>
-      <input type="range" id="faceWidth" data-field="faceWidth">
-    </div>
-    <div class="field" data-garments="hood">
-      <label for="faceHeight">Face opening height <span class="unit" id="faceHeightUnit">cm</span> <span class="val" id="faceHeightVal">20</span></label>
-      <input type="range" id="faceHeight" data-field="faceHeight">
     </div>
 
     <h2>Latex-specific factors</h2>
@@ -246,10 +434,6 @@
       <label for="flare">Hem flare <span class="unit" id="flareUnit">cm</span> <span class="val" id="flareVal">6</span></label>
       <input type="range" id="flare" data-field="flare">
     </div>
-    <div class="field" data-garments="skirt,leggings,top,catsuit,leotard">
-      <label for="curveAmount">Side-seam curve <span class="unit" id="curveAmountUnit">cm</span> <span class="val" id="curveAmountVal">2</span></label>
-      <input type="range" id="curveAmount" data-field="curveAmount">
-    </div>
 
     <h2 data-garments="skirt,garters">Construction</h2>
     <div class="field" data-garments="skirt,garters">
@@ -262,20 +446,24 @@
     </div>
 
     <h2>Export</h2>
-    <button class="action" id="downloadBtn">Download SVG (preview)</button>
-    <div class="export-row">
+    <button class="action" id="downloadBtn">Download SVG</button>
+    <button class="action secondary" id="printBtn" style="margin-top:0.5rem;">Print pattern (1:1, tiled)</button>
+    <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--ink-soft); margin:0.5rem 0;">
+      Real garment panels are wider than a home printer's usable page area, so expect 15-30+ tiled pages for a full garment -- this is normal for printed sewing patterns generally, not specific to this tool. A copy shop with large-format (plotter) printing can output the same pattern on far fewer physical sheets if you'd rather not tape dozens together.
+    </p>
+    <div class="field" style="margin-top:0.6rem;">
+      <label for="paperSize">Paper size for printing</label>
       <select id="paperSize">
-        <option value="a4">A4</option>
-        <option value="letter">US Letter</option>
+        <option value="letter" selected>US Letter (8.5&quot; &times; 11&quot;)</option>
+        <option value="a4">A4 (210mm &times; 297mm)</option>
       </select>
-      <button class="action secondary" id="printBtn">Print full-size (tiled)</button>
     </div>
   </aside>
 
   <main class="canvas-wrap">
     <div class="confidence-banner" id="confidenceBanner"></div>
     <div class="meta-row">
-      <div class="stamp" id="scaleStamp">SCALE 1 : 1 (ON-SCREEN APPROX)</div>
+      <div class="stamp" id="scaleStamp">SCALE 1 : 1 (ON-SCREEN APPROX) &mdash; use Print for true 1:1 scale</div>
       <div class="stamp" id="cutStamp">CUT 2 (FRONT/BACK), MIRROR &middot; CUT 1 WAISTBAND</div>
     </div>
     <div class="canvas-frame">
@@ -283,6 +471,8 @@
     </div>
 
     <div class="formula-panel" id="formulaPanel"></div>
+
+    <div id="printPages"></div>
   </main>
 </div>
 
@@ -294,14 +484,12 @@ const fieldState = {
   hip:          { cm: 96, minCm: 70,  maxCm: 150, stepCm: 1,   isOverlap: false },
   length:       { cm: 36, minCm: 20,  maxCm: 90,  stepCm: 1,   isOverlap: false },
   bust:         { cm: 88, minCm: 70,  maxCm: 130, stepCm: 1,   isOverlap: false },
-  shoulderWidth:{ cm: 38, minCm: 30,  maxCm: 50,  stepCm: 1,   isOverlap: false },
   torsoLength:  { cm: 40, minCm: 25,  maxCm: 70,  stepCm: 1,   isOverlap: false },
-  sleeveLength: { cm: 15, minCm: 5,   maxCm: 65,  stepCm: 1,   isOverlap: false },
+  sleeveLength: { cm: 20, minCm: 5,   maxCm: 65,  stepCm: 1,   isOverlap: false },
   upperArm:     { cm: 28, minCm: 18,  maxCm: 45,  stepCm: 1,   isOverlap: false },
   inseam:       { cm: 75, minCm: 50,  maxCm: 100, stepCm: 1,   isOverlap: false },
   ankle:        { cm: 22, minCm: 15,  maxCm: 40,  stepCm: 1,   isOverlap: false },
   flare:        { cm: 6,  minCm: 0,   maxCm: 30,  stepCm: 1,   isOverlap: false },
-  curveAmount:  { cm: 2,  minCm: 0,   maxCm: 6,   stepCm: 0.5, isOverlap: false },
   waistband:    { cm: 4,  minCm: 0,   maxCm: 10,  stepCm: 0.5, isOverlap: false },
   overlap:      { cm: 0.8, minCm: 0.4, maxCm: 1.5, stepCm: 0.1, isOverlap: true },
   crotchWidth:  { cm: 6,  minCm: 3,   maxCm: 12,  stepCm: 0.5, isOverlap: false },
@@ -311,33 +499,38 @@ const fieldState = {
   bandHeight:   { cm: 6,  minCm: 3,   maxCm: 12,  stepCm: 0.5, isOverlap: false },
   garterLength: { cm: 12, minCm: 6,   maxCm: 25,  stepCm: 1,   isOverlap: false },
   wrist:        { cm: 16, minCm: 12,  maxCm: 24,  stepCm: 0.5, isOverlap: false },
-  handLength:   { cm: 18, minCm: 14,  maxCm: 24,  stepCm: 0.5, isOverlap: false },
-  palmWidth:    { cm: 9,  minCm: 7,   maxCm: 12,  stepCm: 0.5, isOverlap: false },
+  bicep:        { cm: 28, minCm: 18,  maxCm: 45,  stepCm: 1,   isOverlap: false },
+  armLength:    { cm: 45, minCm: 15,  maxCm: 75,  stepCm: 1,   isOverlap: false },
   headCirc:     { cm: 56, minCm: 48,  maxCm: 65,  stepCm: 1,   isOverlap: false },
   neckCirc:     { cm: 36, minCm: 28,  maxCm: 48,  stepCm: 1,   isOverlap: false },
   hoodLength:   { cm: 30, minCm: 20,  maxCm: 45,  stepCm: 1,   isOverlap: false },
-  faceWidth:    { cm: 16, minCm: 10,  maxCm: 24,  stepCm: 1,   isOverlap: false },
-  faceHeight:   { cm: 20, minCm: 12,  maxCm: 28,  stepCm: 1,   isOverlap: false },
 };
 
 let unit = 'cm';
 let garment = 'skirt';
+let lastPieces = [];
 
 const els = {};
 Object.keys(fieldState).forEach(f => { els[f] = document.getElementById(f); });
 const zipEl = document.getElementById('zip');
-const sleevesEl = document.getElementById('sleeves');
 const easeEl = document.getElementById('ease');
 const strapCountEl = document.getElementById('strapCount');
-const gloveStyleEl = document.getElementById('gloveStyle');
+const includeSleeveEl = document.getElementById('includeSleeve');
 const paperSizeEl = document.getElementById('paperSize');
 const svg = document.getElementById('patternSvg');
 const formulaPanel = document.getElementById('formulaPanel');
 const cutStamp = document.getElementById('cutStamp');
 const confidenceBanner = document.getElementById('confidenceBanner');
+const printPagesEl = document.getElementById('printPages');
 
-function toDisplay(valueCm, field) { return unit === 'cm' ? (field.isOverlap ? valueCm*10 : valueCm) : valueCm/CM_PER_IN; }
-function fromDisplay(displayVal, field) { return unit === 'cm' ? (field.isOverlap ? displayVal/10 : displayVal) : displayVal*CM_PER_IN; }
+function toDisplay(valueCm, field) {
+  if (unit === 'cm') return field.isOverlap ? valueCm * 10 : valueCm;
+  return valueCm / CM_PER_IN;
+}
+function fromDisplay(displayVal, field) {
+  if (unit === 'cm') return field.isOverlap ? displayVal / 10 : displayVal;
+  return displayVal * CM_PER_IN;
+}
 function unitLabel(field) { return unit === 'cm' ? (field.isOverlap ? 'mm' : 'cm') : 'in'; }
 function roundForDisplay(v) { return unit === 'in' ? Math.round(v*20)/20 : Math.round(v*2)/2; }
 
@@ -347,28 +540,29 @@ function refreshSliderChrome() {
     slider.min = toDisplay(state.minCm, state);
     slider.max = toDisplay(state.maxCm, state);
     slider.step = unit === 'in' ? 0.05 : (state.isOverlap ? 0.5 : (state.stepCm >= 1 ? 1 : 0.5));
-    slider.value = toDisplay(state.cm, state);
-    document.getElementById(f+'Unit') && (document.getElementById(f+'Unit').textContent = unitLabel(state));
-    document.getElementById(f+'Val') && (document.getElementById(f+'Val').textContent = roundForDisplay(slider.value).toFixed(unit==='in'?2:1));
+    const dispVal = toDisplay(state.cm, state);
+    slider.value = dispVal;
+    document.getElementById(f + 'Unit').textContent = unitLabel(state);
+    document.getElementById(f + 'Val').textContent = roundForDisplay(dispVal).toFixed(unit === 'in' ? 2 : 1);
   });
 }
 function onSliderInput(f) {
-  const state = fieldState[f], slider = els[f];
-  state.cm = fromDisplay(Number(slider.value), state);
-  document.getElementById(f+'Val') && (document.getElementById(f+'Val').textContent = roundForDisplay(Number(slider.value)).toFixed(unit==='in'?2:1));
+  const state = fieldState[f], displayed = Number(els[f].value);
+  state.cm = fromDisplay(displayed, state);
+  document.getElementById(f + 'Val').textContent = roundForDisplay(displayed).toFixed(unit === 'in' ? 2 : 1);
   generate();
 }
 Object.keys(fieldState).forEach(f => els[f].addEventListener('input', () => onSliderInput(f)));
 easeEl.addEventListener('input', generate);
 zipEl.addEventListener('input', generate);
-sleevesEl.addEventListener('input', () => { refreshFieldVisibility(); generate(); });
 strapCountEl.addEventListener('input', generate);
-gloveStyleEl.addEventListener('input', () => { refreshFieldVisibility(); generate(); });
+includeSleeveEl.addEventListener('input', generate);
 
 document.querySelectorAll('[data-preset]').forEach(btn => {
   btn.addEventListener('click', () => {
     fieldState[btn.dataset.preset].cm = Number(btn.dataset.value);
-    refreshSliderChrome(); generate();
+    refreshSliderChrome();
+    generate();
   });
 });
 
@@ -376,193 +570,273 @@ document.getElementById('unitCm').addEventListener('click', () => setUnit('cm'))
 document.getElementById('unitIn').addEventListener('click', () => setUnit('in'));
 function setUnit(u) {
   unit = u;
-  document.getElementById('unitCm').classList.toggle('active', u==='cm');
-  document.getElementById('unitIn').classList.toggle('active', u==='in');
-  refreshSliderChrome(); generate();
+  document.getElementById('unitCm').classList.toggle('active', u === 'cm');
+  document.getElementById('unitIn').classList.toggle('active', u === 'in');
+  refreshSliderChrome();
+  generate();
 }
 
 document.querySelectorAll('.garment-tabs button').forEach(btn => {
   btn.addEventListener('click', () => {
     garment = btn.dataset.garment;
-    document.querySelectorAll('.garment-tabs button').forEach(b => b.classList.toggle('active', b===btn));
-    refreshFieldVisibility(); generate();
+    document.querySelectorAll('.garment-tabs button').forEach(b => b.classList.toggle('active', b === btn));
+    refreshFieldVisibility();
+    generate();
   });
 });
-
 function refreshFieldVisibility() {
   document.querySelectorAll('[data-garments]').forEach(el => {
-    const list = el.dataset.garments.split(',');
-    el.style.display = list.includes(garment) ? '' : 'none';
+    el.style.display = el.dataset.garments.split(',').includes(garment) ? '' : 'none';
   });
-  const sleeveFieldsShown = sleevesEl.checked;
-  ['sleeveLengthField','upperArmField'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    if (garment === 'gloves') return;
-    if (['top','catsuit','leotard'].includes(garment)) el.style.display = sleeveFieldsShown ? '' : 'none';
-  });
-  if (garment === 'gloves') {
-    const fullFinger = gloveStyleEl.value === 'fullfinger';
-    document.getElementById('gloveFingerlessFields').style.display = fullFinger ? 'none' : '';
-    document.getElementById('sleeveLengthField').style.display = fullFinger ? 'none' : '';
-    document.getElementById('upperArmField').style.display = fullFinger ? 'none' : '';
-    document.getElementById('handLengthField').style.display = fullFinger ? '' : 'none';
-    document.getElementById('palmWidthField').style.display = fullFinger ? '' : 'none';
-  }
 }
 
-function fmt(valueCm) { return unit==='cm' ? (valueCm.toFixed(1)+'cm') : ((valueCm/CM_PER_IN).toFixed(2)+'in'); }
-function setBanner(level, text) { confidenceBanner.className = 'confidence-banner' + (level?' '+level:''); confidenceBanner.textContent = text; }
-
-// =====================================================================
-// SHARED GEOMETRY LAYER
-// Every shape is computed ONCE as {points:[[x,y]cm...], bulges:[cm...]}
-// in local coordinates (y increases downward, x centered at 0 unless
-// noted). Both the live preview AND the print export call these same
-// functions and the same low-level path builder -- there is no second
-// implementation of "what shape is a leg panel" anywhere, so preview
-// and print cannot silently drift apart from each other.
-//
-// Bulge sign convention (empirically verified against a test suite):
-// for these clockwise-wound point lists, a NEGATIVE bulge curves the
-// edge OUTWARD (convex/away from center), a POSITIVE bulge curves it
-// INWARD (concave, e.g. a crotch curve or armhole cutout).
-// =====================================================================
-
-function segPath(p0, p1, bulgeCm, scale) {
-  if (!bulgeCm) return 'L ' + (p1[0]*scale) + ',' + (p1[1]*scale);
-  const mx=(p0[0]+p1[0])/2, my=(p0[1]+p1[1])/2;
-  const dx=p1[0]-p0[0], dy=p1[1]-p0[1];
-  const len=Math.hypot(dx,dy)||1;
-  const nx=-dy/len, ny=dx/len;
-  const cx=(mx+nx*bulgeCm)*scale, cy=(my+ny*bulgeCm)*scale;
-  return 'Q ' + cx + ',' + cy + ' ' + (p1[0]*scale) + ',' + (p1[1]*scale);
-}
-function buildClosedPathD(points, bulges, scale, offsetX, offsetY) {
-  const p0 = points[0];
-  let d = 'M ' + ((p0[0])*scale+offsetX) + ',' + ((p0[1])*scale+offsetY) + ' ';
-  for (let i=0;i<points.length;i++) {
-    const a = points[i], b = points[(i+1)%points.length];
-    const seg = segPath(a, b, bulges[i]||0, scale);
-    if (seg.startsWith('L')) {
-      const parts = seg.slice(2).split(',');
-      d += 'L ' + (Number(parts[0])+offsetX) + ',' + (Number(parts[1])+offsetY) + ' ';
-    } else {
-      const rest = seg.slice(2).trim();
-      const nums = rest.split(/[\s,]+/).map(Number);
-      d += 'Q ' + (nums[0]+offsetX) + ',' + (nums[1]+offsetY) + ' ' + (nums[2]+offsetX) + ',' + (nums[3]+offsetY) + ' ';
-    }
-  }
-  return d + 'Z';
-}
-function bbox(points) {
-  const xs = points.map(p=>p[0]), ys = points.map(p=>p[1]);
-  return { minX:Math.min.apply(null,xs), maxX:Math.max.apply(null,xs), minY:Math.min.apply(null,ys), maxY:Math.max.apply(null,ys),
-           width:Math.max.apply(null,xs)-Math.min.apply(null,xs), height:Math.max.apply(null,ys)-Math.min.apply(null,ys) };
-}
-
-function trapezoidGeom(topW, botW, h, curveCm) {
-  return {
-    points: [[-topW/2,0],[topW/2,0],[botW/2,h],[-botW/2,h]],
-    bulges: [0, -curveCm, 0, -curveCm],
-  };
-}
-
-function legGeom(waistW, hipW, ankleW, h, midFrac, outerCurveCm, crotchCurveCm) {
-  const points = [
-    [waistW/2,0],[hipW/2,h*midFrac],[ankleW/2,h],
-    [-ankleW/2,h],[-hipW/2,h*midFrac],[-waistW/2,0],
-  ];
-  const bulges = [-outerCurveCm, -outerCurveCm*0.4, 0, -outerCurveCm*0.25, crotchCurveCm, 0];
-  return { points, bulges };
-}
-
-function bodiceLegGeom(bustW, waistW, hipW, ankleW, torsoH, inseamH, midFrac, curveCm, crotchCurveCm) {
-  const waistY = torsoH, hipY = torsoH+inseamH*midFrac, ankleY = torsoH+inseamH;
-  const points = [
-    [bustW/2,0],[waistW/2,waistY],[hipW/2,hipY],[ankleW/2,ankleY],
-    [-ankleW/2,ankleY],[-hipW/2,hipY],[-waistW/2,waistY],[-bustW/2,0],
-  ];
-  const bulges = [-curveCm, -curveCm*0.5, -curveCm*0.3, 0, -curveCm*0.2, crotchCurveCm, -curveCm, 0];
-  return { points, bulges, waistY, hipY, ankleY };
-}
-
-function bodiceArmholeGeom(bustW, waistW, shoulderW, h, armholeDepth, curveCm) {
-  const points = [
-    [shoulderW/2,0],[bustW/2,armholeDepth],[waistW/2,h],
-    [-waistW/2,h],[-bustW/2,armholeDepth],[-shoulderW/2,0],
-  ];
-  const armholeCurve = Math.max(1.5, (bustW-shoulderW)*0.6);
-  return { points, bulges: [armholeCurve, -curveCm, 0, -curveCm, armholeCurve, 0], armholeDepth };
-}
-
-function sleeveGeom(armholeWidth, cuffWidth, sleeveLen, capHeight) {
-  const points = [[armholeWidth/2,0],[cuffWidth/2,sleeveLen],[-cuffWidth/2,sleeveLen],[-armholeWidth/2,0]];
-  const capBulge = capHeight;
-  return { points, bulges: [0,0,0,capBulge] };
-}
-
-function trianglePanelGeom(baseW, depth, curveCm) {
-  return { points: [[0,0],[baseW/2,depth],[-baseW/2,depth]], bulges: [-curveCm,0,-curveCm] };
-}
-
-function rectGeom(w, h) {
-  return { points: [[-w/2,0],[w/2,0],[w/2,h],[-w/2,h]], bulges: [0,0,0,0] };
-}
-
-function hoodGeom(neckW, headW, crownW, h, midFrac, crownCurveCm, faceOpeningBulgeCm) {
-  const points = [
-    [crownW/2,0],[headW/2,h*(1-midFrac)],[neckW/2,h],
-    [-neckW/2,h],[-headW/2,h*(1-midFrac)],[-crownW/2,0],
-  ];
-  return { points, bulges: [faceOpeningBulgeCm, -1.5, 0, -1.5, -1.5, -crownCurveCm] };
-}
-
-function fingerGeom(baseW, tipW, len, tipCurveCm) {
-  return { points: [[baseW/2,0],[tipW/2,len],[-tipW/2,len],[-baseW/2,0]], bulges: [0,0,0,tipCurveCm] };
-}
-
-function svgElFor(targetSvg, tag, attrs) {
-  const el = (targetSvg.ownerDocument || document).createElementNS('http://www.w3.org/2000/svg', tag);
+function svgEl(tag, attrs) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const k in attrs) el.setAttribute(k, attrs[k]);
   return el;
 }
-function addLabelTo(targetSvg, x, y, text) {
-  const t = svgElFor(targetSvg, 'text', { x, y, 'text-anchor':'middle', class:'dim' });
-  t.textContent = text;
-  targetSvg.appendChild(t);
+function fmt(valueCm) {
+  return unit === 'cm' ? `${valueCm.toFixed(1)}cm` : `${(valueCm/CM_PER_IN).toFixed(2)}in`;
+}
+function setBanner(level, text) {
+  confidenceBanner.className = 'confidence-banner' + (level ? ' ' + level : '');
+  confidenceBanner.textContent = text;
 }
 
-function drawPiece(targetSvg, geom, cx, topPx, scale, label, opts) {
-  opts = opts || {};
-  const d = buildClosedPathD(geom.points, geom.bulges, scale, cx, topPx);
-  targetSvg.appendChild(svgElFor(targetSvg, 'path', { d, class: 'panel-fill' }));
+// =====================================================================
+// CURVE ENGINE -- Catmull-Rom-to-cubic-Bezier conversion (standard,
+// uniform-parameterization spline). Real, well-defined math: smooth
+// curves through a series of real measurement-derived points, not a
+// cosmetic approximation. Straight top/bottom edges are kept straight
+// on purpose (those are usually where a waistband/hem attaches, not a
+// body curve), only the SIDE seams curve through the intermediate
+// points.
+// =====================================================================
 
-  const foldEdges = new Set(opts.foldEdges || []);
-  for (let i=0;i<geom.points.length;i++) {
-    const a = geom.points[i], b = geom.points[(i+1)%geom.points.length];
-    const cls = foldEdges.has(i) ? 'fold' : 'overlap';
-    const dd = buildClosedPathD([a,b], [geom.bulges[i]||0, 0], scale, cx, topPx).replace(/ Z$/, '').replace(/^M[^L Q]*L /, (m)=>m); // open path: M a L/Q b
-    // Simpler: construct directly as an open two-point path
-    const segStr = segPath(a, b, geom.bulges[i]||0, scale);
-    let openD;
-    if (segStr.startsWith('L')) {
-      const parts = segStr.slice(2).split(',');
-      openD = 'M ' + (a[0]*scale+cx) + ',' + (a[1]*scale+topPx) + ' L ' + (Number(parts[0])+cx) + ',' + (Number(parts[1])+topPx);
-    } else {
-      const rest = segStr.slice(2).trim();
-      const nums = rest.split(/[\s,]+/).map(Number);
-      openD = 'M ' + (a[0]*scale+cx) + ',' + (a[1]*scale+topPx) + ' Q ' + (nums[0]+cx) + ',' + (nums[1]+topPx) + ' ' + (nums[2]+cx) + ',' + (nums[3]+topPx);
-    }
-    targetSvg.appendChild(svgElFor(targetSvg, 'path', { d: openD, class: cls, fill: 'none' }));
+function curveThroughPath(points) {
+  let d = '';
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i - 1] || points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] || p2;
+    const c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += `C${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2[0].toFixed(2)},${p2[1].toFixed(2)} `;
   }
-  const bb = bbox(geom.points);
-  if (label) addLabelTo(targetSvg, cx, topPx + bb.minY*scale - 10, label);
-  return { cx, topPx, bb, widthPx: bb.width*scale, heightPx: bb.height*scale };
+  return d;
+}
+
+function curvedPanelPath(cx, points, heightUnits, topY) {
+  // points are [yFrac, fullWidthUnits] pairs -- halve here to get the
+  // distance from the center line to each side seam.
+  const abs = points.map(p => [p[1] / 2, topY + p[0] * heightUnits]);
+  const rightPts = abs.map(p => [cx + p[0], p[1]]);
+  const leftPts = abs.slice().reverse().map(p => [cx - p[0], p[1]]);
+  let d = `M${leftPts[leftPts.length-1][0].toFixed(2)},${leftPts[leftPts.length-1][1].toFixed(2)} `;
+  d += `L${rightPts[0][0].toFixed(2)},${rightPts[0][1].toFixed(2)} `;
+  d += curveThroughPath(rightPts);
+  d += `L${leftPts[0][0].toFixed(2)},${leftPts[0][1].toFixed(2)} `;
+  d += curveThroughPath(leftPts);
+  d += 'Z';
+  return { d, rightPts, leftPts };
+}
+
+function openCurvePath(points) {
+  let d = `M${points[0][0].toFixed(2)},${points[0][1].toFixed(2)} `;
+  d += curveThroughPath(points);
+  return d;
+}
+
+function drawCurvedPanelAt(target, cxUnits, pointsUnits, heightUnits, topUnits, label, isBack, includeZip) {
+  const { d, rightPts, leftPts } = curvedPanelPath(cxUnits, pointsUnits, heightUnits, topUnits);
+  target.appendChild(svgEl('path', { d, class: 'panel-fill' }));
+  target.appendChild(svgEl('path', { d: openCurvePath(rightPts), class: 'overlap', fill: 'none' }));
+  target.appendChild(svgEl('path', { d: openCurvePath(leftPts.slice().reverse()), class: 'overlap', fill: 'none' }));
+  const centerDash = (isBack && includeZip) ? 'overlap' : 'fold';
+  target.appendChild(svgEl('line', { x1: cxUnits, y1: topUnits, x2: cxUnits, y2: topUnits + heightUnits, class: centerDash }));
+  addLabelTo(target, cxUnits, topUnits - 10, label);
+  return topUnits + heightUnits;
+}
+
+function addLabelTo(target, x, y, text) {
+  const t = svgEl('text', { x, y, 'text-anchor': 'middle', class: 'dim' });
+  t.textContent = text;
+  target.appendChild(t);
+}
+
+function drawRectAt(target, cxUnits, widthUnits, heightUnits, topUnits, label) {
+  const x0 = cxUnits - widthUnits/2;
+  target.appendChild(svgEl('rect', { x: x0, y: topUnits, width: widthUnits, height: heightUnits, class: 'panel-fill' }));
+  target.appendChild(svgEl('line', { x1: x0, y1: topUnits, x2: x0, y2: topUnits+heightUnits, class: 'overlap' }));
+  target.appendChild(svgEl('line', { x1: x0+widthUnits, y1: topUnits, x2: x0+widthUnits, y2: topUnits+heightUnits, class: 'overlap' }));
+  addLabelTo(target, cxUnits, topUnits - 8, label);
+  return topUnits + heightUnits;
+}
+
+function drawCurvedCupAt(target, cxUnits, baseWidthUnits, heightUnits, topUnits, label) {
+  const apex = [cxUnits, topUnits];
+  const baseL = [cxUnits - baseWidthUnits/2, topUnits + heightUnits];
+  const baseR = [cxUnits + baseWidthUnits/2, topUnits + heightUnits];
+  const baseMid = [cxUnits, topUnits + heightUnits * 1.08];
+  let d = `M${apex[0]},${apex[1]} L${baseL[0]},${baseL[1]} `;
+  d += curveThroughPath([baseL, baseMid, baseR]);
+  d += `L${apex[0]},${apex[1]} Z`;
+  target.appendChild(svgEl('path', { d, class: 'panel-fill' }));
+  target.appendChild(svgEl('line', { x1: apex[0], y1: apex[1], x2: baseL[0], y2: baseL[1], class: 'overlap' }));
+  target.appendChild(svgEl('line', { x1: apex[0], y1: apex[1], x2: baseR[0], y2: baseR[1], class: 'overlap' }));
+  addLabelTo(target, cxUnits, topUnits - 8, label);
+  return topUnits + heightUnits * 1.1;
+}
+
+function drawSleeveAt(target, cxUnits, bicepUnits, lengthUnits, capHeightUnits, topUnits, label) {
+  const halfBicep = bicepUnits/2;
+  const capPts = [
+    [cxUnits - halfBicep, topUnits + capHeightUnits],
+    [cxUnits, topUnits],
+    [cxUnits + halfBicep, topUnits + capHeightUnits],
+  ];
+  const bottomY = topUnits + capHeightUnits + lengthUnits;
+  let d = `M${capPts[0][0]},${capPts[0][1]} `;
+  d += curveThroughPath(capPts);
+  d += `L${cxUnits+halfBicep},${bottomY} L${cxUnits-halfBicep},${bottomY} Z`;
+  target.appendChild(svgEl('path', { d, class: 'panel-fill' }));
+  target.appendChild(svgEl('line', { x1: cxUnits-halfBicep, y1: topUnits+capHeightUnits, x2: cxUnits-halfBicep, y2: bottomY, class: 'overlap' }));
+  target.appendChild(svgEl('line', { x1: cxUnits+halfBicep, y1: topUnits+capHeightUnits, x2: cxUnits+halfBicep, y2: bottomY, class: 'overlap' }));
+  addLabelTo(target, cxUnits, topUnits - 8, label);
+  return bottomY;
+}
+
+// =====================================================================
+// Piece model + layout: each generate*() builds a list of pieces in
+// pure CM space (no arbitrary preview scale baked in). Rendered twice:
+// once auto-fit for the screen preview, once at true 1:1 scale for
+// print -- this is what makes true-scale print export possible without
+// re-deriving geometry.
+// =====================================================================
+
+function layoutPieces(pieces, gapCm, maxRowWidthCm) {
+  // Simple shelf-packing: fill a row left-to-right until the next piece
+  // would overflow maxRowWidthCm, then wrap to a new row below. This
+  // matters for print export specifically -- naively laying every piece
+  // in one long row wastes huge amounts of space next to short pieces
+  // (e.g. a 4cm waistband forced into the same row-height as a 36cm
+  // panel), which directly inflates the tiled page count for no reason.
+  gapCm = gapCm || 3;
+  maxRowWidthCm = maxRowWidthCm || 150;
+  let rowX = gapCm, rowY = gapCm, rowMaxH = 0, maxWidthUsed = gapCm;
+  pieces.forEach(p => {
+    const w = pieceWidthCm(p), h = pieceHeightCm(p);
+    if (rowX + w + gapCm > maxRowWidthCm && rowX > gapCm) {
+      maxWidthUsed = Math.max(maxWidthUsed, rowX);
+      rowY += rowMaxH + gapCm;
+      rowX = gapCm;
+      rowMaxH = 0;
+    }
+    p.cxCm = rowX + w / 2;
+    p.topCm = rowY;
+    rowX += w + gapCm;
+    rowMaxH = Math.max(rowMaxH, h);
+  });
+  maxWidthUsed = Math.max(maxWidthUsed, rowX);
+  return { totalWidthCm: maxWidthUsed, totalHeightCm: rowY + rowMaxH + gapCm };
+}
+function pieceWidthCm(p) {
+  if (p.type === 'curved') return Math.max(...p.points.map(pt => pt[1]));
+  if (p.type === 'rect') return p.widthCm;
+  if (p.type === 'cup') return p.baseWidthCm;
+  if (p.type === 'sleeve') return p.bicepCm;
+  return 10;
+}
+function pieceHeightCm(p) {
+  if (p.type === 'curved') return p.heightCm;
+  if (p.type === 'rect') return p.heightCm;
+  if (p.type === 'cup') return p.heightCm*1.15;
+  if (p.type === 'sleeve') return p.capHeightCm + p.lengthCm;
+  return 10;
+}
+
+function renderPiecesTo(target, pieces, scale) {
+  pieces.forEach(p => {
+    const cxU = p.cxCm * scale, topU = p.topCm * scale;
+    if (p.type === 'curved') {
+      drawCurvedPanelAt(target, cxU, p.points.map(pt => [pt[0], pt[1]*scale]), p.heightCm*scale, topU, p.label, p.isBack, p.includeZip);
+    } else if (p.type === 'rect') {
+      drawRectAt(target, cxU, p.widthCm*scale, p.heightCm*scale, topU, p.label);
+    } else if (p.type === 'cup') {
+      drawCurvedCupAt(target, cxU, p.baseWidthCm*scale, p.heightCm*scale, topU, p.label);
+    } else if (p.type === 'sleeve') {
+      drawSleeveAt(target, cxU, p.bicepCm*scale, p.lengthCm*scale, p.capHeightCm*scale, topU, p.label);
+    }
+  });
+}
+
+function renderPreview(pieces) {
+  svg.innerHTML = '';
+  const { totalWidthCm, totalHeightCm } = layoutPieces(pieces, 3, 220);
+  const viewW = 900, viewH = 640;
+  const scale = Math.max(1.2, Math.min((viewW-40)/totalWidthCm, (viewH-40)/totalHeightCm));
+  renderPiecesTo(svg, pieces, scale);
+  lastPieces = pieces;
+}
+
+document.getElementById('printBtn').addEventListener('click', () => {
+  buildPrintPages(lastPieces, paperSizeEl.value);
+  window.print();
+});
+
+function buildPrintPages(pieces, paper) {
+  printPagesEl.innerHTML = '';
+  const pageMm = paper === 'a4' ? { w: 210, h: 297 } : { w: 215.9, h: 279.4 };
+  const marginMm = 15;
+  const overlapMm = 20;
+  const scaleMmPerCm = 10;
+  // A generous row cap: only wraps to a new row when it genuinely saves
+  // space (very different piece heights), not an artificial small limit.
+  const maxRowWidthCm = 250;
+  const { totalWidthCm, totalHeightCm } = layoutPieces(pieces, 4, maxRowWidthCm);
+  const usableW = pageMm.w - marginMm*2;
+  const usableH = pageMm.h - marginMm*2;
+  const totalWmm = totalWidthCm * scaleMmPerCm;
+  const totalHmm = totalHeightCm * scaleMmPerCm;
+  const cols = Math.max(1, Math.ceil(totalWmm / (usableW - overlapMm)));
+  const rows = Math.max(1, Math.ceil(totalHmm / (usableH - overlapMm)));
+
+  let pageNum = 0;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      pageNum++;
+      const offsetXmm = c * (usableW - overlapMm);
+      const offsetYmm = r * (usableH - overlapMm);
+
+      const pageDiv = document.createElement('div');
+      pageDiv.className = 'print-page';
+      pageDiv.style.width = pageMm.w + 'mm';
+      pageDiv.style.height = pageMm.h + 'mm';
+      const tag = document.createElement('div');
+      tag.className = 'page-tag';
+      tag.textContent = `Lapis pattern -- page ${pageNum} (row ${r+1}, col ${c+1} of ${rows}x${cols}) -- tape pages together matching overlap edges`;
+      pageDiv.appendChild(tag);
+
+      const pageSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      pageSvg.setAttribute('viewBox', `${offsetXmm - marginMm} ${offsetYmm - marginMm} ${pageMm.w} ${pageMm.h}`);
+      pageSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      pageDiv.appendChild(pageSvg);
+      printPagesEl.appendChild(pageDiv);
+
+      renderPiecesTo(pageSvg, pieces, scaleMmPerCm);
+
+      const refX = offsetXmm - marginMm + 5, refY = offsetYmm - marginMm + pageMm.h - 15;
+      pageSvg.appendChild(svgEl('rect', { x: refX, y: refY, width: 10, height: 10, fill: 'none', stroke: '#000', 'stroke-width': 0.3 }));
+      const refLabel = svgEl('text', { x: refX, y: refY - 2, 'font-size': 3, 'font-family': 'monospace' });
+      refLabel.textContent = '1cm ref square -- verify before cutting';
+      pageSvg.appendChild(refLabel);
+    }
+  }
+  return { pageCount: rows*cols, rows, cols };
 }
 
 function generate() {
-  svg.innerHTML = '';
   const fns = {
     skirt: generateSkirt, top: generateTop, leggings: generateLeggings,
     catsuit: generateCatsuit, leotard: generateLeotard, panties: generatePanties,
@@ -572,374 +846,203 @@ function generate() {
   document.getElementById('easeVal').textContent = easeEl.value;
 }
 
-function eff(v, easePct) { return v*(1-easePct/100); }
+function sleevePieceIfWanted(bustCm, easePct, overlapCm) {
+  if (!includeSleeveEl.checked) return null;
+  const bicep = fieldState.upperArm.cm * (1 - easePct/100) + overlapCm*2;
+  const armholeDepth = bustCm/4 + 2.5;
+  const capHeight = armholeDepth * 0.6;
+  const length = fieldState.sleeveLength.cm;
+  return { type: 'sleeve', bicepCm: bicep, lengthCm: length, capHeightCm: capHeight, label: 'SLEEVE \u00d72 (mirror)' };
+}
 
 function generateSkirt() {
-  setBanner('', 'Curved side seams (not a straight trapezoid anymore) for a closer approximation of body shape at the hip.');
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, curveCm = fieldState.curveAmount.cm;
-  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, length = fieldState.length.cm, flare = fieldState.flare.cm, waistbandH = fieldState.waistband.cm;
+  setBanner('', 'Curved side seams through waist \u2192 hip \u2192 hem (all real measurements) -- a genuine improvement over a straight trapezoid, though hip placement height is still an approximation.');
+  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, length = fieldState.length.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm, waistbandH = fieldState.waistband.cm;
   const includeZip = zipEl.checked;
-  const topW = eff(waist,easePct)/2+overlapCm*2, botW = eff(hip,easePct)/2+flare+overlapCm*2, wbW = eff(waist,easePct)+overlapCm*2;
-  const scale = 4.4;
-  const g = trapezoidGeom(topW, botW, length, curveCm);
-  drawPiece(svg, g, 230, 60, scale, 'FRONT PANEL x1', { foldEdges: includeZip?[]:[2] });
-  drawPiece(svg, g, 560, 60, scale, 'BACK PANEL x1'+(includeZip?' (zip CB)':''), { foldEdges: includeZip?[]:[2] });
-  const wbY = 60+length*scale+50, wbWpx=wbW*scale, wbHpx=Math.max(waistbandH,0.1)*scale;
-  svg.appendChild(svgElFor(svg,'rect',{x:450-wbWpx/2,y:wbY,width:wbWpx,height:wbHpx,class:'waistband'}));
-  addLabelTo(svg, 450, wbY-10, 'WAISTBAND x1 -- ' + fmt(wbW) + ' x ' + fmt(waistbandH));
-  cutStamp.textContent = 'CUT 2 (FRONT+BACK, CURVED SIDE SEAM) . CUT 1 WAISTBAND . ' + (includeZip?'BACK ZIP':'NO ZIP');
-  formulaPanel.innerHTML = '<span class="lbl">panel_top</span> = <span class="num">' + topW.toFixed(2) + 'cm</span>  <span class="lbl">panel_bottom</span> = <span class="num">' + botW.toFixed(2) + 'cm</span>  <span class="lbl">waistband</span> = <span class="num">' + wbW.toFixed(2) + 'cm</span>\n<span class="lbl">side_seam_curve</span> = ' + fmt(curveCm) + ' outward bulge at the seam midpoint (adjustable in Latex-specific factors).';
+  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100);
+  const wW = effWaist/2+overlapCm*2, hW = effHip/2+overlapCm*2, hemW = effHip/2+flare+overlapCm*2;
+  const hipFrac = 0.35;
+  const points = [[0, wW], [hipFrac, hW], [1, hemW]];
+  const pieces = [
+    { type:'curved', points, heightCm: length, label: 'FRONT PANEL \u00d71', isBack:false, includeZip },
+    { type:'curved', points, heightCm: length, label: 'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), isBack:true, includeZip },
+    { type:'rect', widthCm: effWaist+overlapCm*2, heightCm: waistbandH, label: 'WAISTBAND \u00d71' },
+  ];
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK) \u00b7 CUT 1 WAISTBAND \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'} \u00b7 CURVED SIDE SEAMS`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_waist</span> = <span class="num">${effWaist.toFixed(2)}cm</span>  <span class="lbl">effective_hip</span> = <span class="num">${effHip.toFixed(2)}cm</span>
+<span class="lbl">waist_width</span> = <span class="num">${wW.toFixed(2)}cm</span>  <span class="lbl">hip_width</span> = <span class="num">${hW.toFixed(2)}cm</span>  <span class="lbl">hem_width</span> = <span class="num">${hemW.toFixed(2)}cm</span>
+<span class="note">Hip point placed at ${(hipFrac*100).toFixed(0)}% down the skirt length -- adjust by hand if your hip sits noticeably higher/lower on this length.</span>`;
 }
 
 function generateTop() {
-  const hasSleeves = sleevesEl.checked;
-  setBanner('', hasSleeves ? 'Curved side seams + a real armhole cutout and matching sleeve cap.' : 'Curved side seams. Enable "Include sleeves" for an armhole + sleeve piece.');
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, curveCm = fieldState.curveAmount.cm, flare = fieldState.flare.cm;
-  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, length = fieldState.torsoLength.cm, shoulderW = fieldState.shoulderWidth.cm;
-  const includeZip = zipEl.checked;
-  const effBust = eff(bust,easePct), effWaist = eff(waist,easePct), effShoulder = eff(shoulderW,easePct);
-  const scale = 4.4;
-
-  if (!hasSleeves) {
-    const topW = effBust/2+overlapCm*2, botW = effWaist/2+flare+overlapCm*2;
-    const g = trapezoidGeom(topW, botW, length, curveCm);
-    drawPiece(svg, g, 230, 60, scale, 'FRONT PANEL x1');
-    drawPiece(svg, g, 560, 60, scale, 'BACK PANEL x1'+(includeZip?' (zip CB)':''));
-    cutStamp.textContent = 'CUT 2 (FRONT+BACK) . ' + (includeZip?'BACK ZIP':'NO ZIP') + ' . SLEEVELESS';
-    formulaPanel.innerHTML = '<span class="lbl">panel_top</span> = <span class="num">' + topW.toFixed(2) + 'cm</span>  <span class="lbl">panel_bottom</span> = <span class="num">' + botW.toFixed(2) + 'cm</span>';
-    return;
-  }
-
-  const armholeDepth = length*0.22;
-  const shoulderWithOverlap = effShoulder+overlapCm*2, bustWithOverlap = effBust/2+overlapCm*2, waistWithOverlap = effWaist/2+flare+overlapCm*2;
-  const bodice = bodiceArmholeGeom(bustWithOverlap*2, waistWithOverlap*2, shoulderWithOverlap*2, length, armholeDepth, curveCm);
-  drawPiece(svg, bodice, 210, 60, scale, 'FRONT PANEL x1', { foldEdges:[2] });
-  drawPiece(svg, bodice, 480, 60, scale, 'BACK PANEL x1'+(includeZip?' (zip CB)':''), { foldEdges: includeZip?[]:[2] });
-
-  const sleeveLen = fieldState.sleeveLength.cm;
-  const upperArmW = eff(fieldState.upperArm.cm, easePct)+overlapCm*2;
-  const armholeWidth = bustWithOverlap*2 - shoulderWithOverlap*2 + shoulderWithOverlap*0.6;
-  const sleeve = sleeveGeom(Math.max(upperArmW,armholeWidth*0.9), upperArmW*0.75, sleeveLen, sleeveLen*0.18);
-  drawPiece(svg, sleeve, 780, 60, scale, 'SLEEVE x2');
-
-  cutStamp.textContent = 'CUT 2 (FRONT+BACK) + 2 SLEEVES . ' + (includeZip?'BACK ZIP':'NO ZIP') + ' . ARMHOLE CURVE CUT';
-  formulaPanel.innerHTML = '<span class="lbl">armhole_depth</span> ~ 22% of torso length = <span class="num">' + armholeDepth.toFixed(2) + 'cm</span> (an approximation, not a measured depth)\n<span class="lbl">sleeve_cap_height</span> ~ 18% of sleeve length = <span class="num">' + (sleeveLen*0.18).toFixed(2) + 'cm</span>\n<span class="note">Armhole and sleeve-cap curves are matched approximately, not eased/notched precisely -- expect to true up the cap when sewing/gluing it in.</span>';
+  setBanner('', includeSleeveEl.checked
+    ? 'Curved bust\u2192waist side seam, plus a real (if simplified) sleeve block using a standard beginner drafting ratio. No armhole ease distribution or shoulder-slope adjustment -- still a basic block.'
+    : 'Curved bust\u2192waist side seam. Sleeveless; enable the sleeve option above to add a basic sleeve block.');
+  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, length = fieldState.torsoLength.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm, includeZip = zipEl.checked;
+  const effBust = bust*(1-easePct/100), effWaist = waist*(1-easePct/100);
+  const topW = effBust/2+overlapCm*2, botW = effWaist/2+flare+overlapCm*2;
+  const points = [[0, topW], [1, botW]];
+  const pieces = [
+    { type:'curved', points, heightCm: length, label:'FRONT PANEL \u00d71', isBack:false, includeZip },
+    { type:'curved', points, heightCm: length, label:'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), isBack:true, includeZip },
+  ];
+  const sleeve = sleevePieceIfWanted(bust, easePct, overlapCm);
+  if (sleeve) pieces.push(sleeve);
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK)${sleeve?' + 2 SLEEVES':''} \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'}`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_bust</span> = <span class="num">${effBust.toFixed(2)}cm</span>  <span class="lbl">effective_waist</span> = <span class="num">${effWaist.toFixed(2)}cm</span>
+<span class="lbl">panel_top</span> = <span class="num">${topW.toFixed(2)}cm</span>  <span class="lbl">panel_bottom</span> = <span class="num">${botW.toFixed(2)}cm</span>` +
+  (sleeve ? `\n<span class="lbl">sleeve_bicep</span> = <span class="num">${sleeve.bicepCm.toFixed(2)}cm</span>  <span class="lbl">cap_height</span> \u2248 (bust/4+2.5)\u00d70.6 = <span class="num">${sleeve.capHeightCm.toFixed(2)}cm</span>
+<span class="note">Sleeve uses a standard simplified drafting ratio, not a fitted couture cap -- a muslin test is worthwhile before cutting latex.</span>` : '');
 }
 
 function generateLeggings() {
-  setBanner('', 'Now has an asymmetric inner (crotch) curve vs. outer seam curve, instead of a straight-line mirrored block.');
+  setBanner('warn', 'Curved waist\u2192hip\u2192ankle side seam using real measurements at each point -- a genuine fit improvement over straight segments. Still NO true crotch curve (front/back rise are treated as identical), so the inner-leg seam may still need truing up by hand.');
   const waist = fieldState.waist.cm, hip = fieldState.hip.cm, ankle = fieldState.ankle.cm, inseam = fieldState.inseam.cm;
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, curveCm = fieldState.curveAmount.cm;
-  const riseFraction = 0.18;
-  const wW = eff(waist,easePct)/2+overlapCm*2, hW = eff(hip,easePct)/2+overlapCm*2, aW = eff(ankle,easePct)/2+overlapCm*2;
-  const scale = 3.6;
-  const crotchCurve = curveCm*1.3;
-  const g = legGeom(wW, hW, aW, inseam, riseFraction, curveCm, crotchCurve);
-  drawPiece(svg, g, 230, 60, scale, 'FRONT PANEL x1');
-  drawPiece(svg, g, 560, 60, scale, 'BACK PANEL x1');
-  cutStamp.textContent = 'CUT 2 (FRONT+BACK), MIRROR EACH . ASYMMETRIC INNER/OUTER CURVE';
-  formulaPanel.innerHTML = '<span class="lbl">waist_width</span> = <span class="num">' + wW.toFixed(2) + 'cm</span>  <span class="lbl">hip_width</span> = <span class="num">' + hW.toFixed(2) + 'cm</span>  <span class="lbl">ankle_width</span> = <span class="num">' + aW.toFixed(2) + 'cm</span>\n<span class="lbl">outer_seam_curve</span> = ' + fmt(curveCm) + ' outward  <span class="lbl">crotch_curve</span> = ' + fmt(crotchCurve) + ' inward (concave)\n<span class="note">Crotch curve is still an approximation, not derived from a measured rise/crotch-length -- true up by hand or test-fit.</span>';
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100), effAnkle = ankle*(1-easePct/100);
+  const wW = effWaist/2+overlapCm*2, hW = effHip/2+overlapCm*2, aW = effAnkle/2+overlapCm*2;
+  const points = [[0, wW], [0.18, hW], [1, aW]];
+  const pieces = [
+    { type:'curved', points, heightCm: inseam, label:'FRONT PANEL \u00d71', isBack:false, includeZip:false },
+    { type:'curved', points, heightCm: inseam, label:'BACK PANEL \u00d71', isBack:false, includeZip:false },
+  ];
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK), MIRROR EACH \u00b7 CURVED SIDE SEAM, NO TRUE CROTCH CURVE`;
+  formulaPanel.innerHTML = `<span class="lbl">waist_width</span> = <span class="num">${wW.toFixed(2)}cm</span>  <span class="lbl">hip_width</span> = <span class="num">${hW.toFixed(2)}cm</span>  <span class="lbl">ankle_width</span> = <span class="num">${aW.toFixed(2)}cm</span>
+<span class="note">Hip point at 18% of inseam length -- an approximation, not a measured rise.</span>`;
 }
 
 function generateCatsuit() {
-  const hasSleeves = sleevesEl.checked;
-  setBanner('', 'Curved seams throughout (side seam, crotch curve)' + (hasSleeves?' + sleeves.':'; enable sleeves in the Top-shared field above for an armhole + sleeve piece.'));
+  setBanner('warn', 'One continuous curved panel per side through bust\u2192waist\u2192hip\u2192ankle -- all real measurements driving the curve. Still no true crotch curve, and sleeves use the same simplified block as Top.');
   const bust = fieldState.bust.cm, waist = fieldState.waist.cm, hip = fieldState.hip.cm, ankle = fieldState.ankle.cm;
   const torsoLen = fieldState.torsoLength.cm, inseam = fieldState.inseam.cm;
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, curveCm = fieldState.curveAmount.cm, includeZip = zipEl.checked;
-  const riseFraction = 0.18;
-  const bW = eff(bust,easePct)/2+overlapCm*2, wW = eff(waist,easePct)/2+overlapCm*2, hW = eff(hip,easePct)/2+overlapCm*2, aW = eff(ankle,easePct)/2+overlapCm*2;
-  const crotchCurve = curveCm*1.3;
-  const scale = 3.0;
-  const g = bodiceLegGeom(bW,wW,hW,aW,torsoLen,inseam,riseFraction,curveCm,crotchCurve);
-  drawPiece(svg, g, 230, 60, scale, 'FRONT PANEL x1', { foldEdges:[2] });
-  drawPiece(svg, g, 560, 60, scale, 'BACK PANEL x1'+(includeZip?' (zip CB)':''), { foldEdges: includeZip?[]:[2] });
-
-  let sleeveNote = '';
-  if (hasSleeves) {
-    const sleeveLen = fieldState.sleeveLength.cm;
-    const upperArmW = eff(fieldState.upperArm.cm, easePct)+overlapCm*2;
-    const sleeve = sleeveGeom(upperArmW*1.15, upperArmW*0.75, sleeveLen, sleeveLen*0.18);
-    drawPiece(svg, sleeve, 810, 60, scale*1.6, 'SLEEVE x2');
-    sleeveNote = '\n<span class="note">Sleeves reuse the Top block\'s armhole-matching logic, approximated against this panel\'s bust width.</span>';
-  }
-  cutStamp.textContent = 'CUT 2 (FRONT+BACK) ' + (hasSleeves?'+ 2 SLEEVES ':'') + '. ' + (includeZip?'BACK ZIP':'NO ZIP') + ' . CURVED SEAMS';
-  formulaPanel.innerHTML = '<span class="lbl">bust</span>=<span class="num">' + bW.toFixed(2) + 'cm</span> <span class="lbl">waist</span>=<span class="num">' + wW.toFixed(2) + 'cm</span> <span class="lbl">hip</span>=<span class="num">' + hW.toFixed(2) + 'cm</span> <span class="lbl">ankle</span>=<span class="num">' + aW.toFixed(2) + 'cm</span>\n<span class="lbl">crotch_curve</span> = ' + fmt(crotchCurve) + ' inward (concave), asymmetric vs. the outer seam.' + sleeveNote;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, includeZip = zipEl.checked;
+  const eff = v => v*(1-easePct/100);
+  const bW = eff(bust)/2+overlapCm*2, wW = eff(waist)/2+overlapCm*2, hW = eff(hip)/2+overlapCm*2, aW = eff(ankle)/2+overlapCm*2;
+  const totalLen = torsoLen + inseam;
+  const waistFrac = torsoLen/totalLen;
+  const hipFrac = waistFrac + (1-waistFrac)*0.18;
+  const points = [[0, bW], [waistFrac, wW], [hipFrac, hW], [1, aW]];
+  const pieces = [
+    { type:'curved', points, heightCm: totalLen, label:'FRONT PANEL \u00d71', isBack:false, includeZip },
+    { type:'curved', points, heightCm: totalLen, label:'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), isBack:true, includeZip },
+  ];
+  const sleeve = sleevePieceIfWanted(bust, easePct, overlapCm);
+  if (sleeve) pieces.push(sleeve);
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK)${sleeve?' + 2 SLEEVES':''} \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'} \u00b7 NO TRUE CROTCH CURVE`;
+  formulaPanel.innerHTML = `<span class="lbl">bust</span>=<span class="num">${bW.toFixed(2)}cm</span> <span class="lbl">waist</span>=<span class="num">${wW.toFixed(2)}cm</span> <span class="lbl">hip</span>=<span class="num">${hW.toFixed(2)}cm</span> <span class="lbl">ankle</span>=<span class="num">${aW.toFixed(2)}cm</span>
+<span class="note">One smooth curve runs through all four points per side seam.</span>`;
 }
 
 function generateLeotard() {
-  setBanner('', 'Curved bodice side seams; leg opening + gusset unchanged (still a simple rectangle, not a curved binding piece).');
+  setBanner('warn', 'Curved bodice side seam (bust\u2192waist). Leg opening is still just the fabric edge with a simple rectangular gusset -- no curved leg-opening binding piece drafted.');
   const bust = fieldState.bust.cm, waist = fieldState.waist.cm, length = fieldState.torsoLength.cm;
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm, curveCm = fieldState.curveAmount.cm;
-  const crotchW = fieldState.crotchWidth.cm, includeZip = zipEl.checked;
-  const topW = eff(bust,easePct)/2+overlapCm*2, botW = eff(waist,easePct)/2+flare+overlapCm*2;
-  const scale = 4.4;
-  const g = trapezoidGeom(topW, botW, length, curveCm);
-  drawPiece(svg, g, 230, 60, scale, 'FRONT PANEL x1');
-  drawPiece(svg, g, 560, 60, scale, 'BACK PANEL x1'+(includeZip?' (zip CB)':''));
-  const gussetW = crotchW*2+overlapCm*4;
-  drawPiece(svg, rectGeom(gussetW, crotchW), 230, 60+length*scale+40, scale, 'GUSSET x1');
-  cutStamp.textContent = 'CUT 2 (FRONT+BACK) + 1 GUSSET . ' + (includeZip?'BACK ZIP':'NO ZIP');
-  formulaPanel.innerHTML = '<span class="lbl">panel_top</span>=<span class="num">' + topW.toFixed(2) + 'cm</span> <span class="lbl">panel_bottom</span>=<span class="num">' + botW.toFixed(2) + 'cm</span> <span class="lbl">gusset</span>=<span class="num">' + gussetW.toFixed(2) + 'cm</span>x' + fmt(crotchW);
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm, crotchW = fieldState.crotchWidth.cm, includeZip = zipEl.checked;
+  const effBust = bust*(1-easePct/100), effWaist = waist*(1-easePct/100);
+  const topW = effBust/2+overlapCm*2, botW = effWaist/2+flare+overlapCm*2;
+  const points = [[0, topW], [1, botW]];
+  const pieces = [
+    { type:'curved', points, heightCm: length, label:'FRONT PANEL \u00d71', isBack:false, includeZip },
+    { type:'curved', points, heightCm: length, label:'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), isBack:true, includeZip },
+    { type:'rect', widthCm: crotchW*2+overlapCm*4, heightCm: crotchW, label:'GUSSET \u00d71' },
+  ];
+  const sleeve = sleevePieceIfWanted(bust, easePct, overlapCm);
+  if (sleeve) pieces.push(sleeve);
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK) + 1 GUSSET${sleeve?' + 2 SLEEVES':''} \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'}`;
+  formulaPanel.innerHTML = `<span class="lbl">panel_top</span>=<span class="num">${topW.toFixed(2)}cm</span> <span class="lbl">panel_bottom</span>=<span class="num">${botW.toFixed(2)}cm</span>
+<span class="note">Leg openings are the raw fabric edge -- no separate binding piece drafted.</span>`;
 }
 
 function generatePanties() {
-  setBanner('', 'Simple front/back/gusset block, unchanged -- already a solid real-world construction method.');
+  setBanner('', 'Front/back/gusset block -- a genuinely common real construction method for simple panties, so this stays solid.');
   const waist = fieldState.waist.cm, hip = fieldState.hip.cm, rise = fieldState.riseShort.cm, crotchW = fieldState.crotchWidth.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
-  const topW = eff(waist,easePct)/2+overlapCm*2, botW = eff(hip,easePct)/2+overlapCm*2;
-  const scale = 4.8;
-  drawPiece(svg, trapezoidGeom(topW, botW, rise, 0), 230, 60, scale, 'FRONT PANEL x1');
-  drawPiece(svg, trapezoidGeom(topW, botW*1.1, rise, 0), 500, 60, scale, 'BACK PANEL x1');
-  const gussetW = crotchW*2+overlapCm*4;
-  drawPiece(svg, rectGeom(gussetW, crotchW), 750, 60, scale, 'GUSSET x1');
-  cutStamp.textContent = 'CUT 1 FRONT + 1 BACK + 1 GUSSET';
-  formulaPanel.innerHTML = '<span class="lbl">front/back_top</span>=<span class="num">' + topW.toFixed(2) + 'cm</span> <span class="lbl">front_bottom</span>=<span class="num">' + botW.toFixed(2) + 'cm</span> <span class="lbl">gusset</span>=<span class="num">' + gussetW.toFixed(2) + 'cm</span>x' + fmt(crotchW);
+  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100);
+  const topW = effWaist/2+overlapCm*2, botW = effHip/2+overlapCm*2;
+  const points = [[0, topW], [1, botW]];
+  const pieces = [
+    { type:'curved', points, heightCm: rise, label:'FRONT PANEL \u00d71', isBack:false, includeZip:false },
+    { type:'curved', points: [[0,topW],[1,botW*1.1]], heightCm: rise, label:'BACK PANEL \u00d71', isBack:false, includeZip:false },
+    { type:'rect', widthCm: crotchW*2+overlapCm*4, heightCm: crotchW, label:'GUSSET \u00d71' },
+  ];
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 1 FRONT + 1 BACK + 1 GUSSET \u00b7 ELASTIC WAIST/LEGS`;
+  formulaPanel.innerHTML = `<span class="lbl">front/back_top</span>=<span class="num">${topW.toFixed(2)}cm</span> <span class="lbl">front_bottom</span>=<span class="num">${botW.toFixed(2)}cm</span> (back +10% for seat coverage)`;
 }
 
 function generateGarters() {
-  setBanner('', 'Just strips of material plus a belt.');
+  setBanner('', 'Just strips of material plus a belt -- no curve needed, no meaningful caveat here.');
   const waist = fieldState.waist.cm, beltH = fieldState.waistband.cm, strapLen = fieldState.garterLength.cm;
   const overlapCm = fieldState.overlap.cm, count = Number(strapCountEl.value), easePct = Number(easeEl.value);
-  const beltW = eff(waist,easePct)+overlapCm*2;
-  const scale = 4.4;
-  drawPiece(svg, rectGeom(beltW, beltH), 450, 60, scale, 'BELT x1');
+  const effWaist = waist*(1-easePct/100);
+  const beltW = effWaist+overlapCm*2;
   const strapW = 2.5+overlapCm*2;
-  const spacing = 900/(count+1);
-  for (let i=0;i<count;i++) drawPiece(svg, rectGeom(strapW, strapLen), spacing*(i+1), 60+beltH*scale+40, scale*0.9, 'STRAP ' + (i+1));
-  cutStamp.textContent = 'CUT 1 BELT + ' + count + ' STRAPS . CLIPS NOT DRAFTED';
-  formulaPanel.innerHTML = '<span class="lbl">belt_width</span>=<span class="num">' + beltW.toFixed(2) + 'cm</span> <span class="lbl">strap_width</span>=<span class="num">' + strapW.toFixed(2) + 'cm</span>';
+  const pieces = [{ type:'rect', widthCm: beltW, heightCm: beltH, label:'BELT \u00d71' }];
+  for (let i=0;i<count;i++) pieces.push({ type:'rect', widthCm: strapW, heightCm: strapLen, label:`STRAP ${i+1}` });
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 1 BELT + ${count} STRAPS \u00b7 CLIPS NOT DRAFTED (hardware)`;
+  formulaPanel.innerHTML = `<span class="lbl">belt_width</span> = <span class="num">${beltW.toFixed(2)}cm</span>  <span class="lbl">strap_width</span> = <span class="num">${strapW.toFixed(2)}cm</span> (default, adjust to taste)`;
 }
 
 function generateGloves() {
-  const style = gloveStyleEl.value;
-  if (style === 'fingerless') {
-    setBanner('rough', 'Fingerless/arm-sleeve style. For an actual 5-finger pattern, switch Style to "Full-finger glove" above.');
-    const wrist = fieldState.wrist.cm, bicep = fieldState.upperArm.cm, length = fieldState.sleeveLength.cm;
-    const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
-    const wW = eff(wrist,easePct)/2+overlapCm*2, bW = eff(bicep,easePct)/2+overlapCm*2;
-    const scale = 5.5;
-    const g = legGeom(wW, wW, bW, length, 0.08, 0, 0);
-    drawPiece(svg, g, 450, 60, scale, 'SLEEVE x2 (mirror for pair)');
-    cutStamp.textContent = 'CUT 2, MIRRORED . FINGERLESS/SLEEVE STYLE';
-    formulaPanel.innerHTML = '<span class="lbl">wrist_width</span>=<span class="num">' + wW.toFixed(2) + 'cm</span> <span class="lbl">upper_arm_width</span>=<span class="num">' + bW.toFixed(2) + 'cm</span>';
-    return;
-  }
-
-  setBanner('warn', 'Real multi-piece finger pattern (palm + 4 individual fingers + thumb), each a simplified straight tapered tube. Fingers are pieced onto the palm rather than cut as one continuous silhouette (a legitimate, commonly-used simpler glove construction) -- no fourchette side-strips for a closer fit, and finger lengths are proportional estimates from your hand length, not individually measured.');
-  const wrist = fieldState.wrist.cm, handLen = fieldState.handLength.cm, palmW = fieldState.palmWidth.cm;
+  setBanner('rough', 'STILL A ROUGH BLOCK for the fingerless/sleeve style -- curves improve the taper along the arm, but a true 5-finger glove needs separate finger-length measurements and individual curved finger cones this tool doesn\'t collect yet. Tell me your hand length + finger lengths and I can build that properly next.');
+  const wrist = fieldState.wrist.cm, bicep = fieldState.bicep.cm, length = fieldState.armLength.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
-  const wristW = eff(wrist,easePct)/2+overlapCm*2, palmWidthEff = eff(palmW,easePct)/2+overlapCm*2;
-  const palmLen = handLen*0.55;
-  const scale = 6.5;
-
-  drawPiece(svg, trapezoidGeom(wristW*2, palmWidthEff*2, palmLen, 1), 160, 60, scale, 'PALM x2 (front+back)');
-
-  const fingers = [
-    { name: 'INDEX', ratio: 0.50 },
-    { name: 'MIDDLE', ratio: 0.58 },
-    { name: 'RING', ratio: 0.54 },
-    { name: 'PINKY', ratio: 0.42 },
-  ];
-  const fingerBaseW = Math.max(1.6, (palmWidthEff*2)/5);
-  let fx = 360;
-  fingers.forEach(f => {
-    const len = handLen*f.ratio;
-    const g = fingerGeom(fingerBaseW, fingerBaseW*0.8, len, -fingerBaseW*0.35);
-    drawPiece(svg, g, fx, 60, scale, f.name + ' x2');
-    fx += 70;
-  });
-
-  const thumbLen = handLen*0.45, thumbW = fingerBaseW*1.25;
-  drawPiece(svg, fingerGeom(thumbW, thumbW*0.8, thumbLen, -thumbW*0.35), fx+30, 60, scale, 'THUMB x2');
-
-  cutStamp.textContent = 'CUT 2 PALM + 2 EACH FINGER (x4) + 2 THUMB . PIECED CONSTRUCTION';
-  formulaPanel.innerHTML = '<span class="lbl">palm_length</span> ~ 55% of hand length = <span class="num">' + palmLen.toFixed(2) + 'cm</span>\n<span class="lbl">index/middle/ring/pinky_length</span> = hand_length x (0.50 / 0.58 / 0.54 / 0.42) -- proportional estimates\n<span class="lbl">thumb_length</span> ~ 45% of hand length = <span class="num">' + thumbLen.toFixed(2) + 'cm</span>\n<span class="note">If you know your actual individual finger lengths, override these by eye when tracing -- the ratios above are population averages, not your hand specifically.</span>';
+  const eff = v => v*(1-easePct/100);
+  const wW = eff(wrist)/2+overlapCm*2, bW = eff(bicep)/2+overlapCm*2;
+  const points = [[0, wW], [0.08, wW], [1, bW]];
+  const pieces = [{ type:'curved', points, heightCm: length, label:'SLEEVE \u00d71 (mirror for pair)', isBack:false, includeZip:false }];
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 FINGERLESS/SLEEVE STYLE \u00b7 NOT A 5-FINGER PATTERN`;
+  formulaPanel.innerHTML = `<span class="lbl">wrist_width</span>=<span class="num">${wW.toFixed(2)}cm</span> <span class="lbl">upper_arm_width</span>=<span class="num">${bW.toFixed(2)}cm</span>
+<span class="note">Curved taper from wrist to upper arm. True finger drafting needs per-finger length inputs not yet collected here.</span>`;
 }
 
 function generateBralette() {
-  setBanner('rough', 'Triangle-cup, no-underwire style only. Cup sides are now gently curved rather than dead straight, but this still cannot produce a molded/underwire cup shape.');
+  setBanner('rough', 'Cup base now curves slightly (a genuine soft-cup improvement over a hard triangle point), but this remains triangle/no-underwire style only -- molded or underwire cups need curved/darted pieces out of scope for this tool.');
   const bust = fieldState.bust.cm, underbust = fieldState.underbust.cm, cupDepth = fieldState.cupDepth.cm, bandH = fieldState.bandHeight.cm;
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, curveCm = fieldState.curveAmount.cm*0.6;
-  const effUnderbust = eff(underbust,easePct);
-  const cupBaseW = Math.max(6, (bust-underbust)*1.4+overlapCm*2);
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const effUnderbust = underbust*(1-easePct/100);
+  const cupBaseW = Math.max(6, (bust-underbust)*1.4 + overlapCm*2);
   const bandW = effUnderbust/2+overlapCm*2;
-  const scale = 5;
-  drawPiece(svg, rectGeom(bandW, bandH), 230, 60, scale, 'BAND (x2, L+R)');
-  drawPiece(svg, trianglePanelGeom(cupBaseW, cupDepth, curveCm), 560, 60, scale, 'CUP x2 (mirror)');
-  drawPiece(svg, rectGeom(1.5+overlapCm*2, 35), 820, 60, scale*0.5, 'STRAP x2');
-  cutStamp.textContent = 'CUT 2 BAND + 2 CUPS + 2 STRAPS . CURVED CUP SIDES';
-  formulaPanel.innerHTML = '<span class="lbl">band_width</span>=<span class="num">' + bandW.toFixed(2) + 'cm</span> <span class="lbl">cup_base_width</span>~<span class="num">' + cupBaseW.toFixed(2) + 'cm</span> <span class="lbl">cup_side_curve</span>=' + fmt(curveCm) + '\n<span class="note">cup_base_width is a rough heuristic, not a real cup-volume formula.</span>';
+  const pieces = [
+    { type:'rect', widthCm: bandW, heightCm: bandH, label:'BAND (\u00d72, L+R)' },
+    { type:'cup', baseWidthCm: cupBaseW, heightCm: cupDepth, label:'CUP \u00d72 (mirror)' },
+    { type:'rect', widthCm: 1.5+overlapCm*2, heightCm: 35, label:'STRAP \u00d72' },
+  ];
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 BAND + 2 CUPS (MIRROR) + 2 STRAPS \u00b7 TRIANGLE/NO-UNDERWIRE ONLY`;
+  formulaPanel.innerHTML = `<span class="lbl">band_width</span>=<span class="num">${bandW.toFixed(2)}cm</span> <span class="lbl">cup_base_width</span>\u2248<span class="num">${cupBaseW.toFixed(2)}cm</span>
+<span class="note">cup_base_width is a rough heuristic, not a real cup-volume formula.</span>`;
 }
 
 function generateHood() {
-  setBanner('rough', 'Still a rough starting block -- now with a domed crown curve and an approximated face-opening cutout, but a hood is inherently 3D and this remains something to mock up in cheap fabric before cutting latex.');
+  setBanner('rough', 'Side panels now curve smoothly neck\u2192widest-point\u2192crown (real measurements), but the face opening still is NOT drafted -- that needs face width/height inputs this tool doesn\'t collect yet. Tell me those and I can draft a real curved opening next. Strongly recommend a fabric mockup regardless.');
   const headCirc = fieldState.headCirc.cm, neckCirc = fieldState.neckCirc.cm, length = fieldState.hoodLength.cm;
-  const faceW = fieldState.faceWidth.cm, faceH = fieldState.faceHeight.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
-  const neckW = eff(neckCirc,easePct)/2+overlapCm*2, headW = eff(headCirc,easePct)/2+overlapCm*2, crownW = 3+overlapCm*2;
-  const scale = 5;
-  const faceOpeningBulge = Math.min(faceW*0.5, faceH*0.4);
-  const g = hoodGeom(neckW, headW, crownW, length, 0.25, 3, faceOpeningBulge);
-  drawPiece(svg, g, 230, 60, scale, 'SIDE PANEL x1 (center front, crown top)');
-  const gBack = hoodGeom(neckW, headW, crownW, length, 0.25, 3, -1.5);
-  drawPiece(svg, gBack, 560, 60, scale, 'SIDE PANEL x1 (mirror, center back)');
-  cutStamp.textContent = 'CUT 2, MIRRORED . CENTER FRONT (FACE OPENING) + CENTER BACK SEAMS';
-  formulaPanel.innerHTML = '<span class="lbl">neck_width</span>=<span class="num">' + neckW.toFixed(2) + 'cm</span> <span class="lbl">head_width</span>=<span class="num">' + headW.toFixed(2) + 'cm</span> <span class="lbl">crown_width</span>=<span class="num">' + crownW.toFixed(2) + 'cm</span>\n<span class="lbl">face_opening_bulge</span> ~ min(face_width x0.5, face_height x0.4) = <span class="num">' + faceOpeningBulge.toFixed(2) + 'cm</span> carved into the center-front edge\n<span class="note">This approximates a face opening as a single curve on one edge -- it is NOT a precisely measured oval cutout. Mock this up before cutting latex.</span>';
+  const eff = v => v*(1-easePct/100);
+  const neckW = eff(neckCirc)/2+overlapCm*2, headW = eff(headCirc)/2+overlapCm*2, crownW = 2+overlapCm*2;
+  const points = [[0, crownW], [0.25, headW], [1, neckW]];
+  const pieces = [
+    { type:'curved', points, heightCm: length, label:'SIDE PANEL \u00d71', isBack:false, includeZip:false },
+    { type:'curved', points, heightCm: length, label:'SIDE PANEL \u00d71 (mirror)', isBack:false, includeZip:false },
+  ];
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 CF+CB SEAMS \u00b7 FACE OPENING NOT DRAFTED`;
+  formulaPanel.innerHTML = `<span class="lbl">neck_width</span>=<span class="num">${neckW.toFixed(2)}cm</span> <span class="lbl">widest_point</span>=<span class="num">${headW.toFixed(2)}cm</span> <span class="lbl">crown_width</span>=<span class="num">${crownW.toFixed(2)}cm</span>`;
 }
 
-const PAPER_SIZES_MM = { a4: { w: 210, h: 297 }, letter: { w: 215.9, h: 279.4 } };
-const PRINT_MARGIN_MM = 10;
-
-function collectCurrentPiecesForPrint() {
-  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, curveCm = fieldState.curveAmount.cm;
-  const pieces = [];
-  const f = fieldState;
-
-  if (garment === 'skirt') {
-    const topW = eff(f.waist.cm,easePct)/2+overlapCm*2, botW = eff(f.hip.cm,easePct)/2+f.flare.cm+overlapCm*2;
-    pieces.push({geom: trapezoidGeom(topW, botW, f.length.cm, curveCm), label:'FRONT PANEL'});
-    pieces.push({geom: trapezoidGeom(topW, botW, f.length.cm, curveCm), label:'BACK PANEL'});
-  } else if (garment === 'top') {
-    if (!sleevesEl.checked) {
-      const topW = eff(f.bust.cm,easePct)/2+overlapCm*2, botW = eff(f.waist.cm,easePct)/2+f.flare.cm+overlapCm*2;
-      pieces.push({geom: trapezoidGeom(topW, botW, f.torsoLength.cm, curveCm), label:'FRONT PANEL'});
-      pieces.push({geom: trapezoidGeom(topW, botW, f.torsoLength.cm, curveCm), label:'BACK PANEL'});
-    } else {
-      const armholeDepth = f.torsoLength.cm*0.22;
-      const shoulderWithOverlap = eff(f.shoulderWidth.cm,easePct)+overlapCm*2, bustWithOverlap = eff(f.bust.cm,easePct)/2+overlapCm*2, waistWithOverlap = eff(f.waist.cm,easePct)/2+f.flare.cm+overlapCm*2;
-      const bodice = bodiceArmholeGeom(bustWithOverlap*2, waistWithOverlap*2, shoulderWithOverlap*2, f.torsoLength.cm, armholeDepth, curveCm);
-      pieces.push({geom: bodice, label:'FRONT PANEL'});
-      pieces.push({geom: bodice, label:'BACK PANEL'});
-      const upperArmW = eff(f.upperArm.cm,easePct)+overlapCm*2;
-      pieces.push({geom: sleeveGeom(upperArmW, upperArmW*0.75, f.sleeveLength.cm, f.sleeveLength.cm*0.18), label:'SLEEVE'});
-    }
-  } else if (garment === 'leggings') {
-    const wW = eff(f.waist.cm,easePct)/2+overlapCm*2, hW = eff(f.hip.cm,easePct)/2+overlapCm*2, aW = eff(f.ankle.cm,easePct)/2+overlapCm*2;
-    pieces.push({geom: legGeom(wW,hW,aW,f.inseam.cm,0.18,curveCm,curveCm*1.3), label:'FRONT PANEL'});
-    pieces.push({geom: legGeom(wW,hW,aW,f.inseam.cm,0.18,curveCm,curveCm*1.3), label:'BACK PANEL'});
-  } else if (garment === 'catsuit') {
-    const bW=eff(f.bust.cm,easePct)/2+overlapCm*2, wW=eff(f.waist.cm,easePct)/2+overlapCm*2, hW=eff(f.hip.cm,easePct)/2+overlapCm*2, aW=eff(f.ankle.cm,easePct)/2+overlapCm*2;
-    const g = bodiceLegGeom(bW,wW,hW,aW,f.torsoLength.cm,f.inseam.cm,0.18,curveCm,curveCm*1.3);
-    pieces.push({geom:g, label:'FRONT PANEL'});
-    pieces.push({geom:g, label:'BACK PANEL'});
-    if (sleevesEl.checked) {
-      const upperArmW = eff(f.upperArm.cm,easePct)+overlapCm*2;
-      pieces.push({geom: sleeveGeom(upperArmW*1.15, upperArmW*0.75, f.sleeveLength.cm, f.sleeveLength.cm*0.18), label:'SLEEVE'});
-    }
-  } else if (garment === 'leotard') {
-    const topW=eff(f.bust.cm,easePct)/2+overlapCm*2, botW=eff(f.waist.cm,easePct)/2+f.flare.cm+overlapCm*2;
-    pieces.push({geom: trapezoidGeom(topW,botW,f.torsoLength.cm,curveCm), label:'FRONT PANEL'});
-    pieces.push({geom: trapezoidGeom(topW,botW,f.torsoLength.cm,curveCm), label:'BACK PANEL'});
-    pieces.push({geom: rectGeom(f.crotchWidth.cm*2+overlapCm*4, f.crotchWidth.cm), label:'GUSSET'});
-  } else if (garment === 'panties') {
-    const topW=eff(f.waist.cm,easePct)/2+overlapCm*2, botW=eff(f.hip.cm,easePct)/2+overlapCm*2;
-    pieces.push({geom: trapezoidGeom(topW,botW,f.riseShort.cm,0), label:'FRONT'});
-    pieces.push({geom: trapezoidGeom(topW,botW*1.1,f.riseShort.cm,0), label:'BACK'});
-    pieces.push({geom: rectGeom(f.crotchWidth.cm*2+overlapCm*4, f.crotchWidth.cm), label:'GUSSET'});
-  } else if (garment === 'garters') {
-    const beltW = eff(f.waist.cm,easePct)+overlapCm*2, count = Number(strapCountEl.value);
-    pieces.push({geom: rectGeom(beltW, f.waistband.cm), label:'BELT'});
-    for (let i=0;i<count;i++) pieces.push({geom: rectGeom(2.5+overlapCm*2, f.garterLength.cm), label:'STRAP ' + (i+1)});
-  } else if (garment === 'gloves') {
-    if (gloveStyleEl.value === 'fingerless') {
-      const wW=eff(f.wrist.cm,easePct)/2+overlapCm*2, bW=eff(f.upperArm.cm,easePct)/2+overlapCm*2;
-      pieces.push({geom: legGeom(wW,wW,bW,f.sleeveLength.cm,0.08,0,0), label:'SLEEVE'});
-    } else {
-      const wristW=eff(f.wrist.cm,easePct)/2+overlapCm*2, palmWidthEff=eff(f.palmWidth.cm,easePct)/2+overlapCm*2;
-      pieces.push({geom: trapezoidGeom(wristW*2, palmWidthEff*2, f.handLength.cm*0.55, 1), label:'PALM'});
-      const fingerBaseW = Math.max(1.6,(palmWidthEff*2)/5);
-      [['INDEX',0.50],['MIDDLE',0.58],['RING',0.54],['PINKY',0.42]].forEach(function(pair){
-        pieces.push({geom: fingerGeom(fingerBaseW, fingerBaseW*0.8, f.handLength.cm*pair[1], -fingerBaseW*0.35), label:pair[0]});
-      });
-      pieces.push({geom: fingerGeom(fingerBaseW*1.25, fingerBaseW*1.0, f.handLength.cm*0.45, -fingerBaseW*0.44), label:'THUMB'});
-    }
-  } else if (garment === 'bralette') {
-    const bandW = eff(f.underbust.cm,easePct)/2+overlapCm*2;
-    const cupBaseW = Math.max(6,(f.bust.cm-f.underbust.cm)*1.4+overlapCm*2);
-    pieces.push({geom: rectGeom(bandW, f.bandHeight.cm), label:'BAND'});
-    pieces.push({geom: trianglePanelGeom(cupBaseW, f.cupDepth.cm, curveCm*0.6), label:'CUP'});
-    pieces.push({geom: rectGeom(1.5+overlapCm*2, 35), label:'STRAP'});
-  } else if (garment === 'hood') {
-    const neckW=eff(f.neckCirc.cm,easePct)/2+overlapCm*2, headW=eff(f.headCirc.cm,easePct)/2+overlapCm*2, crownW=3+overlapCm*2;
-    const faceOpeningBulge = Math.min(f.faceWidth.cm*0.5, f.faceHeight.cm*0.4);
-    pieces.push({geom: hoodGeom(neckW,headW,crownW,f.hoodLength.cm,0.25,3,faceOpeningBulge), label:'SIDE PANEL (front)'});
-    pieces.push({geom: hoodGeom(neckW,headW,crownW,f.hoodLength.cm,0.25,3,-1.5), label:'SIDE PANEL (back)'});
-  }
-  return pieces;
-}
-
-function layoutPiecesCm(pieces) {
-  let cursorX = 3, maxY = 0;
-  const gap = 4;
-  pieces.forEach(function(p) {
-    const bb = bbox(p.geom.points);
-    p._x = cursorX - bb.minX;
-    p._y = 3 - bb.minY;
-    cursorX += bb.width + gap;
-    maxY = Math.max(maxY, 3 + bb.height);
-  });
-  return { pieces: pieces, totalWidthCm: cursorX, totalHeightCm: maxY + 3 };
-}
-
-function buildMasterSvgMarkup(layout) {
-  const mmScale = 10;
-  let inner = '';
-  layout.pieces.forEach(function(p) {
-    const d = buildClosedPathD(p.geom.points, p.geom.bulges, mmScale, p._x*mmScale, p._y*mmScale);
-    inner += '<path d="' + d + '" fill="rgba(47,107,94,0.08)" stroke="#1e2a24" stroke-width="0.6"/>';
-    for (let i=0;i<p.geom.points.length;i++) {
-      const a = p.geom.points[i], b = p.geom.points[(i+1)%p.geom.points.length];
-      const oa=[a[0]+p._x,a[1]+p._y], ob=[b[0]+p._x,b[1]+p._y];
-      const dd = 'M ' + (oa[0]*mmScale) + ',' + (oa[1]*mmScale) + ' ' + segPath(oa,ob,p.geom.bulges[i]||0,mmScale);
-      inner += '<path d="' + dd + '" fill="none" stroke="#b5482f" stroke-width="0.5" stroke-dasharray="3 2"/>';
-    }
-    const bb = bbox(p.geom.points);
-    const lx = (p._x)*mmScale, ly = (p._y+bb.minY)*mmScale - 4;
-    inner += '<text x="' + lx + '" y="' + ly + '" font-size="4" font-family="monospace" text-anchor="start" fill="#1e2a24">' + p.label + '</text>';
-  });
-  return inner;
-}
-
-document.getElementById('printBtn').addEventListener('click', function() {
-  const pieces = collectCurrentPiecesForPrint();
-  if (!pieces.length) return;
-  const layout = layoutPiecesCm(pieces);
-  const totalWmm = layout.totalWidthCm*10, totalHmm = layout.totalHeightCm*10;
-  const inner = buildMasterSvgMarkup(layout);
-
-  const paper = PAPER_SIZES_MM[paperSizeEl.value];
-  const printableW = paper.w - PRINT_MARGIN_MM*2, printableH = paper.h - PRINT_MARGIN_MM*2;
-  const cols = Math.max(1, Math.ceil(totalWmm/printableW));
-  const rows = Math.max(1, Math.ceil(totalHmm/printableH));
-
-  let pagesHtml = '';
-  for (let r=0; r<rows; r++) {
-    for (let c=0; c<cols; c++) {
-      const vx = c*printableW, vy = r*printableH;
-      pagesHtml += '\n      <div class="print-page" style="width:' + paper.w + 'mm;height:' + paper.h + 'mm;">\n' +
-        '        <div class="page-label">' + garment.toUpperCase() + ' -- Row ' + (r+1) + ', Col ' + (c+1) + ' of ' + rows + 'x' + cols + ' -- print at 100% scale, no fit-to-page</div>\n' +
-        '        <svg width="' + printableW + 'mm" height="' + printableH + 'mm" viewBox="' + vx + ' ' + vy + ' ' + printableW + ' ' + printableH + '" style="margin:' + PRINT_MARGIN_MM + 'mm;">\n' +
-        '          ' + inner + '\n' +
-        '          <g stroke="#000" stroke-width="0.3"><line x1="' + (vx+5) + '" y1="' + vy + '" x2="' + (vx+5) + '" y2="' + (vy+10) + '"/><line x1="' + vx + '" y1="' + (vy+5) + '" x2="' + (vx+10) + '" y2="' + (vy+5) + '"/></g>\n' +
-        '        </svg>\n      </div>';
-    }
-  }
-
-  const printWin = window.open('', '_blank');
-  printWin.document.write('<!DOCTYPE html><html><head><title>Lapis print - ' + garment + '</title>' +
-    '<style>body{margin:0;font-family:monospace;}.print-page{page-break-after:always;position:relative;box-sizing:border-box;border:1px dashed #ccc;}.page-label{position:absolute;top:2mm;left:2mm;font-size:8px;color:#888;}@media print{.page-label{color:#ccc;}.print-page{border:none;}}</style>' +
-    '</head><body>' + pagesHtml +
-    '<script>window.onload=function(){setTimeout(function(){window.print();},300);};<\/script>' +
-    '</body></html>');
-  printWin.document.close();
-});
-
-document.getElementById('downloadBtn').addEventListener('click', function() {
+document.getElementById('downloadBtn').addEventListener('click', () => {
   const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'lapis-' + garment + '-pattern.svg'; a.click();
+  a.href = url; a.download = `lapis-${garment}-pattern.svg`; a.click();
   URL.revokeObjectURL(url);
 });
 
