@@ -15,6 +15,7 @@
     --pin: #b5482f;
     --thread: #2f6b5e;
     --grid: #dfe4d6;
+    --warn: #a06a1a;
   }
 
   * { box-sizing: border-box; }
@@ -79,29 +80,32 @@
 
   .garment-tabs {
     display: flex;
+    flex-wrap: wrap;
     border-bottom: 2px solid var(--ink);
   }
   .garment-tabs button {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 90px;
     background: rgba(255,255,255,0.35);
     border: none;
     border-right: 1.5px solid var(--line);
-    padding: 0.75rem 0.5rem;
+    border-bottom: 1.5px solid var(--line);
+    padding: 0.65rem 0.4rem;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.74rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     color: var(--ink-soft);
     cursor: pointer;
   }
-  .garment-tabs button:last-child { border-right: none; }
   .garment-tabs button.active { background: var(--ink); color: var(--paper); }
+  .garment-tabs button .confidence { font-size: 0.9em; margin-left: 2px; }
 
   .layout {
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 0;
-    min-height: calc(100vh - 155px);
+    min-height: calc(100vh - 175px);
   }
 
   @media (max-width: 900px) {
@@ -141,6 +145,29 @@
   .field label .val { color: var(--pin); font-weight: 700; }
 
   .field input[type="range"] { width: 100%; accent-color: var(--pin); }
+  .field select {
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.4rem;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+  }
+
+  .preset-row { display: flex; gap: 0.4rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+  .preset-row button {
+    flex: 1;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    background: var(--paper);
+    border: 1.3px solid var(--line);
+    padding: 0.35rem 0.3rem;
+    cursor: pointer;
+    color: var(--ink-soft);
+  }
+  .preset-row button:hover { border-color: var(--thread); color: var(--thread); }
 
   .toggle-row {
     display: flex;
@@ -187,6 +214,18 @@
   }
   button.action:hover { background: var(--thread); }
 
+  .confidence-banner {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--thread);
+    background: rgba(47,107,94,0.06);
+    color: var(--ink);
+  }
+  .confidence-banner.warn { border-left-color: var(--warn); background: rgba(160,106,26,0.08); }
+  .confidence-banner.rough { border-left-color: var(--pin); background: rgba(181,72,47,0.08); }
+
   .formula-panel {
     margin-top: 1.6rem;
     font-family: 'Space Mono', monospace;
@@ -226,17 +265,24 @@
   <button data-garment="skirt" class="active">Skirt</button>
   <button data-garment="top">Top</button>
   <button data-garment="leggings">Leggings</button>
+  <button data-garment="catsuit">Catsuit</button>
+  <button data-garment="leotard">Leotard</button>
+  <button data-garment="panties">Panties</button>
+  <button data-garment="garters">Garters</button>
+  <button data-garment="gloves">Gloves</button>
+  <button data-garment="bralette">Bralette <span class="confidence">&#9650;</span></button>
+  <button data-garment="hood">Hood <span class="confidence">&#9650;</span></button>
 </nav>
 
 <div class="layout">
   <aside class="controls">
     <h2>Body measurements</h2>
 
-    <div class="field" data-garments="skirt,leggings">
+    <div class="field" data-garments="skirt,leggings,top,catsuit,leotard,panties,garters">
       <label for="waist">Waist <span class="unit" id="waistUnit">cm</span> <span class="val" id="waistVal">70</span></label>
       <input type="range" id="waist" data-field="waist">
     </div>
-    <div class="field" data-garments="skirt,leggings">
+    <div class="field" data-garments="skirt,leggings,catsuit,panties">
       <label for="hip">Hip <span class="unit" id="hipUnit">cm</span> <span class="val" id="hipVal">96</span></label>
       <input type="range" id="hip" data-field="hip">
     </div>
@@ -245,26 +291,93 @@
       <input type="range" id="length" data-field="length">
     </div>
 
-    <div class="field" data-garments="top">
+    <div class="field" data-garments="top,catsuit,leotard,bralette">
       <label for="bust">Bust <span class="unit" id="bustUnit">cm</span> <span class="val" id="bustVal">88</span></label>
       <input type="range" id="bust" data-field="bust">
     </div>
-    <div class="field" data-garments="top">
-      <label for="waistTop">Waist <span class="unit" id="waistTopUnit">cm</span> <span class="val" id="waistTopVal">70</span></label>
-      <input type="range" id="waistTop" data-field="waistTop">
-    </div>
-    <div class="field" data-garments="top">
-      <label for="torsoLength">Torso length (shoulder to hem) <span class="unit" id="torsoLengthUnit">cm</span> <span class="val" id="torsoLengthVal">40</span></label>
+    <div class="field" data-garments="top,catsuit,leotard">
+      <label for="torsoLength">Torso length (shoulder to waist) <span class="unit" id="torsoLengthUnit">cm</span> <span class="val" id="torsoLengthVal">40</span></label>
       <input type="range" id="torsoLength" data-field="torsoLength">
     </div>
 
-    <div class="field" data-garments="leggings">
+    <div class="field" data-garments="leggings,catsuit">
       <label for="inseam">Inseam (waist to ankle) <span class="unit" id="inseamUnit">cm</span> <span class="val" id="inseamVal">75</span></label>
       <input type="range" id="inseam" data-field="inseam">
     </div>
-    <div class="field" data-garments="leggings">
+    <div class="field" data-garments="leggings,catsuit">
       <label for="ankle">Ankle circumference <span class="unit" id="ankleUnit">cm</span> <span class="val" id="ankleVal">22</span></label>
       <input type="range" id="ankle" data-field="ankle">
+    </div>
+
+    <div class="field" data-garments="panties,leotard">
+      <label for="crotchWidth">Gusset width <span class="unit" id="crotchWidthUnit">cm</span> <span class="val" id="crotchWidthVal">6</span></label>
+      <input type="range" id="crotchWidth" data-field="crotchWidth">
+    </div>
+    <div class="field" data-garments="panties">
+      <div class="preset-row">
+        <button type="button" data-preset="riseShort" data-value="14">Low-rise</button>
+        <button type="button" data-preset="riseShort" data-value="18">Mid-rise</button>
+        <button type="button" data-preset="riseShort" data-value="24">High-rise</button>
+      </div>
+      <label for="riseShort">Rise (waist to gusset) <span class="unit" id="riseShortUnit">cm</span> <span class="val" id="riseShortVal">18</span></label>
+      <input type="range" id="riseShort" data-field="riseShort">
+    </div>
+
+    <div class="field" data-garments="bralette">
+      <label for="underbust">Underbust <span class="unit" id="underbustUnit">cm</span> <span class="val" id="underbustVal">74</span></label>
+      <input type="range" id="underbust" data-field="underbust">
+    </div>
+    <div class="field" data-garments="bralette">
+      <label for="cupDepth">Cup depth <span class="unit" id="cupDepthUnit">cm</span> <span class="val" id="cupDepthVal">10</span></label>
+      <input type="range" id="cupDepth" data-field="cupDepth">
+    </div>
+    <div class="field" data-garments="bralette">
+      <label for="bandHeight">Band height <span class="unit" id="bandHeightUnit">cm</span> <span class="val" id="bandHeightVal">6</span></label>
+      <input type="range" id="bandHeight" data-field="bandHeight">
+    </div>
+
+    <div class="field" data-garments="garters">
+      <label for="garterLength">Strap length <span class="unit" id="garterLengthUnit">cm</span> <span class="val" id="garterLengthVal">12</span></label>
+      <input type="range" id="garterLength" data-field="garterLength">
+    </div>
+    <div class="field" data-garments="garters">
+      <label for="strapCount">Number of straps</label>
+      <select id="strapCount">
+        <option value="2">2 (basic)</option>
+        <option value="4" selected>4 (standard)</option>
+        <option value="6">6 (full suspender)</option>
+      </select>
+    </div>
+
+    <div class="field" data-garments="gloves">
+      <div class="preset-row">
+        <button type="button" data-preset="armLength" data-value="18">Wrist</button>
+        <button type="button" data-preset="armLength" data-value="45">Elbow</button>
+        <button type="button" data-preset="armLength" data-value="65">Shoulder</button>
+      </div>
+      <label for="armLength">Length (wrist to chosen point) <span class="unit" id="armLengthUnit">cm</span> <span class="val" id="armLengthVal">45</span></label>
+      <input type="range" id="armLength" data-field="armLength">
+    </div>
+    <div class="field" data-garments="gloves">
+      <label for="wrist">Wrist circumference <span class="unit" id="wristUnit">cm</span> <span class="val" id="wristVal">16</span></label>
+      <input type="range" id="wrist" data-field="wrist">
+    </div>
+    <div class="field" data-garments="gloves">
+      <label for="bicep">Upper-arm circumference (at chosen length) <span class="unit" id="bicepUnit">cm</span> <span class="val" id="bicepVal">28</span></label>
+      <input type="range" id="bicep" data-field="bicep">
+    </div>
+
+    <div class="field" data-garments="hood">
+      <label for="headCirc">Head circumference <span class="unit" id="headCircUnit">cm</span> <span class="val" id="headCircVal">56</span></label>
+      <input type="range" id="headCirc" data-field="headCirc">
+    </div>
+    <div class="field" data-garments="hood">
+      <label for="neckCirc">Neck circumference <span class="unit" id="neckCircUnit">cm</span> <span class="val" id="neckCircVal">36</span></label>
+      <input type="range" id="neckCirc" data-field="neckCirc">
+    </div>
+    <div class="field" data-garments="hood">
+      <label for="hoodLength">Length (neck to crown) <span class="unit" id="hoodLengthUnit">cm</span> <span class="val" id="hoodLengthVal">30</span></label>
+      <input type="range" id="hoodLength" data-field="hoodLength">
     </div>
 
     <h2>Latex-specific factors</h2>
@@ -276,17 +389,17 @@
       <label for="overlap">Glue overlap <span class="unit" id="overlapUnit">mm</span> <span class="val" id="overlapVal">8</span></label>
       <input type="range" id="overlap" data-field="overlap">
     </div>
-    <div class="field" data-garments="skirt,top">
+    <div class="field" data-garments="skirt,top,catsuit,leotard">
       <label for="flare">Hem flare <span class="unit" id="flareUnit">cm</span> <span class="val" id="flareVal">6</span></label>
       <input type="range" id="flare" data-field="flare">
     </div>
 
-    <h2 data-garments="skirt">Construction</h2>
-    <div class="field" data-garments="skirt">
-      <label for="waistband">Waistband height <span class="unit" id="waistbandUnit">cm</span> <span class="val" id="waistbandVal">4</span></label>
+    <h2 data-garments="skirt,garters">Construction</h2>
+    <div class="field" data-garments="skirt,garters">
+      <label for="waistband">Waistband / belt height <span class="unit" id="waistbandUnit">cm</span> <span class="val" id="waistbandVal">4</span></label>
       <input type="range" id="waistband" data-field="waistband">
     </div>
-    <div class="field toggle-row" data-garments="skirt,top">
+    <div class="field toggle-row" data-garments="skirt,top,catsuit,leotard">
       <input type="checkbox" id="zip" checked>
       <label for="zip" style="margin:0;">Include back zip allowance</label>
     </div>
@@ -296,6 +409,7 @@
   </aside>
 
   <main class="canvas-wrap">
+    <div class="confidence-banner" id="confidenceBanner"></div>
     <div class="meta-row">
       <div class="stamp" id="scaleStamp">SCALE 1 : 1 (ON-SCREEN APPROX)</div>
       <div class="stamp" id="cutStamp">CUT 2 (FRONT/BACK), MIRROR &middot; CUT 1 WAISTBAND</div>
@@ -315,49 +429,58 @@ const CM_PER_IN = 2.54;
 // (or, for overlap, centimeters representing what's normally spoken of in mm).
 // Sliders are just a view onto these numbers in whichever unit is selected.
 const fieldState = {
-  waist:       { cm: 70, minCm: 55,  maxCm: 130, stepCm: 1,   isOverlap: false },
-  hip:         { cm: 96, minCm: 70,  maxCm: 150, stepCm: 1,   isOverlap: false },
-  length:      { cm: 36, minCm: 20,  maxCm: 90,  stepCm: 1,   isOverlap: false },
-  bust:        { cm: 88, minCm: 70,  maxCm: 130, stepCm: 1,   isOverlap: false },
-  waistTop:    { cm: 70, minCm: 55,  maxCm: 130, stepCm: 1,   isOverlap: false },
-  torsoLength: { cm: 40, minCm: 25,  maxCm: 70,  stepCm: 1,   isOverlap: false },
-  inseam:      { cm: 75, minCm: 50,  maxCm: 100, stepCm: 1,   isOverlap: false },
-  ankle:       { cm: 22, minCm: 15,  maxCm: 40,  stepCm: 1,   isOverlap: false },
-  flare:       { cm: 6,  minCm: 0,   maxCm: 30,  stepCm: 1,   isOverlap: false },
-  waistband:   { cm: 4,  minCm: 0,   maxCm: 10,  stepCm: 0.5, isOverlap: false },
-  overlap:     { cm: 0.8, minCm: 0.4, maxCm: 1.5, stepCm: 0.1, isOverlap: true },
+  waist:        { cm: 70, minCm: 55,  maxCm: 130, stepCm: 1,   isOverlap: false },
+  hip:          { cm: 96, minCm: 70,  maxCm: 150, stepCm: 1,   isOverlap: false },
+  length:       { cm: 36, minCm: 20,  maxCm: 90,  stepCm: 1,   isOverlap: false },
+  bust:         { cm: 88, minCm: 70,  maxCm: 130, stepCm: 1,   isOverlap: false },
+  torsoLength:  { cm: 40, minCm: 25,  maxCm: 70,  stepCm: 1,   isOverlap: false },
+  inseam:       { cm: 75, minCm: 50,  maxCm: 100, stepCm: 1,   isOverlap: false },
+  ankle:        { cm: 22, minCm: 15,  maxCm: 40,  stepCm: 1,   isOverlap: false },
+  flare:        { cm: 6,  minCm: 0,   maxCm: 30,  stepCm: 1,   isOverlap: false },
+  waistband:    { cm: 4,  minCm: 0,   maxCm: 10,  stepCm: 0.5, isOverlap: false },
+  overlap:      { cm: 0.8, minCm: 0.4, maxCm: 1.5, stepCm: 0.1, isOverlap: true },
+  crotchWidth:  { cm: 6,  minCm: 3,   maxCm: 12,  stepCm: 0.5, isOverlap: false },
+  riseShort:    { cm: 18, minCm: 10,  maxCm: 30,  stepCm: 1,   isOverlap: false },
+  underbust:    { cm: 74, minCm: 55,  maxCm: 110, stepCm: 1,   isOverlap: false },
+  cupDepth:     { cm: 10, minCm: 5,   maxCm: 18,  stepCm: 0.5, isOverlap: false },
+  bandHeight:   { cm: 6,  minCm: 3,   maxCm: 12,  stepCm: 0.5, isOverlap: false },
+  garterLength: { cm: 12, minCm: 6,   maxCm: 25,  stepCm: 1,   isOverlap: false },
+  wrist:        { cm: 16, minCm: 12,  maxCm: 24,  stepCm: 0.5, isOverlap: false },
+  bicep:        { cm: 28, minCm: 18,  maxCm: 45,  stepCm: 1,   isOverlap: false },
+  armLength:    { cm: 45, minCm: 15,  maxCm: 75,  stepCm: 1,   isOverlap: false },
+  headCirc:     { cm: 56, minCm: 48,  maxCm: 65,  stepCm: 1,   isOverlap: false },
+  neckCirc:     { cm: 36, minCm: 28,  maxCm: 48,  stepCm: 1,   isOverlap: false },
+  hoodLength:   { cm: 30, minCm: 20,  maxCm: 45,  stepCm: 1,   isOverlap: false },
 };
 
 let unit = 'cm'; // 'cm' or 'in'
-let garment = 'skirt'; // 'skirt' | 'top' | 'leggings'
+let garment = 'skirt';
 
 const els = {};
 Object.keys(fieldState).forEach(f => { els[f] = document.getElementById(f); });
 const zipEl = document.getElementById('zip');
 const easeEl = document.getElementById('ease');
+const strapCountEl = document.getElementById('strapCount');
 const svg = document.getElementById('patternSvg');
 const formulaPanel = document.getElementById('formulaPanel');
 const cutStamp = document.getElementById('cutStamp');
+const confidenceBanner = document.getElementById('confidenceBanner');
 
 function toDisplay(valueCm, field) {
-  if (unit === 'cm') {
-    return field.isOverlap ? valueCm * 10 : valueCm; // overlap shown as mm in cm-mode
-  }
-  return valueCm / CM_PER_IN; // inches, for both regular fields and overlap
+  if (unit === 'cm') return field.isOverlap ? valueCm * 10 : valueCm;
+  return valueCm / CM_PER_IN;
 }
 function fromDisplay(displayVal, field) {
-  if (unit === 'cm') {
-    return field.isOverlap ? displayVal / 10 : displayVal;
-  }
+  if (unit === 'cm') return field.isOverlap ? displayVal / 10 : displayVal;
   return displayVal * CM_PER_IN;
 }
 function unitLabel(field) {
   if (unit === 'cm') return field.isOverlap ? 'mm' : 'cm';
   return 'in';
 }
-function roundForDisplay(v, field) {
-  if (unit === 'in') return Math.round(v * 20) / 20; // nearest 0.05"
-  return Math.round(v * 2) / 2; // nearest 0.5 in cm/mm
+function roundForDisplay(v) {
+  if (unit === 'in') return Math.round(v * 20) / 20;
+  return Math.round(v * 2) / 2;
 }
 
 function refreshSliderChrome() {
@@ -375,7 +498,7 @@ function refreshSliderChrome() {
     slider.value = dispVal;
 
     document.getElementById(f + 'Unit').textContent = unitLabel(state);
-    document.getElementById(f + 'Val').textContent = roundForDisplay(dispVal, state).toFixed(unit === 'in' ? 2 : 1);
+    document.getElementById(f + 'Val').textContent = roundForDisplay(dispVal).toFixed(unit === 'in' ? 2 : 1);
   });
 }
 
@@ -384,7 +507,7 @@ function onSliderInput(f) {
   const slider = els[f];
   const displayed = Number(slider.value);
   state.cm = fromDisplay(displayed, state);
-  document.getElementById(f + 'Val').textContent = roundForDisplay(displayed, state).toFixed(unit === 'in' ? 2 : 1);
+  document.getElementById(f + 'Val').textContent = roundForDisplay(displayed).toFixed(unit === 'in' ? 2 : 1);
   generate();
 }
 
@@ -393,6 +516,17 @@ Object.keys(fieldState).forEach(f => {
 });
 easeEl.addEventListener('input', generate);
 zipEl.addEventListener('input', generate);
+strapCountEl.addEventListener('input', generate);
+
+// preset buttons just set a field's cm value directly and re-render
+document.querySelectorAll('[data-preset]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.preset;
+    fieldState[f].cm = Number(btn.dataset.value);
+    refreshSliderChrome();
+    generate();
+  });
+});
 
 document.getElementById('unitCm').addEventListener('click', () => setUnit('cm'));
 document.getElementById('unitIn').addEventListener('click', () => setUnit('in'));
@@ -404,7 +538,6 @@ function setUnit(u) {
   generate();
 }
 
-// ---- garment tab switching ----
 document.querySelectorAll('.garment-tabs button').forEach(btn => {
   btn.addEventListener('click', () => {
     garment = btn.dataset.garment;
@@ -428,234 +561,323 @@ function svgEl(tag, attrs) {
 }
 
 function fmt(valueCm) {
-  // format a cm quantity for the drawing labels, in whatever unit is active
   if (unit === 'cm') return `${valueCm.toFixed(1)}cm`;
   return `${(valueCm / CM_PER_IN).toFixed(2)}in`;
 }
 
-// Draws a simple 4-point trapezoid panel (used by both Skirt and Top --
-// same shape, different measurements feeding it) and returns the y
-// coordinate of its bottom edge (useful for laying out pieces below it).
-function drawTrapezoidPanel(cx, topWidthCm, bottomWidthCm, heightCm, scale, label, isBack, includeZip) {
-  const topW = topWidthCm * scale;
-  const botW = bottomWidthCm * scale;
-  const h = heightCm * scale;
-  const top = 60;
-  const x0 = cx - topW / 2, x1 = cx + topW / 2;
-  const x2 = cx + botW / 2, x3 = cx - botW / 2;
-  const points = `${x0},${top} ${x1},${top} ${x2},${top + h} ${x3},${top + h}`;
-  svg.appendChild(svgEl('polygon', { points, class: 'panel-fill' }));
+function setBanner(level, text) {
+  confidenceBanner.className = 'confidence-banner' + (level ? ' ' + level : '');
+  confidenceBanner.textContent = text;
+}
 
+// ---------------- shared drawing primitives ----------------
+
+function drawTrapezoidPanel(cx, topWidthCm, bottomWidthCm, heightCm, scale, label, isBack, includeZip) {
+  const topW = topWidthCm * scale, botW = bottomWidthCm * scale, h = heightCm * scale, top = 60;
+  const x0 = cx - topW / 2, x1 = cx + topW / 2, x2 = cx + botW / 2, x3 = cx - botW / 2;
+  svg.appendChild(svgEl('polygon', { points: `${x0},${top} ${x1},${top} ${x2},${top+h} ${x3},${top+h}`, class: 'panel-fill' }));
   svg.appendChild(svgEl('line', { x1: x0, y1: top, x2: x3, y2: top + h, class: 'overlap' }));
   svg.appendChild(svgEl('line', { x1: x1, y1: top, x2: x2, y2: top + h, class: 'overlap' }));
-
   const centerDash = (isBack && includeZip) ? 'overlap' : 'fold';
   svg.appendChild(svgEl('line', { x1: cx, y1: top, x2: cx, y2: top + h, class: centerDash }));
-
-  const lbl = svgEl('text', { x: cx, y: top - 12, 'text-anchor': 'middle', class: 'dim' });
-  lbl.textContent = label;
-  svg.appendChild(lbl);
-
-  const dim1 = svgEl('text', { x: cx, y: top + 14, 'text-anchor': 'middle', class: 'dim' });
-  dim1.textContent = fmt(topWidthCm);
-  svg.appendChild(dim1);
-
-  const dim2 = svgEl('text', { x: cx, y: top + h - 6, 'text-anchor': 'middle', class: 'dim' });
-  dim2.textContent = fmt(bottomWidthCm);
-  svg.appendChild(dim2);
-
+  addLabel(cx, top - 12, label);
+  addLabel(cx, top + 14, fmt(topWidthCm));
+  addLabel(cx, top + h - 6, fmt(bottomWidthCm));
   return top + h;
 }
 
-// Draws a simplified single-leg panel: waist tapering out to a hip bulge,
-// then tapering back in to the ankle. Straight-line segments only (same
-// limitation as the trapezoid panels) -- this is a simplified block, NOT
-// a fitted crotch curve. Real crotch shaping needs curved seams, which
-// this generator doesn't do yet for any garment.
-function drawLegPanel(cx, waistWidthCm, hipWidthCm, ankleWidthCm, lengthCm, riseFraction, scale, label) {
-  const waistW = waistWidthCm * scale;
-  const hipW = hipWidthCm * scale;
-  const ankleW = ankleWidthCm * scale;
-  const h = lengthCm * scale;
-  const top = 60;
-  const hipY = top + h * riseFraction;
-  const bottomY = top + h;
-
+// Simplified single-leg block: waist/neck -> hip/head bulge -> ankle/crown.
+// Reused for Leggings AND as the rough basis for Gloves and Hood, since
+// all three are "narrow -> wide -> narrow (or vice versa) tapered tube"
+// shapes at this level of simplification.
+function drawTaperedTube(cx, endAWidthCm, midWidthCm, endBWidthCm, lengthCm, midFraction, scale, label) {
+  const endAW = endAWidthCm * scale, midW = midWidthCm * scale, endBW = endBWidthCm * scale;
+  const h = lengthCm * scale, top = 60;
+  const midY = top + h * midFraction, bottomY = top + h;
   const points = [
-    [cx - waistW / 2, top],
-    [cx + waistW / 2, top],
-    [cx + hipW / 2, hipY],
-    [cx + ankleW / 2, bottomY],
-    [cx - ankleW / 2, bottomY],
-    [cx - hipW / 2, hipY],
+    [cx - endAW / 2, top], [cx + endAW / 2, top],
+    [cx + midW / 2, midY],
+    [cx + endBW / 2, bottomY], [cx - endBW / 2, bottomY],
+    [cx - midW / 2, midY],
   ].map(p => p.join(',')).join(' ');
   svg.appendChild(svgEl('polygon', { points, class: 'panel-fill' }));
-
-  // overlap edges: waist-to-hip and hip-to-ankle on both sides
-  svg.appendChild(svgEl('polyline', { points: `${cx - waistW/2},${top} ${cx - hipW/2},${hipY} ${cx - ankleW/2},${bottomY}`, class: 'overlap' }));
-  svg.appendChild(svgEl('polyline', { points: `${cx + waistW/2},${top} ${cx + hipW/2},${hipY} ${cx + ankleW/2},${bottomY}`, class: 'overlap' }));
-
-  const lbl = svgEl('text', { x: cx, y: top - 12, 'text-anchor': 'middle', class: 'dim' });
-  lbl.textContent = label;
-  svg.appendChild(lbl);
-  const dim1 = svgEl('text', { x: cx, y: top + 14, 'text-anchor': 'middle', class: 'dim' });
-  dim1.textContent = fmt(waistWidthCm);
-  svg.appendChild(dim1);
-  const dim2 = svgEl('text', { x: cx, y: hipY + 4, 'text-anchor': 'middle', class: 'dim' });
-  dim2.textContent = fmt(hipWidthCm);
-  svg.appendChild(dim2);
-  const dim3 = svgEl('text', { x: cx, y: bottomY - 6, 'text-anchor': 'middle', class: 'dim' });
-  dim3.textContent = fmt(ankleWidthCm);
-  svg.appendChild(dim3);
-
+  svg.appendChild(svgEl('polyline', { points: `${cx-endAW/2},${top} ${cx-midW/2},${midY} ${cx-endBW/2},${bottomY}`, class: 'overlap' }));
+  svg.appendChild(svgEl('polyline', { points: `${cx+endAW/2},${top} ${cx+midW/2},${midY} ${cx+endBW/2},${bottomY}`, class: 'overlap' }));
+  addLabel(cx, top - 12, label);
+  addLabel(cx, top + 14, fmt(endAWidthCm));
+  addLabel(cx, midY + 4, fmt(midWidthCm));
+  addLabel(cx, bottomY - 6, fmt(endBWidthCm));
   return bottomY;
 }
 
+// One continuous bodice+leg panel for the Catsuit -- topologically correct
+// as a single piece (no fake seam at the natural waist), still straight
+// lines only / no crotch curve.
+function drawBodiceLegPanel(cx, bustW, waistW, hipW, ankleW, torsoLenCm, inseamCm, riseFraction, scale, label, isBack, includeZip) {
+  const top = 60;
+  const bW = bustW * scale, wW = waistW * scale, hW = hipW * scale, aW = ankleW * scale;
+  const torsoH = torsoLenCm * scale, inseamH = inseamCm * scale;
+  const waistY = top + torsoH;
+  const hipY = waistY + inseamH * riseFraction;
+  const ankleY = waistY + inseamH;
+
+  const pts = [
+    [cx - bW/2, top], [cx + bW/2, top],
+    [cx + wW/2, waistY],
+    [cx + hW/2, hipY],
+    [cx + aW/2, ankleY],
+    [cx - aW/2, ankleY],
+    [cx - hW/2, hipY],
+    [cx - wW/2, waistY],
+  ].map(p => p.join(',')).join(' ');
+  svg.appendChild(svgEl('polygon', { points: pts, class: 'panel-fill' }));
+
+  svg.appendChild(svgEl('polyline', { points: `${cx-bW/2},${top} ${cx-wW/2},${waistY} ${cx-hW/2},${hipY} ${cx-aW/2},${ankleY}`, class: 'overlap' }));
+  svg.appendChild(svgEl('polyline', { points: `${cx+bW/2},${top} ${cx+wW/2},${waistY} ${cx+hW/2},${hipY} ${cx+aW/2},${ankleY}`, class: 'overlap' }));
+
+  const centerDash = (isBack && includeZip) ? 'overlap' : 'fold';
+  svg.appendChild(svgEl('line', { x1: cx, y1: top, x2: cx, y2: waistY, class: centerDash }));
+
+  addLabel(cx, top - 12, label);
+  addLabel(cx, top + 14, fmt(bustW));
+  addLabel(cx, waistY + 4, fmt(waistW));
+  addLabel(cx, hipY + 4, fmt(hipW));
+  addLabel(cx, ankleY - 6, fmt(ankleW));
+  return ankleY;
+}
+
+function drawRect(cx, widthCm, heightCm, scale, label) {
+  const w = widthCm * scale, h = heightCm * scale, top = 60;
+  const x0 = cx - w / 2;
+  svg.appendChild(svgEl('rect', { x: x0, y: top, width: w, height: h, class: 'panel-fill' }));
+  svg.appendChild(svgEl('line', { x1: x0, y1: top, x2: x0, y2: top + h, class: 'overlap' }));
+  svg.appendChild(svgEl('line', { x1: x0 + w, y1: top, x2: x0 + w, y2: top + h, class: 'overlap' }));
+  addLabel(cx, top - 10, label);
+  addLabel(cx, top + h + 16, `${fmt(widthCm)} \u00d7 ${fmt(heightCm)}`);
+  return top + h;
+}
+
+function drawTrianglePanel(cx, baseWidthCm, heightCm, scale, label) {
+  const baseW = baseWidthCm * scale, h = heightCm * scale, top = 60;
+  const points = `${cx},${top} ${cx-baseW/2},${top+h} ${cx+baseW/2},${top+h}`;
+  svg.appendChild(svgEl('polygon', { points, class: 'panel-fill' }));
+  svg.appendChild(svgEl('line', { x1: cx, y1: top, x2: cx-baseW/2, y2: top+h, class: 'overlap' }));
+  svg.appendChild(svgEl('line', { x1: cx, y1: top, x2: cx+baseW/2, y2: top+h, class: 'overlap' }));
+  addLabel(cx, top - 10, label);
+  addLabel(cx, top + h + 14, `base ${fmt(baseWidthCm)}, depth ${fmt(heightCm)}`);
+  return top + h;
+}
+
+function addLabel(x, y, text) {
+  const t = svgEl('text', { x, y, 'text-anchor': 'middle', class: 'dim' });
+  t.textContent = text;
+  svg.appendChild(t);
+}
+
+// ---------------- dispatch ----------------
+
 function generate() {
   svg.innerHTML = '';
-  if (garment === 'skirt') generateSkirt();
-  else if (garment === 'top') generateTop();
-  else if (garment === 'leggings') generateLeggings();
+  const fns = {
+    skirt: generateSkirt, top: generateTop, leggings: generateLeggings,
+    catsuit: generateCatsuit, leotard: generateLeotard, panties: generatePanties,
+    garters: generateGarters, gloves: generateGloves, bralette: generateBralette, hood: generateHood,
+  };
+  fns[garment]();
+  document.getElementById('easeVal').textContent = easeEl.value;
 }
 
+// ---------------- Skirt (solid) ----------------
 function generateSkirt() {
-  const waist = fieldState.waist.cm;
-  const hip = fieldState.hip.cm;
-  const length = fieldState.length.cm;
-  const easePct = Number(easeEl.value);
-  const overlapCm = fieldState.overlap.cm;
-  const flare = fieldState.flare.cm;
-  const waistbandH = fieldState.waistband.cm;
+  setBanner('', 'Solid block: straight side seams, no curve, but a well-understood and commonly-used shape for latex skirts as-is.');
+  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, length = fieldState.length.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm, waistbandH = fieldState.waistband.cm;
   const includeZip = zipEl.checked;
-  document.getElementById('easeVal').textContent = easePct;
 
-  const effectiveWaist = waist * (1 - easePct / 100);
-  const effectiveHip = hip * (1 - easePct / 100);
-  const panelTopWidth = effectiveWaist / 2 + overlapCm * 2;
-  const panelBottomWidth = effectiveHip / 2 + flare + overlapCm * 2;
-  const waistbandWidth = effectiveWaist + overlapCm * 2;
+  const effWaist = waist * (1 - easePct/100), effHip = hip * (1 - easePct/100);
+  const topW = effWaist/2 + overlapCm*2, botW = effHip/2 + flare + overlapCm*2, wbW = effWaist + overlapCm*2;
 
   const scale = 4.4;
-  const frontBottom = drawTrapezoidPanel(230, panelTopWidth, panelBottomWidth, length, scale, 'FRONT PANEL \u00d7 1', false, includeZip);
-  const backBottom = drawTrapezoidPanel(560, panelTopWidth, panelBottomWidth, length, scale, 'BACK PANEL \u00d7 1' + (includeZip ? ' (zip overlap on CB)' : ''), true, includeZip);
+  const fb = drawTrapezoidPanel(230, topW, botW, length, scale, 'FRONT PANEL \u00d71', false, includeZip);
+  const bb = drawTrapezoidPanel(560, topW, botW, length, scale, 'BACK PANEL \u00d71' + (includeZip?' (zip overlap CB)':''), true, includeZip);
+  const wbY = Math.max(fb,bb)+50, wbHpx = Math.max(waistbandH,0.1)*scale, wbWpx = wbW*scale, wbX = 450-wbWpx/2;
+  svg.appendChild(svgEl('rect',{x:wbX,y:wbY,width:wbWpx,height:wbHpx,class:'waistband'}));
+  addLabel(450, wbY-10, `WAISTBAND \u00d71 \u2014 ${fmt(wbW)} \u00d7 ${fmt(waistbandH)}`);
 
-  const wbY = Math.max(frontBottom, backBottom) + 50;
-  const wbW = waistbandWidth * scale;
-  const wbH = Math.max(waistbandH, 0.1) * scale;
-  const wbX = 450 - wbW / 2;
-  svg.appendChild(svgEl('rect', { x: wbX, y: wbY, width: wbW, height: wbH, class: 'waistband' }));
-  const wbLbl = svgEl('text', { x: 450, y: wbY - 10, 'text-anchor': 'middle', class: 'dim' });
-  wbLbl.textContent = `WAISTBAND \u00d7 1  \u2014  ${fmt(waistbandWidth)} \u00d7 ${fmt(waistbandH)}`;
-  svg.appendChild(wbLbl);
-
-  cutStamp.textContent = `CUT 2 (FRONT + BACK) \u00b7 CUT 1 WAISTBAND \u00b7 ${includeZip ? 'BACK ZIP' : 'NO ZIP \u2014 CB FOLD OR SEAM'}`;
-
-  formulaPanel.innerHTML =
-`<span class="note">Internal math always runs in centimeters, regardless of the unit toggle \u2014 the slider just converts your entry for display.</span>
-
-<span class="lbl">effective_waist</span> = waist \u00d7 (1 \u2212 ease/100)
-  = ${waist.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveWaist.toFixed(2)} cm</span>
-
-<span class="lbl">effective_hip</span>   = hip \u00d7 (1 \u2212 ease/100)
-  = ${hip.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveHip.toFixed(2)} cm</span>
-
-<span class="lbl">panel_top_width</span>    = effective_waist / 2 + overlap \u00d7 2
-  = ${effectiveWaist.toFixed(2)} / 2 + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${panelTopWidth.toFixed(2)} cm</span>  (${fmt(panelTopWidth)})
-
-<span class="lbl">panel_bottom_width</span> = effective_hip / 2 + hem_flare + overlap \u00d7 2
-  = ${effectiveHip.toFixed(2)} / 2 + ${flare.toFixed(2)} + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${panelBottomWidth.toFixed(2)} cm</span>  (${fmt(panelBottomWidth)})
-
-<span class="lbl">waistband_width</span>    = effective_waist + overlap \u00d7 2
-  = ${effectiveWaist.toFixed(2)} + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${waistbandWidth.toFixed(2)} cm</span>  (${fmt(waistbandWidth)})
-
-Dashed red = glue overlap edge (side seams${includeZip ? ' + back zip flap' : ''}).
-Dashed grey = fold or plain center edge (no seam needed).`;
+  cutStamp.textContent = `CUT 2 (FRONT+BACK) \u00b7 CUT 1 WAISTBAND \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'}`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_waist</span> = ${waist.toFixed(1)} \u00d7 (1-${easePct}/100) = <span class="num">${effWaist.toFixed(2)}cm</span>
+<span class="lbl">effective_hip</span>   = ${hip.toFixed(1)} \u00d7 (1-${easePct}/100) = <span class="num">${effHip.toFixed(2)}cm</span>
+<span class="lbl">panel_top</span>    = effective_waist/2 + overlap\u00d72 = <span class="num">${topW.toFixed(2)}cm</span>
+<span class="lbl">panel_bottom</span> = effective_hip/2 + flare + overlap\u00d72 = <span class="num">${botW.toFixed(2)}cm</span>
+<span class="lbl">waistband</span>    = effective_waist + overlap\u00d72 = <span class="num">${wbW.toFixed(2)}cm</span>`;
 }
 
+// ---------------- Top (solid) ----------------
 function generateTop() {
-  const bust = fieldState.bust.cm;
-  const waist = fieldState.waistTop.cm;
-  const length = fieldState.torsoLength.cm;
-  const easePct = Number(easeEl.value);
-  const overlapCm = fieldState.overlap.cm;
-  const flare = fieldState.flare.cm;
+  setBanner('', 'Sleeveless bodice block. No sleeves, armhole shaping, or bust darts modeled -- fits best on a fairly straight torso.');
+  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, length = fieldState.torsoLength.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm;
   const includeZip = zipEl.checked;
-  document.getElementById('easeVal').textContent = easePct;
-
-  const effectiveBust = bust * (1 - easePct / 100);
-  const effectiveWaist = waist * (1 - easePct / 100);
-  const panelTopWidth = effectiveBust / 2 + overlapCm * 2;
-  const panelBottomWidth = effectiveWaist / 2 + flare + overlapCm * 2;
-
+  const effBust = bust*(1-easePct/100), effWaist = waist*(1-easePct/100);
+  const topW = effBust/2+overlapCm*2, botW = effWaist/2+flare+overlapCm*2;
   const scale = 4.4;
-  drawTrapezoidPanel(230, panelTopWidth, panelBottomWidth, length, scale, 'FRONT PANEL \u00d7 1', false, includeZip);
-  drawTrapezoidPanel(560, panelTopWidth, panelBottomWidth, length, scale, 'BACK PANEL \u00d7 1' + (includeZip ? ' (zip overlap on CB)' : ''), true, includeZip);
-
-  cutStamp.textContent = `CUT 2 (FRONT + BACK) \u00b7 NO WAISTBAND \u00b7 ${includeZip ? 'BACK ZIP' : 'NO ZIP \u2014 CB FOLD OR SEAM'} \u00b7 SLEEVELESS BLOCK`;
-
-  formulaPanel.innerHTML =
-`<span class="note">Internal math always runs in centimeters, regardless of the unit toggle. This is a sleeveless bodice block \u2014 sleeves, armhole shaping, and bust darts aren't modeled yet, so it fits best on a fairly straight torso shape.</span>
-
-<span class="lbl">effective_bust</span>  = bust \u00d7 (1 \u2212 ease/100)
-  = ${bust.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveBust.toFixed(2)} cm</span>
-
-<span class="lbl">effective_waist</span> = waist \u00d7 (1 \u2212 ease/100)
-  = ${waist.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveWaist.toFixed(2)} cm</span>
-
-<span class="lbl">panel_top_width</span>    = effective_bust / 2 + overlap \u00d7 2
-  = ${effectiveBust.toFixed(2)} / 2 + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${panelTopWidth.toFixed(2)} cm</span>  (${fmt(panelTopWidth)})
-
-<span class="lbl">panel_bottom_width</span> = effective_waist / 2 + hem_flare + overlap \u00d7 2
-  = ${effectiveWaist.toFixed(2)} / 2 + ${flare.toFixed(2)} + ${overlapCm.toFixed(2)} \u00d7 2 = <span class="num">${panelBottomWidth.toFixed(2)} cm</span>  (${fmt(panelBottomWidth)})
-
-Dashed red = glue overlap edge (side seams${includeZip ? ' + back zip flap' : ''}).
-Dashed grey = fold or plain center edge (no seam needed).`;
+  drawTrapezoidPanel(230, topW, botW, length, scale, 'FRONT PANEL \u00d71', false, includeZip);
+  drawTrapezoidPanel(560, topW, botW, length, scale, 'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), true, includeZip);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK) \u00b7 NO WAISTBAND \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'} \u00b7 SLEEVELESS`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_bust</span>  = ${bust.toFixed(1)} \u00d7 (1-${easePct}/100) = <span class="num">${effBust.toFixed(2)}cm</span>
+<span class="lbl">effective_waist</span> = ${waist.toFixed(1)} \u00d7 (1-${easePct}/100) = <span class="num">${effWaist.toFixed(2)}cm</span>
+<span class="lbl">panel_top</span>    = effective_bust/2 + overlap\u00d72 = <span class="num">${topW.toFixed(2)}cm</span>
+<span class="lbl">panel_bottom</span> = effective_waist/2 + flare + overlap\u00d72 = <span class="num">${botW.toFixed(2)}cm</span>`;
 }
 
+// ---------------- Leggings (solid, no crotch curve) ----------------
 function generateLeggings() {
-  const waist = fieldState.waist.cm;
-  const hip = fieldState.hip.cm;
-  const ankle = fieldState.ankle.cm;
-  const inseam = fieldState.inseam.cm;
-  const easePct = Number(easeEl.value);
-  const overlapCm = fieldState.overlap.cm;
-  const riseFraction = 0.18; // approximate waist-to-hip point as a fraction of total length
-
-  document.getElementById('easeVal').textContent = easePct;
-
-  const effectiveWaist = waist * (1 - easePct / 100);
-  const effectiveHip = hip * (1 - easePct / 100);
-  const effectiveAnkle = ankle * (1 - easePct / 100);
-
-  const waistWidth = effectiveWaist / 2 + overlapCm * 2;
-  const hipWidth = effectiveHip / 2 + overlapCm * 2;
-  const ankleWidth = effectiveAnkle / 2 + overlapCm * 2;
-
+  setBanner('warn', 'Simplified block: straight lines only, NO crotch curve. Real fitted leggings need a curved inner-leg seam -- true this up by hand or test-fit before committing to latex.');
+  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, ankle = fieldState.ankle.cm, inseam = fieldState.inseam.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const riseFraction = 0.18;
+  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100), effAnkle = ankle*(1-easePct/100);
+  const wW = effWaist/2+overlapCm*2, hW = effHip/2+overlapCm*2, aW = effAnkle/2+overlapCm*2;
   const scale = 3.6;
-  drawLegPanel(230, waistWidth, hipWidth, ankleWidth, inseam, riseFraction, scale, 'FRONT PANEL \u00d7 1');
-  drawLegPanel(560, waistWidth, hipWidth, ankleWidth, inseam, riseFraction, scale, 'BACK PANEL \u00d7 1');
+  drawTaperedTube(230, wW, hW, aW, inseam, riseFraction, scale, 'FRONT PANEL \u00d71');
+  drawTaperedTube(560, wW, hW, aW, inseam, riseFraction, scale, 'BACK PANEL \u00d71');
+  cutStamp.textContent = `CUT 2 (FRONT+BACK), MIRROR EACH \u00b7 NO CROTCH CURVE`;
+  formulaPanel.innerHTML = `<span class="note">Hip point placed at ${(riseFraction*100).toFixed(0)}% of inseam length -- an approximation, not a measured rise.</span>
+<span class="lbl">waist_width</span> = ${effWaist.toFixed(2)}/2 + overlap\u00d72 = <span class="num">${wW.toFixed(2)}cm</span>
+<span class="lbl">hip_width</span>   = ${effHip.toFixed(2)}/2 + overlap\u00d72 = <span class="num">${hW.toFixed(2)}cm</span>
+<span class="lbl">ankle_width</span> = ${effAnkle.toFixed(2)}/2 + overlap\u00d72 = <span class="num">${aW.toFixed(2)}cm</span>`;
+}
 
-  cutStamp.textContent = `CUT 2 (FRONT + BACK), MIRROR EACH \u00b7 SIMPLIFIED BLOCK \u2014 NO CROTCH CURVE`;
+// ---------------- Catsuit (solid, no crotch curve) ----------------
+function generateCatsuit() {
+  setBanner('warn', 'Single connected bodice+leg panel (topologically correct, no fake waist seam) but still straight-line only -- NO crotch curve, and no sleeves/armhole shaping. Expect to true up the inner-leg seam by hand.');
+  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, hip = fieldState.hip.cm, ankle = fieldState.ankle.cm;
+  const torsoLen = fieldState.torsoLength.cm, inseam = fieldState.inseam.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, includeZip = zipEl.checked;
+  const riseFraction = 0.18;
+  const eff = v => v*(1-easePct/100);
+  const bW = eff(bust)/2+overlapCm*2, wW = eff(waist)/2+overlapCm*2, hW = eff(hip)/2+overlapCm*2, aW = eff(ankle)/2+overlapCm*2;
+  const scale = 3.2;
+  drawBodiceLegPanel(230, bW, wW, hW, aW, torsoLen, inseam, riseFraction, scale, 'FRONT PANEL \u00d71', false, includeZip);
+  drawBodiceLegPanel(560, bW, wW, hW, aW, torsoLen, inseam, riseFraction, scale, 'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), true, includeZip);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK) \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'} \u00b7 SLEEVELESS \u00b7 NO CROTCH CURVE`;
+  formulaPanel.innerHTML = `One continuous panel per side: bust \u2192 waist \u2192 hip \u2192 ankle, each already including stretch reduction and overlap.
+<span class="lbl">bust_width</span>  = <span class="num">${bW.toFixed(2)}cm</span>
+<span class="lbl">waist_width</span> = <span class="num">${wW.toFixed(2)}cm</span>
+<span class="lbl">hip_width</span>   = <span class="num">${hW.toFixed(2)}cm</span>
+<span class="lbl">ankle_width</span> = <span class="num">${aW.toFixed(2)}cm</span>
+<span class="note">Hip point placed at ${(riseFraction*100).toFixed(0)}% of inseam length below the waist point.</span>`;
+}
 
-  formulaPanel.innerHTML =
-`<span class="note">Internal math always runs in centimeters. IMPORTANT SIMPLIFICATION: this is a straight-line block with no crotch curve \u2014 real fitted leggings/catsuit bottoms need a curved crotch seam, which this generator doesn't draft yet. Expect to true-up the inner leg seam by hand or via a test fit.</span>
+// ---------------- Leotard (solid-ish: bodice solid, gusset simple) ----------------
+function generateLeotard() {
+  setBanner('warn', 'Bodice portion is a solid block (same confidence as Top); the leg opening is just the fabric edge with a simple rectangular gusset -- no curved leg-opening binding piece drafted, and no sleeves.');
+  const bust = fieldState.bust.cm, waist = fieldState.waist.cm, length = fieldState.torsoLength.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm, flare = fieldState.flare.cm;
+  const crotchW = fieldState.crotchWidth.cm, includeZip = zipEl.checked;
+  const effBust = bust*(1-easePct/100), effWaist = waist*(1-easePct/100);
+  const topW = effBust/2+overlapCm*2, botW = effWaist/2+flare+overlapCm*2;
+  const scale = 4.4;
+  drawTrapezoidPanel(230, topW, botW, length, scale, 'FRONT PANEL \u00d71', false, includeZip);
+  drawTrapezoidPanel(560, topW, botW, length, scale, 'BACK PANEL \u00d71'+(includeZip?' (zip overlap CB)':''), true, includeZip);
+  const gussetW = crotchW*2+overlapCm*4;
+  drawRect(230, gussetW, crotchW, scale, `GUSSET \u00d71`);
+  cutStamp.textContent = `CUT 2 (FRONT+BACK) + 1 GUSSET \u00b7 ${includeZip?'BACK ZIP':'NO ZIP'} \u00b7 SLEEVELESS`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_bust</span> = <span class="num">${effBust.toFixed(2)}cm</span>  <span class="lbl">effective_waist</span> = <span class="num">${effWaist.toFixed(2)}cm</span>
+<span class="lbl">panel_top</span> = <span class="num">${topW.toFixed(2)}cm</span>  <span class="lbl">panel_bottom</span> = <span class="num">${botW.toFixed(2)}cm</span>
+<span class="lbl">gusset</span> = crotch_width\u00d72 + overlap\u00d74 = <span class="num">${gussetW.toFixed(2)}cm</span> \u00d7 ${fmt(crotchW)}
+<span class="note">Leg openings are just the raw fabric edge of the bodice panels -- no separate elastic-binding piece drafted here.</span>`;
+}
 
-<span class="lbl">effective_waist</span> = waist \u00d7 (1 \u2212 ease/100)
-  = ${waist.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveWaist.toFixed(2)} cm</span>
+// ---------------- Panties (solid-ish) ----------------
+function generatePanties() {
+  setBanner('', 'Simple front/back/gusset block -- a genuinely common way simple latex/fabric panties are actually constructed, so this one is fairly solid despite being simple.');
+  const waist = fieldState.waist.cm, hip = fieldState.hip.cm, rise = fieldState.riseShort.cm, crotchW = fieldState.crotchWidth.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const effWaist = waist*(1-easePct/100), effHip = hip*(1-easePct/100);
+  const topW = effWaist/2+overlapCm*2, botW = effHip/2+overlapCm*2;
+  const scale = 4.8;
+  drawTrapezoidPanel(230, topW, botW, rise, scale, 'FRONT PANEL \u00d71', false, false);
+  drawTrapezoidPanel(500, topW, botW*1.1, rise, scale, 'BACK PANEL \u00d71', false, false);
+  const gussetW = crotchW*2+overlapCm*4;
+  drawRect(720, gussetW, crotchW, scale, 'GUSSET \u00d71');
+  cutStamp.textContent = `CUT 1 FRONT + 1 BACK + 1 GUSSET \u00b7 ELASTIC WAIST/LEGS (no separate binding piece drafted)`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_waist</span> = <span class="num">${effWaist.toFixed(2)}cm</span>  <span class="lbl">effective_hip</span> = <span class="num">${effHip.toFixed(2)}cm</span>
+<span class="lbl">front/back_top</span> = <span class="num">${topW.toFixed(2)}cm</span>  <span class="lbl">front_bottom</span> = <span class="num">${botW.toFixed(2)}cm</span> (back is 10% wider for seat coverage)
+<span class="lbl">gusset</span> = <span class="num">${gussetW.toFixed(2)}cm</span> \u00d7 ${fmt(crotchW)}`;
+}
 
-<span class="lbl">effective_hip</span>   = hip \u00d7 (1 \u2212 ease/100)
-  = ${hip.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveHip.toFixed(2)} cm</span>
+// ---------------- Garters (solid -- just strips) ----------------
+function generateGarters() {
+  setBanner('', 'Just strips of material plus a belt -- genuinely simple, no meaningful confidence caveat needed here.');
+  const waist = fieldState.waist.cm, beltH = fieldState.waistband.cm, strapLen = fieldState.garterLength.cm;
+  const overlapCm = fieldState.overlap.cm, count = Number(strapCountEl.value);
+  const easePct = Number(easeEl.value);
+  const effWaist = waist*(1-easePct/100);
+  const beltW = effWaist+overlapCm*2;
+  const scale = 4.4;
+  const beltBottom = drawRect(450, beltW, beltH, scale, `BELT \u00d71`);
+  const strapW = 2.5+overlapCm*2;
+  const spacing = 900/(count+1);
+  for (let i=0;i<count;i++) {
+    drawRect(spacing*(i+1), strapW, strapLen, scale*0.9, `STRAP ${i+1}`);
+  }
+  cutStamp.textContent = `CUT 1 BELT + ${count} STRAPS \u00b7 CLIPS NOT DRAFTED (hardware, not fabric)`;
+  formulaPanel.innerHTML = `<span class="lbl">effective_waist</span> = <span class="num">${effWaist.toFixed(2)}cm</span>
+<span class="lbl">belt_width</span> = effective_waist + overlap\u00d72 = <span class="num">${beltW.toFixed(2)}cm</span>
+<span class="lbl">strap_width</span> = 2.5cm + overlap\u00d72 = <span class="num">${strapW.toFixed(2)}cm</span> (a reasonable default width, not a measured value -- adjust to taste)
+<span class="note">Garter clips/hardware are purchased, not drafted here.</span>`;
+}
 
-<span class="lbl">effective_ankle</span> = ankle \u00d7 (1 \u2212 ease/100)
-  = ${ankle.toFixed(2)}cm \u00d7 (1 \u2212 ${easePct}/100) = <span class="num">${effectiveAnkle.toFixed(2)} cm</span>
+// ---------------- Gloves (rough -- fingerless/mitten only) ----------------
+function generateGloves() {
+  setBanner('rough', 'ROUGH BLOCK, fingerless/arm-sleeve style only. Individual finger stalls need genuinely different pattern construction (small curved cone shapes per finger) that this straight-line system cannot produce -- full 5-finger gloves are out of scope here. This tapered-tube shape works for opera-length or elbow-length fingerless sleeves.');
+  const wrist = fieldState.wrist.cm, bicep = fieldState.bicep.cm, length = fieldState.armLength.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const eff = v => v*(1-easePct/100);
+  const wW = eff(wrist)/2+overlapCm*2, bW = eff(bicep)/2+overlapCm*2;
+  const scale = 5.5;
+  drawTaperedTube(230, wW, wW, bW, length, 0.08, scale, 'SLEEVE \u00d71 (mirror for pair)');
+  cutStamp.textContent = `CUT 2, MIRRORED (ONE PER ARM) \u00b7 FINGERLESS/SLEEVE STYLE \u00b7 NOT A 5-FINGER GLOVE PATTERN`;
+  formulaPanel.innerHTML = `<span class="lbl">wrist_width</span> = <span class="num">${wW.toFixed(2)}cm</span>  <span class="lbl">upper_arm_width</span> = <span class="num">${bW.toFixed(2)}cm</span>
+<span class="note">Shape is wrist-width for a short run near the hand, then tapers out to the upper-arm measurement over the rest of the length -- a rough approximation of arm taper, not a measured curve.</span>`;
+}
 
-<span class="lbl">waist_width</span>  = effective_waist / 2 + overlap \u00d7 2 = <span class="num">${waistWidth.toFixed(2)} cm</span>  (${fmt(waistWidth)})
-<span class="lbl">hip_width</span>    = effective_hip / 2 + overlap \u00d7 2   = <span class="num">${hipWidth.toFixed(2)} cm</span>  (${fmt(hipWidth)})
-<span class="lbl">ankle_width</span>  = effective_ankle / 2 + overlap \u00d7 2 = <span class="num">${ankleWidth.toFixed(2)} cm</span>  (${fmt(ankleWidth)})
+// ---------------- Bralette (ROUGH) ----------------
+function generateBralette() {
+  setBanner('rough', 'ROUGH BLOCK: triangle-cup, no-underwire bralette style only -- this is the one bra style that genuinely reduces to straight lines. Molded, underwire, or fully-supportive cup shapes need curved/darted pattern pieces this system cannot produce, and are out of scope here.');
+  const bust = fieldState.bust.cm, underbust = fieldState.underbust.cm, cupDepth = fieldState.cupDepth.cm, bandH = fieldState.bandHeight.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const effUnderbust = underbust*(1-easePct/100);
+  const cupBaseW = Math.max(6, (bust-underbust)*1.4 + overlapCm*2);
+  const bandW = effUnderbust/2+overlapCm*2;
+  const scale = 5;
+  drawRect(230, bandW, bandH, scale, 'BAND (\u00d72, L+R)');
+  drawTrianglePanel(560, cupBaseW, cupDepth, scale, 'CUP \u00d72 (L+R, mirror)');
+  drawRect(820, 1.5+overlapCm*2, 35, scale*0.5, 'STRAP \u00d72');
+  cutStamp.textContent = `CUT 2 BAND + 2 CUPS (MIRROR) + 2 STRAPS \u00b7 TRIANGLE/NO-UNDERWIRE STYLE ONLY`;
+  formulaPanel.innerHTML = `<span class="lbl">band_width (each side)</span> = effective_underbust/2 + overlap\u00d72 = <span class="num">${bandW.toFixed(2)}cm</span>
+<span class="lbl">cup_base_width</span> \u2248 (bust \u2212 underbust) \u00d7 1.4 + overlap\u00d72 = <span class="num">${cupBaseW.toFixed(2)}cm</span>
+<span class="note">cup_base_width is a rough heuristic, not a real cup-volume formula -- expect to adjust after a test fit. Strap length/placement is left to you (hardware- and preference-dependent).</span>`;
+}
 
-<span class="lbl">hip_point</span> is placed at ${(riseFraction*100).toFixed(0)}% of the inseam length down from the waist \u2014 an approximation, not a measured rise. If your rise measurement differs noticeably from that assumption, adjust the pattern by hand after printing.
-
-Dashed red = glue overlap edge (outer + inner leg seams).`;
+// ---------------- Hood (ROUGH) ----------------
+function generateHood() {
+  setBanner('rough', 'ROUGH STARTING BLOCK ONLY. A hood is inherently a 3D dome shape around the head -- a genuinely good fit needs curved/darted panels and careful face-opening placement that this straight-line system cannot responsibly produce. Strongly recommend a cheap fabric mockup (toile) before cutting latex from this.');
+  const headCirc = fieldState.headCirc.cm, neckCirc = fieldState.neckCirc.cm, length = fieldState.hoodLength.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const eff = v => v*(1-easePct/100);
+  const neckW = eff(neckCirc)/2+overlapCm*2;
+  const headW = eff(headCirc)/2+overlapCm*2;
+  const crownW = 2+overlapCm*2;
+  const scale = 5;
+  drawTaperedTube(230, crownW, headW, neckW, length, 0.75, scale, 'SIDE PANEL \u00d71 (crown at top)');
+  drawTaperedTube(560, crownW, headW, neckW, length, 0.75, scale, 'SIDE PANEL \u00d71 (mirror)');
+  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 CENTER FRONT + CENTER BACK SEAMS \u00b7 FACE OPENING NOT DRAFTED`;
+  formulaPanel.innerHTML = `<span class="lbl">neck_width (each panel)</span> = <span class="num">${neckW.toFixed(2)}cm</span>
+<span class="lbl">widest_point (ear/temple level)</span> = <span class="num">${headW.toFixed(2)}cm</span>
+<span class="lbl">crown_width</span> = small fixed allowance = <span class="num">${crownW.toFixed(2)}cm</span>
+<span class="note">The face opening itself is NOT drafted -- you'll need to cut and fit that by hand, ideally on a mockup first. This block only gives you a starting silhouette for the two side panels.</span>`;
 }
 
 document.getElementById('downloadBtn').addEventListener('click', () => {
