@@ -8,32 +8,41 @@ Open `index.html` directly in a browser, or (once GitHub Pages is enabled for th
 
 ## What it does
 
-Three garment types, switchable via tabs at the top, sharing the same core latex-specific math:
+Ten garment types, switchable via tabs at the top, sharing the same core latex-specific math. Each carries an honest confidence level shown right in the app — not every shape reduces cleanly to straight lines, and I'd rather flag that than hand you a pattern that looks equally trustworthy across the board when it isn't.
 
-- **Skirt** — front + back trapezoid panels + waistband, optional back zip allowance
-- **Top** — sleeveless bodice block, bust-to-waist trapezoid panels, optional back zip allowance
-- **Leggings** — simplified single-leg block per panel (waist → hip → ankle taper), straight-line only, no crotch curve yet
+**Solid — straight lines are a genuinely reasonable choice for these:**
+- **Skirt** — front + back trapezoid panels + waistband
+- **Top** — sleeveless bodice block
+- **Panties** — front/back/gusset, a real common construction method
+- **Garters** — belt + straps, just strips of material
 
-Shared across all three:
+**Simplified, with a clear caveat — usable, but expect to true up by hand:**
+- **Leggings** — waist→hip→ankle taper, no crotch curve
+- **Catsuit** — one continuous bodice+leg panel per side, no crotch curve, no sleeves
+- **Leotard** — solid bodice + simple rectangular gusset, no curved leg-opening binding
 
-- **Stretch reduction (%)** — latex is cut *smaller* than the body since it stretches to fit; this is the core latex-specific calculation, applied before any panel geometry is computed
-- **Glue overlap (mm)** — latex garments are bonded with rubber cement, not sewn, so seams need overlap allowance rather than a folded hem
+**Rough starting blocks only — genuinely need curves/darts this system can't produce:**
+- **Gloves** — fingerless/arm-sleeve style only; individual finger stalls need different construction entirely and are out of scope
+- **Bralette** — triangle-cup, no-underwire style only; molded/underwire cups need curved, darted pieces
+- **Hood** — a hood is inherently a 3D dome; this gives you a starting silhouette only, strongly recommend a fabric mockup before cutting latex
 
-A **cm / inch unit toggle** sits in the header — all internal math always runs in centimeters regardless of which unit is displayed, so switching units never drifts or rounds the underlying values.
+Shared across all ten:
 
-The formula panel below the pattern preview shows the exact arithmetic live, with your actual entered numbers plugged in, so the math is never a black box.
+- **Stretch reduction (%)** — latex is cut *smaller* than the body since it stretches to fit; applied before any panel geometry is computed
+- **Glue overlap (mm)** — seams need overlap allowance rather than a folded hem, since latex is bonded, not sewn
+
+A **cm / inch unit toggle** sits in the header — all internal math always runs in centimeters regardless of which unit is displayed. The formula panel below the pattern preview shows the exact arithmetic live for whichever garment is selected, so the math is never a black box.
 
 ## Known limitations (current state)
 
-- **Straight-line panels only, for every garment** — no curved seams anywhere yet, including the Leggings crotch curve, which real fitted leggings/catsuit bottoms need. The Leggings tab explicitly calls this out in its formula panel.
-- **Top is a sleeveless block** — no sleeves, armhole shaping, or bust darts modeled yet
+- **Straight-line panels only, everywhere** — no curved seams anywhere yet, including any crotch curves
 - **On-screen scale only** — no 1:1 physical-size print/PDF export with page tiling yet
-- **Leggings' hip placement is an approximation** (18% of inseam length down from the waist), not a measured rise — adjust by hand if that doesn't match your actual proportions
+- **"Multiple types" is implemented via presets/parameters, not separate algorithms** — e.g. Garters' strap count, Gloves' length presets (wrist/elbow/shoulder), Panties' rise presets (low/mid/high) all just adjust existing sliders rather than switching to a genuinely different pattern-drafting method
 
 ## Roadmap ideas
 
-- Curved side-seam and crotch-curve shaping for genuinely fitted silhouettes
+- Curved seam support (side seams, crotch curve, cup shaping) — the single biggest upgrade across nearly every garment here
 - Multi-page 1:1 scale PDF export (tiled across printable sheets)
-- Sleeves and armhole shaping for the Top block
-- A full catsuit combining the Top and Leggings blocks into one connected garment
-- Per-body-region ease presets (chest vs. ankle stretch differently)
+- Sleeves and armhole shaping for Top/Catsuit/Leotard
+- A real 5-finger glove pattern (genuinely different construction from the current fingerless block)
+- Face-opening drafting for the Hood, once curved-seam support exists
