@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1e2a24">
 <title>Lapis &mdash; Latex Pattern Draft</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
 
@@ -295,7 +299,7 @@
   <button data-garment="garters">Garters</button>
   <button data-garment="gloves">Gloves <span class="confidence">&#9650;</span></button>
   <button data-garment="bralette">Bralette <span class="confidence">&#9650;</span></button>
-  <button data-garment="hood">Hood <span class="confidence">&#9650;</span></button>
+  <button data-garment="hood">Hood</button>
 </nav>
 
 <div class="layout">
@@ -391,6 +395,14 @@
     </div>
 
     <div class="field" data-garments="gloves">
+      <label>Glove style</label>
+      <div class="preset-row">
+        <button type="button" data-glovestyle="fingerless" class="glovestyle-btn active">Fingerless / sleeve</button>
+        <button type="button" data-glovestyle="full" class="glovestyle-btn">Full 5-finger</button>
+      </div>
+    </div>
+
+    <div class="field" data-garments="gloves" data-glovestyle="fingerless">
       <div class="preset-row">
         <button type="button" data-preset="armLength" data-value="18">Wrist</button>
         <button type="button" data-preset="armLength" data-value="45">Elbow</button>
@@ -399,13 +411,46 @@
       <label for="armLength">Length (wrist to chosen point) <span class="unit" id="armLengthUnit">cm</span> <span class="val" id="armLengthVal">45</span></label>
       <input type="range" id="armLength" data-field="armLength">
     </div>
-    <div class="field" data-garments="gloves">
+    <div class="field" data-garments="gloves" data-glovestyle="fingerless">
       <label for="wrist">Wrist circumference <span class="unit" id="wristUnit">cm</span> <span class="val" id="wristVal">16</span></label>
       <input type="range" id="wrist" data-field="wrist">
     </div>
-    <div class="field" data-garments="gloves">
+    <div class="field" data-garments="gloves" data-glovestyle="fingerless">
       <label for="bicep">Upper-arm circumference (at chosen length) <span class="unit" id="bicepUnit">cm</span> <span class="val" id="bicepVal">28</span></label>
       <input type="range" id="bicep" data-field="bicep">
+    </div>
+
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="handWidth">Hand width (circumference at knuckles) <span class="unit" id="handWidthUnit">cm</span> <span class="val" id="handWidthVal">21</span></label>
+      <input type="range" id="handWidth" data-field="handWidth">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="palmLength">Palm length (wrist crease to knuckles) <span class="unit" id="palmLengthUnit">cm</span> <span class="val" id="palmLengthVal">11</span></label>
+      <input type="range" id="palmLength" data-field="palmLength">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="fingerCirc">Average finger circumference <span class="unit" id="fingerCircUnit">cm</span> <span class="val" id="fingerCircVal">6.5</span></label>
+      <input type="range" id="fingerCirc" data-field="fingerCirc">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="thumbLength">Thumb length <span class="unit" id="thumbLengthUnit">cm</span> <span class="val" id="thumbLengthVal">5.5</span></label>
+      <input type="range" id="thumbLength" data-field="thumbLength">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="indexLength">Index finger length <span class="unit" id="indexLengthUnit">cm</span> <span class="val" id="indexLengthVal">7</span></label>
+      <input type="range" id="indexLength" data-field="indexLength">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="middleLength">Middle finger length <span class="unit" id="middleLengthUnit">cm</span> <span class="val" id="middleLengthVal">8</span></label>
+      <input type="range" id="middleLength" data-field="middleLength">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="ringLength">Ring finger length <span class="unit" id="ringLengthUnit">cm</span> <span class="val" id="ringLengthVal">7.5</span></label>
+      <input type="range" id="ringLength" data-field="ringLength">
+    </div>
+    <div class="field" data-garments="gloves" data-glovestyle="full">
+      <label for="pinkyLength">Pinky finger length <span class="unit" id="pinkyLengthUnit">cm</span> <span class="val" id="pinkyLengthVal">6</span></label>
+      <input type="range" id="pinkyLength" data-field="pinkyLength">
     </div>
 
     <div class="field" data-garments="hood">
@@ -419,6 +464,14 @@
     <div class="field" data-garments="hood">
       <label for="hoodLength">Length (neck to crown) <span class="unit" id="hoodLengthUnit">cm</span> <span class="val" id="hoodLengthVal">30</span></label>
       <input type="range" id="hoodLength" data-field="hoodLength">
+    </div>
+    <div class="field" data-garments="hood">
+      <label for="faceWidth">Face opening width (widest point) <span class="unit" id="faceWidthUnit">cm</span> <span class="val" id="faceWidthVal">14</span></label>
+      <input type="range" id="faceWidth" data-field="faceWidth">
+    </div>
+    <div class="field" data-garments="hood">
+      <label for="faceHeight">Face opening height (chin to forehead) <span class="unit" id="faceHeightUnit">cm</span> <span class="val" id="faceHeightVal">18</span></label>
+      <input type="range" id="faceHeight" data-field="faceHeight">
     </div>
 
     <h2>Latex-specific factors</h2>
@@ -501,13 +554,24 @@ const fieldState = {
   wrist:        { cm: 16, minCm: 12,  maxCm: 24,  stepCm: 0.5, isOverlap: false },
   bicep:        { cm: 28, minCm: 18,  maxCm: 45,  stepCm: 1,   isOverlap: false },
   armLength:    { cm: 45, minCm: 15,  maxCm: 75,  stepCm: 1,   isOverlap: false },
+  handWidth:    { cm: 21, minCm: 15,  maxCm: 30,  stepCm: 0.5, isOverlap: false },
+  palmLength:   { cm: 11, minCm: 7,   maxCm: 16,  stepCm: 0.5, isOverlap: false },
+  fingerCirc:   { cm: 6.5, minCm: 4,  maxCm: 10,  stepCm: 0.25, isOverlap: false },
+  thumbLength:  { cm: 5.5, minCm: 3,  maxCm: 9,   stepCm: 0.25, isOverlap: false },
+  indexLength:  { cm: 7,  minCm: 4,   maxCm: 10,  stepCm: 0.25, isOverlap: false },
+  middleLength: { cm: 8,  minCm: 4,   maxCm: 11,  stepCm: 0.25, isOverlap: false },
+  ringLength:   { cm: 7.5, minCm: 4,  maxCm: 10.5, stepCm: 0.25, isOverlap: false },
+  pinkyLength:  { cm: 6,  minCm: 3,   maxCm: 9,   stepCm: 0.25, isOverlap: false },
   headCirc:     { cm: 56, minCm: 48,  maxCm: 65,  stepCm: 1,   isOverlap: false },
   neckCirc:     { cm: 36, minCm: 28,  maxCm: 48,  stepCm: 1,   isOverlap: false },
   hoodLength:   { cm: 30, minCm: 20,  maxCm: 45,  stepCm: 1,   isOverlap: false },
+  faceWidth:    { cm: 14, minCm: 10,  maxCm: 20,  stepCm: 0.5, isOverlap: false },
+  faceHeight:   { cm: 18, minCm: 12,  maxCm: 26,  stepCm: 0.5, isOverlap: false },
 };
 
 let unit = 'cm';
 let garment = 'skirt';
+let gloveStyle = 'fingerless';
 let lastPieces = [];
 
 const els = {};
@@ -586,9 +650,20 @@ document.querySelectorAll('.garment-tabs button').forEach(btn => {
 });
 function refreshFieldVisibility() {
   document.querySelectorAll('[data-garments]').forEach(el => {
-    el.style.display = el.dataset.garments.split(',').includes(garment) ? '' : 'none';
+    const matchesGarment = el.dataset.garments.split(',').includes(garment);
+    const matchesGloveStyle = !el.dataset.glovestyle || el.dataset.glovestyle === gloveStyle;
+    el.style.display = (matchesGarment && matchesGloveStyle) ? '' : 'none';
   });
 }
+
+document.querySelectorAll('.glovestyle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    gloveStyle = btn.dataset.glovestyle;
+    document.querySelectorAll('.glovestyle-btn').forEach(b => b.classList.toggle('active', b === btn));
+    refreshFieldVisibility();
+    generate();
+  });
+});
 
 function svgEl(tag, attrs) {
   const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -655,6 +730,26 @@ function drawCurvedPanelAt(target, cxUnits, pointsUnits, heightUnits, topUnits, 
   target.appendChild(svgEl('path', { d: openCurvePath(leftPts.slice().reverse()), class: 'overlap', fill: 'none' }));
   const centerDash = (isBack && includeZip) ? 'overlap' : 'fold';
   target.appendChild(svgEl('line', { x1: cxUnits, y1: topUnits, x2: cxUnits, y2: topUnits + heightUnits, class: centerDash }));
+  addLabelTo(target, cxUnits, topUnits - 10, label);
+  return topUnits + heightUnits;
+}
+
+// Asymmetric panel: the two sides curve through DIFFERENT point series
+// instead of mirroring one series. Needed for the Hood's face opening,
+// where the outer (hood) edge and inner (center-front) edge are genuinely
+// different shapes -- the inner edge bows outward around the face region
+// to actually cut an opening, rather than staying a straight fold line.
+function drawAsymmetricPanelAt(target, cxUnits, innerPointsUnits, outerPointsUnits, heightUnits, topUnits, label) {
+  const innerAbs = innerPointsUnits.map(p => [cxUnits - p[1], topUnits + p[0]*heightUnits]);
+  const outerAbs = outerPointsUnits.map(p => [cxUnits + p[1], topUnits + p[0]*heightUnits]);
+  let d = `M${innerAbs[0][0].toFixed(2)},${innerAbs[0][1].toFixed(2)} L${outerAbs[0][0].toFixed(2)},${outerAbs[0][1].toFixed(2)} `;
+  d += curveThroughPath(outerAbs);
+  d += `L${innerAbs[innerAbs.length-1][0].toFixed(2)},${innerAbs[innerAbs.length-1][1].toFixed(2)} `;
+  d += curveThroughPath(innerAbs.slice().reverse());
+  d += 'Z';
+  target.appendChild(svgEl('path', { d, class: 'panel-fill' }));
+  target.appendChild(svgEl('path', { d: openCurvePath(outerAbs), class: 'overlap', fill: 'none' }));
+  target.appendChild(svgEl('path', { d: openCurvePath(innerAbs.slice().reverse()), class: 'overlap', fill: 'none' }));
   addLabelTo(target, cxUnits, topUnits - 10, label);
   return topUnits + heightUnits;
 }
@@ -743,6 +838,7 @@ function layoutPieces(pieces, gapCm, maxRowWidthCm) {
 }
 function pieceWidthCm(p) {
   if (p.type === 'curved') return Math.max(...p.points.map(pt => pt[1]));
+  if (p.type === 'asymmetric') return Math.max(...p.innerPoints.map(pt=>pt[1])) + Math.max(...p.outerPoints.map(pt=>pt[1]));
   if (p.type === 'rect') return p.widthCm;
   if (p.type === 'cup') return p.baseWidthCm;
   if (p.type === 'sleeve') return p.bicepCm;
@@ -750,6 +846,7 @@ function pieceWidthCm(p) {
 }
 function pieceHeightCm(p) {
   if (p.type === 'curved') return p.heightCm;
+  if (p.type === 'asymmetric') return p.heightCm;
   if (p.type === 'rect') return p.heightCm;
   if (p.type === 'cup') return p.heightCm*1.15;
   if (p.type === 'sleeve') return p.capHeightCm + p.lengthCm;
@@ -761,6 +858,8 @@ function renderPiecesTo(target, pieces, scale) {
     const cxU = p.cxCm * scale, topU = p.topCm * scale;
     if (p.type === 'curved') {
       drawCurvedPanelAt(target, cxU, p.points.map(pt => [pt[0], pt[1]*scale]), p.heightCm*scale, topU, p.label, p.isBack, p.includeZip);
+    } else if (p.type === 'asymmetric') {
+      drawAsymmetricPanelAt(target, cxU, p.innerPoints.map(pt=>[pt[0],pt[1]*scale]), p.outerPoints.map(pt=>[pt[0],pt[1]*scale]), p.heightCm*scale, topU, p.label);
     } else if (p.type === 'rect') {
       drawRectAt(target, cxU, p.widthCm*scale, p.heightCm*scale, topU, p.label);
     } else if (p.type === 'cup') {
@@ -991,7 +1090,15 @@ function generateGarters() {
 }
 
 function generateGloves() {
-  setBanner('rough', 'STILL A ROUGH BLOCK for the fingerless/sleeve style -- curves improve the taper along the arm, but a true 5-finger glove needs separate finger-length measurements and individual curved finger cones this tool doesn\'t collect yet. Tell me your hand length + finger lengths and I can build that properly next.');
+  if (gloveStyle === 'full') {
+    generateFullGlove();
+  } else {
+    generateFingerlessGlove();
+  }
+}
+
+function generateFingerlessGlove() {
+  setBanner('rough', 'Fingerless/arm-sleeve style. Switch to "Full 5-finger" above for a real per-finger drafted glove instead.');
   const wrist = fieldState.wrist.cm, bicep = fieldState.bicep.cm, length = fieldState.armLength.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
   const eff = v => v*(1-easePct/100);
@@ -999,9 +1106,44 @@ function generateGloves() {
   const points = [[0, wW], [0.08, wW], [1, bW]];
   const pieces = [{ type:'curved', points, heightCm: length, label:'SLEEVE \u00d71 (mirror for pair)', isBack:false, includeZip:false }];
   renderPreview(pieces);
-  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 FINGERLESS/SLEEVE STYLE \u00b7 NOT A 5-FINGER PATTERN`;
+  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 FINGERLESS/SLEEVE STYLE`;
   formulaPanel.innerHTML = `<span class="lbl">wrist_width</span>=<span class="num">${wW.toFixed(2)}cm</span> <span class="lbl">upper_arm_width</span>=<span class="num">${bW.toFixed(2)}cm</span>
-<span class="note">Curved taper from wrist to upper arm. True finger drafting needs per-finger length inputs not yet collected here.</span>`;
+<span class="note">Curved taper from wrist to upper arm.</span>`;
+}
+
+function generateFullGlove() {
+  setBanner('', 'Real 5-finger draft: a palm piece plus five individually-sized curved finger cones (each reusing the same curved-cap shape as a sleeve, just finger-sized). Finger circumference is still a single averaged value applied to all fingers -- individual finger widths would be the next honest refinement if it matters for your fit.');
+  const handWidth = fieldState.handWidth.cm, palmLength = fieldState.palmLength.cm, wrist = fieldState.wrist.cm;
+  const fingerCirc = fieldState.fingerCirc.cm;
+  const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
+  const eff = v => v*(1-easePct/100);
+
+  const wristW = eff(wrist)/2+overlapCm*2;
+  const handW = eff(handWidth)/2+overlapCm*2;
+  const fingerW = eff(fingerCirc)/2+overlapCm*2;
+  const fingerCapHeight = fingerW * 0.45; // rounded tip allowance, proportional to finger width
+
+  const palmPoints = [[0, wristW], [1, handW]];
+  const pieces = [
+    { type:'curved', points: palmPoints, heightCm: palmLength, label:'PALM \u00d71 (mirror for pair)', isBack:false, includeZip:false },
+  ];
+
+  const fingers = [
+    { key: 'thumbLength', label: 'THUMB' },
+    { key: 'indexLength', label: 'INDEX' },
+    { key: 'middleLength', label: 'MIDDLE' },
+    { key: 'ringLength', label: 'RING' },
+    { key: 'pinkyLength', label: 'PINKY' },
+  ];
+  fingers.forEach(f => {
+    const len = fieldState[f.key].cm;
+    pieces.push({ type:'sleeve', bicepCm: fingerW, lengthCm: Math.max(1, len - fingerCapHeight), capHeightCm: fingerCapHeight, label: `${f.label} \u00d72 (mirror)` });
+  });
+
+  renderPreview(pieces);
+  cutStamp.textContent = `CUT 2 PALM + 2 OF EACH FINGER (10 finger pieces total) \u00b7 CURVED FINGERTIPS \u00b7 REAL 5-FINGER DRAFT`;
+  formulaPanel.innerHTML = `<span class="lbl">wrist_width</span>=<span class="num">${wristW.toFixed(2)}cm</span> <span class="lbl">hand_width</span>=<span class="num">${handW.toFixed(2)}cm</span> <span class="lbl">finger_width</span>=<span class="num">${fingerW.toFixed(2)}cm</span> (applied to all 5 fingers)
+<span class="note">Each finger piece is its own length, curving to a rounded tip -- reusing the same curved-cap construction as the sleeve block. Finger WIDTH is a single averaged value, not measured per-finger -- a real refinement if your fingers vary a lot in girth, not just length.</span>`;
 }
 
 function generateBralette() {
@@ -1023,19 +1165,36 @@ function generateBralette() {
 }
 
 function generateHood() {
-  setBanner('rough', 'Side panels now curve smoothly neck\u2192widest-point\u2192crown (real measurements), but the face opening still is NOT drafted -- that needs face width/height inputs this tool doesn\'t collect yet. Tell me those and I can draft a real curved opening next. Strongly recommend a fabric mockup regardless.');
+  setBanner('warn', 'Side panels curve outer edge (neck\u2192widest-point\u2192crown) AND a real curved face opening on the inner edge, sized from your face width/height measurements. Still a rough approximation of where the opening sits vertically, and a hood is inherently 3D -- a fabric mockup is still genuinely worthwhile before cutting latex.');
   const headCirc = fieldState.headCirc.cm, neckCirc = fieldState.neckCirc.cm, length = fieldState.hoodLength.cm;
+  const faceWidth = fieldState.faceWidth.cm, faceHeight = fieldState.faceHeight.cm;
   const easePct = Number(easeEl.value), overlapCm = fieldState.overlap.cm;
   const eff = v => v*(1-easePct/100);
   const neckW = eff(neckCirc)/2+overlapCm*2, headW = eff(headCirc)/2+overlapCm*2, crownW = 2+overlapCm*2;
-  const points = [[0, crownW], [0.25, headW], [1, neckW]];
+
+  const outerPoints = [[0, crownW], [0.25, headW], [1, neckW]];
+
+  const faceTopFrac = 0.30;
+  const faceHeightFrac = Math.min(0.55, faceHeight / length);
+  const faceMidFrac = faceTopFrac + faceHeightFrac/2;
+  const faceBottomFrac = faceTopFrac + faceHeightFrac;
+  const innerPoints = [
+    [0, 0.5],
+    [faceTopFrac, 0.5],
+    [faceMidFrac, faceWidth/2 + overlapCm*2],
+    [faceBottomFrac, 0.5],
+    [1, 0.5],
+  ];
+
   const pieces = [
-    { type:'curved', points, heightCm: length, label:'SIDE PANEL \u00d71', isBack:false, includeZip:false },
-    { type:'curved', points, heightCm: length, label:'SIDE PANEL \u00d71 (mirror)', isBack:false, includeZip:false },
+    { type:'asymmetric', innerPoints, outerPoints, heightCm: length, label:'SIDE PANEL \u00d71' },
+    { type:'asymmetric', innerPoints, outerPoints, heightCm: length, label:'SIDE PANEL \u00d71 (mirror)' },
   ];
   renderPreview(pieces);
-  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 CF+CB SEAMS \u00b7 FACE OPENING NOT DRAFTED`;
-  formulaPanel.innerHTML = `<span class="lbl">neck_width</span>=<span class="num">${neckW.toFixed(2)}cm</span> <span class="lbl">widest_point</span>=<span class="num">${headW.toFixed(2)}cm</span> <span class="lbl">crown_width</span>=<span class="num">${crownW.toFixed(2)}cm</span>`;
+  cutStamp.textContent = `CUT 2, MIRRORED \u00b7 CF+CB SEAMS \u00b7 FACE OPENING DRAFTED (approximate placement)`;
+  formulaPanel.innerHTML = `<span class="lbl">neck_width</span>=<span class="num">${neckW.toFixed(2)}cm</span> <span class="lbl">widest_point</span>=<span class="num">${headW.toFixed(2)}cm</span> <span class="lbl">crown_width</span>=<span class="num">${crownW.toFixed(2)}cm</span>
+<span class="lbl">face_opening_half_width</span>=<span class="num">${(faceWidth/2+overlapCm*2).toFixed(2)}cm</span>
+<span class="note">Face opening placed at ${(faceTopFrac*100).toFixed(0)}%\u2013${(faceBottomFrac*100).toFixed(0)}% down the panel length -- an approximation. If it doesn't line up with where your face actually sits on this hood length, adjust hoodLength or true up the opening by hand on a mockup.</span>`;
 }
 
 document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -1049,6 +1208,12 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
 refreshSliderChrome();
 refreshFieldVisibility();
 generate();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
